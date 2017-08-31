@@ -1,6 +1,18 @@
+-==License for all textures and models==-
+
+Copyright (c) 2017 Daniel S. Astral
+
+Base license of ARR, with the following notable points:
+-You cannot use/redistribute these textures and/or models.
+-You cannot modify these textures and/or models.
+  -Exception; If it is for the ClassyHats Minecraft mod.
+  
+  
+-==License for all code==-
+
 MIT License
 
-Copyright (c) 2017 Daniel Astral
+Copyright (c) 2017 Wire Segal
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
