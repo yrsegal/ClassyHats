@@ -1,8 +1,8 @@
 {
 	"credit": "Made by Tristaric, utilizing Blockbench.",
 	"textures": {
-		"0": "items/shleep_0",
-		"particle": "items/shleep_0"
+		"0": "classyhats:items/shleep_0",
+		"particle": "classyhats:items/shleep_0"
 	},
 	"elements": [
 		{

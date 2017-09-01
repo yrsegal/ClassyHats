@@ -1,8 +1,8 @@
 {
 	"credit": "Made by Tristaric, utilizing Blockbench.",
 	"textures": {
-		"0": "items/tophat",
-		"particle": "items/tophat"
+		"0": "classyhats:items/tophat",
+		"particle": "classyhats:items/tophat"
 	},
 	"elements": [
 		{

@@ -1,0 +1,10 @@
+item_group.classyhats=Classy Hats
+
+item.classyhats:missingno.name=Broken Hat
+item.classyhats:missingno.desc0=Oh no! Something went wrong!
+item.classyhats:missingno.desc1=The server might have different configs...
+item.classyhats:missingno.desc2=This might be from an old version...
+item.classyhats:missingno.desc3=Or this was just created manually.
+
+item.classyhats:tophat.name=Top Hat
+item.classyhats:tophat.desc=For black tie parties.
