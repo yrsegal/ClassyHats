@@ -36,11 +36,15 @@ object ItemHat : ItemMod("hat"), IExtraVariantHolder {
         return stack
     }
 
+    init {
+        setMaxStackSize(1)
+    }
+
 
     override val extraVariants: Array<out String>
         get() = HatConfigHandler.hats.values.map { it.name }.toTypedArray()
     override val meshDefinition: ((stack: ItemStack) -> ModelResourceLocation)?
-        get() = { ModelHandler.resourceLocations["classyhats"]!![getHat(it).name] as ModelResourceLocation }
+        get() = { ModelHandler.resourceLocations[LibMisc.MOD_ID]!![getHat(it).name] as ModelResourceLocation }
 
     override fun getSubItems(itemIn: Item, tab: CreativeTabs?, subItems: NonNullList<ItemStack>) {
         HatConfigHandler.hats.values

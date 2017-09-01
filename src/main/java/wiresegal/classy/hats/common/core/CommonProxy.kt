@@ -3,9 +3,13 @@ package wiresegal.classy.hats.common.core
 import com.teamwizardry.librarianlib.features.base.ModCreativeTab
 import com.teamwizardry.librarianlib.features.helpers.nonnullListOf
 import net.minecraft.item.ItemStack
+import net.minecraftforge.common.capabilities.CapabilityManager
 import net.minecraftforge.fml.common.event.FMLInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
+import wiresegal.classy.hats.common.hat.BaseHatStorage
+import wiresegal.classy.hats.common.hat.CapabilityHatsStorage
+import wiresegal.classy.hats.common.hat.IHatStorage
 import wiresegal.classy.hats.common.hat.ItemHat
 
 /**
@@ -14,6 +18,10 @@ import wiresegal.classy.hats.common.hat.ItemHat
  */
 open class CommonProxy {
     open fun pre(e: FMLPreInitializationEvent) {
+
+        CapabilityManager.INSTANCE.register(IHatStorage::class.java, CapabilityHatsStorage(), ::BaseHatStorage)
+        AttachmentHandler
+
         object : ModCreativeTab() {
             override val iconStack: ItemStack
                 get() {
@@ -24,6 +32,7 @@ open class CommonProxy {
                     return items[0]
                 }
         }
+
         HatConfigHandler.loadPreInit(e)
         ItemHat
     }

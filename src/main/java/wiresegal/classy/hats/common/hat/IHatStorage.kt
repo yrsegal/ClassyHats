@@ -11,13 +11,11 @@ import net.minecraftforge.common.util.INBTSerializable
  * A capability that marks an item as a hat.
  */
 interface IHatStorage : INBTSerializable<NBTTagCompound> {
-    val hats: List<ItemStack>
+    var hats: List<ItemStack>
 
-    val equipped: ItemStack
+    var equipped: ItemStack
 
-    fun equipHat(stack: ItemStack): Boolean
+    fun addStoredHat(stack: ItemStack)
 
-    fun addStoredHat(stack: ItemStack): Boolean
-
-    fun removeStoredHat(stack: ItemStack): Boolean
+    fun removeStoredHat(stack: ItemStack)
 }
