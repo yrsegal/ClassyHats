@@ -1,4 +1,5 @@
 item_group.classyhats=Classy Hats
+classyhats.container.hats=Hats
 
 item.classyhats:missingno.name=Broken Hat
 item.classyhats:missingno.desc0=Oh no! Something went wrong!

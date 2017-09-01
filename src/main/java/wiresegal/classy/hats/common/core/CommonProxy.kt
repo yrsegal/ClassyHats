@@ -7,6 +7,9 @@ import net.minecraftforge.common.capabilities.CapabilityManager
 import net.minecraftforge.fml.common.event.FMLInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
+import net.minecraftforge.fml.common.network.NetworkRegistry
+import wiresegal.classy.hats.ClassyHats
+import wiresegal.classy.hats.common.gui.HatsGuiFactory
 import wiresegal.classy.hats.common.hat.BaseHatStorage
 import wiresegal.classy.hats.common.hat.CapabilityHatsStorage
 import wiresegal.classy.hats.common.hat.IHatStorage
@@ -38,7 +41,7 @@ open class CommonProxy {
     }
 
     open fun init(e: FMLInitializationEvent) {
-        // NO-OP
+        NetworkRegistry.INSTANCE.registerGuiHandler(ClassyHats.INSTANCE, HatsGuiFactory)
     }
 
     open fun post(e: FMLPostInitializationEvent) {

@@ -7,6 +7,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent
 import org.apache.logging.log4j.LogManager
+import org.apache.logging.log4j.Logger
 import wiresegal.classy.hats.common.core.CommonProxy
 
 /**
@@ -18,6 +19,8 @@ class ClassyHats {
 
     @Mod.EventHandler
     fun pre(e: FMLPreInitializationEvent) {
+        INSTANCE = this
+
         PROXY.pre(e)
     }
 
@@ -38,9 +41,12 @@ class ClassyHats {
 
     companion object {
 
-        val LOGGER = LogManager.getLogger("ClassyHats")
+        val LOGGER: Logger = LogManager.getLogger("ClassyHats")
 
         @SidedProxy(clientSide = LibMisc.CLIENT_PROXY, serverSide = LibMisc.COMMON_PROXY)
         lateinit var PROXY: CommonProxy
+
+        lateinit var INSTANCE: ClassyHats
+            private set
     }
 }

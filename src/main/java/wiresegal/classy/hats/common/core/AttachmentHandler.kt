@@ -28,7 +28,7 @@ object AttachmentHandler {
     }
 
     fun getCapability(player: EntityPlayer)
-            = player.getCapability(CapabilityHat.CAPABILITY_HAT, null)!!
+            = player.getCapability(CapabilityHat.CAPABILITY_HAT, null)!!.apply { this.player = player }
 
     @SubscribeEvent
     fun cloneCapabilitiesEvent(event: PlayerEvent.Clone) {
@@ -74,9 +74,8 @@ object AttachmentHandler {
     fun syncDataFor(entity: EntityPlayer, to: EntityPlayerMP) {
         val data = getCapability(entity)
         val hat = data.equipped
-        val hats = if (entity.entityId == to.entityId) data.hats else null
-
-        PacketHandler.NETWORK.sendTo(PacketHatSync(hat, hats), to)
+        val hats = if (entity.entityId == to.entityId) data.hats.serializeNBT() else null
+        PacketHandler.NETWORK.sendTo(PacketHatSync(entity.entityId, hat, hats), to)
     }
 }
 

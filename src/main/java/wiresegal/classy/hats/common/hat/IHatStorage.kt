@@ -1,8 +1,10 @@
 package wiresegal.classy.hats.common.hat
 
+import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraftforge.common.util.INBTSerializable
+import net.minecraftforge.items.ItemStackHandler
 
 /**
  * @author WireSegal
@@ -11,11 +13,9 @@ import net.minecraftforge.common.util.INBTSerializable
  * A capability that marks an item as a hat.
  */
 interface IHatStorage : INBTSerializable<NBTTagCompound> {
-    var hats: List<ItemStack>
+    val hats: ItemStackHandler
+
+    var player: EntityPlayer?
 
     var equipped: ItemStack
-
-    fun addStoredHat(stack: ItemStack)
-
-    fun removeStoredHat(stack: ItemStack)
 }

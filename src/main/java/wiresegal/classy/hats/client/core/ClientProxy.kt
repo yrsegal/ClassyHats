@@ -24,6 +24,8 @@ class ClientProxy : CommonProxy() {
         Minecraft.getMinecraft().resourceManager
         val packs = ReflectionHelper.getPrivateValue<MutableList<IResourcePack>, Minecraft>(Minecraft::class.java, Minecraft.getMinecraft(), *DEFAULT_RESOURCE_PACKS)
         packs.add(FolderResourcePack(HatConfigHandler.rpl))
+
+        KeyHandler
     }
 
     override fun init(e: FMLInitializationEvent) {
