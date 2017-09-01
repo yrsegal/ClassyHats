@@ -7,6 +7,7 @@ import com.teamwizardry.librarianlib.features.kotlin.serialize
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
 import wiresegal.classy.hats.ClassyHats
 import java.io.File
+import java.util.*
 
 /**
  * @author WireSegal
@@ -43,11 +44,11 @@ object HatConfigHandler {
 
                 val blacklist = if (load.has("blacklist_hats")) load.getAsJsonArray("blacklist_hats") else JsonArray()
                 blacklist.map { it.asString }.filter { it != "missingno" }.forEach { hats.remove(it) }
-                
+
                 val hats = if (load.has("custom_hats")) load.getAsJsonArray("custom_hats") else JsonArray()
                 for (hat in hats) {
                     val hatObj = hat.asJsonObject
-                    val name = hatObj.getAsJsonPrimitive("name").asString
+                    val name = hatObj.getAsJsonPrimitive("name").asString.toLowerCase(Locale.ROOT)
                     val weight = if (hatObj.has("weight")) hatObj.getAsJsonPrimitive("weight").asDouble else 1.0
                     val elusive = if (hatObj.has("elusive")) hatObj.getAsJsonPrimitive("elusive").asBoolean else false
                     newHats.put(name, Hat(name, weight, elusive))
@@ -70,6 +71,7 @@ object HatConfigHandler {
             }.serialize())
         }
 
+        // A failsafe
         hats.put("missingno", missingno)
 
         rpl = File(e.modConfigurationDirectory, "classyhats_resources")
