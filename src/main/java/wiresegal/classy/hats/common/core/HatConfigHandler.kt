@@ -43,7 +43,7 @@ object HatConfigHandler {
                 val load = JsonParser().parse(path.reader()).asJsonObject
 
                 val blacklist = if (load.has("blacklist_hats")) load.getAsJsonArray("blacklist_hats") else JsonArray()
-                blacklist.map { it.asString }.filter { it != "missingno" }.forEach { hats.remove(it) }
+                blacklist.map { it.asString.toLowerCase(Locale.ROOT) }.filter { it != "missingno" }.forEach { hats.remove(it) }
 
                 val hats = if (load.has("custom_hats")) load.getAsJsonArray("custom_hats") else JsonArray()
                 for (hat in hats) {
