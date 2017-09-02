@@ -47,8 +47,8 @@ class GuiHat(player: EntityPlayer) : InventoryEffectRenderer(ContainerHat(player
     /**
      * Draw the foreground layer for the GuiContainer (everything in front of the items)
      */
-    override fun drawGuiContainerForegroundLayer(p_146979_1_: Int, p_146979_2_: Int) {
-        this.fontRenderer.drawString(I18n.format("container.crafting", arrayOfNulls<Any>(0)), 115, 8, 4210752)
+    override fun drawGuiContainerForegroundLayer(mouseX: Int, mouseY: Int) {
+        this.fontRenderer.drawString(I18n.format("container.crafting"), 97, 8, 0x404040)
     }
 
     /**
@@ -78,6 +78,6 @@ class GuiHat(player: EntityPlayer) : InventoryEffectRenderer(ContainerHat(player
 
     companion object {
 
-        val background = ResourceLocation("classyhats", "textures/gui/expanded_inventory.png")
+        val background = ResourceLocation("classyhats", "textures/gui/hat_inv.png")
     }
 }

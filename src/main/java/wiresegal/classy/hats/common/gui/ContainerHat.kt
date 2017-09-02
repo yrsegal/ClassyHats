@@ -29,7 +29,7 @@ class ContainerHat(playerInv: InventoryPlayer, private val thePlayer: EntityPlay
         this.addSlotToContainer(SlotCrafting(playerInv.player, this.craftMatrix, this.craftResult, 0, 154, 28))
 
         for (i in 0..1) for (j in 0..1) 
-            this.addSlotToContainer(Slot(this.craftMatrix, j + i * 2, 116 + j * 18, 18 + i * 18))
+            this.addSlotToContainer(Slot(this.craftMatrix, j + i * 2, 98 + j * 18, 18 + i * 18))
 
         for (k in 0..3) {
             val slot = equipmentSlots[k]
@@ -47,7 +47,7 @@ class ContainerHat(playerInv: InventoryPlayer, private val thePlayer: EntityPlay
             })
         }
 
-        this.addSlotToContainer(object : Slot(HatInventoryWrapper(hat), 0, 77, 35) {
+        this.addSlotToContainer(object : Slot(HatInventoryWrapper(hat), 0, 77, 8) {
             override fun isItemValid(stack: ItemStack) = stack.item == ItemHat
         })
 
