@@ -11,6 +11,7 @@ item.classyhats:tophat.name=Top Hat
 item.classyhats:tophat.desc=For black tie parties.
 
 item.classyhats:phantom_thread.name=Phantom Thread
-item.classyhats:phantom_thread.desc=Craft with armor to make it invisible!
+item.classyhats:phantom_thread.desc0=Craft with armor to make it invisible!
+item.classyhats:phantom_thread.desc1=Craft it again to make the armor visible.
 
 classyhats.misc.phantom=&bLined with Phantom Thread

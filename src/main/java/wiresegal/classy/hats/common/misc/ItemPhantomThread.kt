@@ -63,10 +63,12 @@ object ItemPhantomThread : ItemMod("phantom_thread") {
     @SubscribeEvent
     fun tooltip(e: ItemTooltipEvent) {
         val stack = e.itemStack
-        val phantom = ItemNBTHelper.getBoolean(stack, PHANTOM_TAG, false)
+        if (stack.hasTagCompound()) {
+            val phantom = ItemNBTHelper.getBoolean(stack, PHANTOM_TAG, false)
 
-        if (phantom)
-            TooltipHelper.addToTooltip(e.toolTip, "${LibMisc.MOD_ID}.misc.phantom")
+            if (phantom)
+                TooltipHelper.addToTooltip(e.toolTip, "${LibMisc.MOD_ID}.misc.phantom")
+        }
     }
 
     private var head: ItemStack = ItemStack.EMPTY
@@ -145,7 +147,13 @@ object PhantomRecipe : IRecipe {
         }
 
         val armorCopy = armor.copy()
-        ItemNBTHelper.setBoolean(armorCopy, PHANTOM_TAG, !ItemNBTHelper.getBoolean(armorCopy, PHANTOM_TAG, false))
+        if (ItemNBTHelper.getBoolean(armorCopy, PHANTOM_TAG, false))
+            ItemNBTHelper.removeEntry(armorCopy, PHANTOM_TAG)
+        else
+            ItemNBTHelper.setBoolean(armorCopy, PHANTOM_TAG, true)
+        val tag = armorCopy.tagCompound
+        if (tag != null && tag.size == 0)
+            armorCopy.tagCompound = null
         return armorCopy
     }
 
