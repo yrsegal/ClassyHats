@@ -67,7 +67,7 @@ object ItemPhantomThread : ItemMod("phantom_thread") {
             val phantom = ItemNBTHelper.getBoolean(stack, PHANTOM_TAG, false)
 
             if (phantom)
-                TooltipHelper.addToTooltip(e.toolTip, "${LibMisc.MOD_ID}.misc.phantom")
+                e.toolTip.add(1, TooltipHelper.local("classyhats.misc.phantom").replace("&".toRegex(), "§"))
         }
     }
 
