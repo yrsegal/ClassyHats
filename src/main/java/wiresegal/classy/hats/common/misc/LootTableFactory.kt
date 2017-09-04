@@ -1,10 +1,16 @@
 package wiresegal.classy.hats.common.misc
 
+import net.minecraft.entity.item.EntityItem
+import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
+import net.minecraft.world.WorldServer
 import net.minecraft.world.storage.loot.*
+import net.minecraft.world.storage.loot.LootTableList.*
 import net.minecraft.world.storage.loot.functions.SetNBT
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.event.LootTableLoadEvent
+import net.minecraftforge.event.entity.living.LivingDropsEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import wiresegal.classy.hats.LibMisc
 import wiresegal.classy.hats.common.core.HatConfigHandler
@@ -18,6 +24,7 @@ object LootTableFactory {
 
     private val elusiveTable: LootTable
     private val regularTable: LootTable
+    private val pool: LootPool
 
     init {
         val hats = HatConfigHandler.hats.values.filter { it != HatConfigHandler.missingno }
@@ -41,6 +48,12 @@ object LootTableFactory {
         LootTableList.register(ResourceLocation(LibMisc.MOD_ID, "elusive"))
         LootTableList.register(ResourceLocation(LibMisc.MOD_ID, "regular"))
         LootTableList.register(ResourceLocation(LibMisc.MOD_ID, "combined"))
+
+        pool = LootPool(arrayOf(LootEntryTable(ResourceLocation(LibMisc.MOD_ID, "combined"), 1, 0, arrayOf(), "classyhats")),
+                arrayOf(),
+                RandomValueRange(1f, 3f),
+                RandomValueRange(0f),
+                "classyhats")
     }
 
     @SubscribeEvent
@@ -50,8 +63,35 @@ object LootTableFactory {
                 e.table = elusiveTable
             else if (e.name.resourcePath == "regular")
                 e.table = regularTable
-        }
+        } else if (e.name == CHESTS_SIMPLE_DUNGEON ||
+                e.name == CHESTS_STRONGHOLD_LIBRARY ||
+                e.name == CHESTS_END_CITY_TREASURE ||
+                e.name == CHESTS_IGLOO_CHEST ||
+                e.name == CHESTS_WOODLAND_MANSION ||
+                e.name == CHESTS_DESERT_PYRAMID ||
+                e.name == CHESTS_JUNGLE_TEMPLE)
+            e.table.addPool(pool)
     }
 
+    @SubscribeEvent
+    fun onBossDeath(e: LivingDropsEvent) {
+        val boss = !e.entityLiving.isNonBoss
 
+        val entity = e.entityLiving
+        val world = entity.world
+
+        if (world is WorldServer && boss && e.isRecentlyHit) {
+
+            val killer = e.source.trueSource as? EntityPlayer
+
+            val item = mutableListOf<ItemStack>()
+            pool.generateLoot(item, world.rand, LootContext(0f, world, world.lootTableManager, entity, killer, e.source))
+
+            for (i in item) {
+                val entityItem = EntityItem(world, entity.posX, entity.posY, entity.posZ, i)
+                entityItem.setDefaultPickupDelay()
+                e.drops.add(entityItem)
+            }
+        }
+    }
 }
