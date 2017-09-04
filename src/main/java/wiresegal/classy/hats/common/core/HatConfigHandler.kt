@@ -27,6 +27,9 @@ object HatConfigHandler {
     var defaultWeight = 1
     var elusiveWeight = 1
 
+    var shouldInjectLootChests = true
+    var shouldInjectLootBoss = true
+
     data class Hat(val name: String, var weight: Int = 1, val elusive: Boolean = false) {
         fun toJson() = json {
             obj(
@@ -50,6 +53,9 @@ object HatConfigHandler {
 
                 defaultWeight = if (load.has("default_weight")) load.getAsJsonPrimitive("default_weight").asInt else 1
                 elusiveWeight = if (load.has("elusive_weight")) load.getAsJsonPrimitive("elusive_weight").asInt else 1
+
+                shouldInjectLootChests = if (load.has("loot_hat_from_chests")) load.getAsJsonPrimitive("loot_hat_from_chests").asBoolean else true
+                shouldInjectLootBoss = if (load.has("loot_hat_from_boss")) load.getAsJsonPrimitive("loot_hat_from_boss").asBoolean else true
 
                 hats.values.forEach { if (it != missingno) {
                     if (it.elusive) it.weight = elusiveWeight
@@ -80,6 +86,8 @@ object HatConfigHandler {
                         "blacklist_hats" to array(),
                         "default_weight" to 1,
                         "elusive_weight" to 1,
+                        "loot_hat_from_chests" to true,
+                        "loot_hat_from_boss" to true,
                         "custom_hats" to array(),
                         "example_custom_hat" to array(Hat("example", 2, true).toJson())
                 )

@@ -49,11 +49,11 @@ object LootTableFactory {
         LootTableList.register(ResourceLocation(LibMisc.MOD_ID, "regular"))
         LootTableList.register(ResourceLocation(LibMisc.MOD_ID, "combined"))
 
-        pool = LootPool(arrayOf(LootEntryTable(ResourceLocation(LibMisc.MOD_ID, "combined"), 1, 0, arrayOf(), "classyhats")),
+        pool = LootPool(arrayOf(LootEntryTable(ResourceLocation(LibMisc.MOD_ID, "combined"), 1, 0, arrayOf(), LibMisc.MOD_ID)),
                 arrayOf(),
                 RandomValueRange(1f, 3f),
                 RandomValueRange(0f),
-                "classyhats")
+                LibMisc.MOD_ID)
     }
 
     @SubscribeEvent
@@ -63,18 +63,21 @@ object LootTableFactory {
                 e.table = elusiveTable
             else if (e.name.resourcePath == "regular")
                 e.table = regularTable
-        } else if (e.name == CHESTS_SIMPLE_DUNGEON ||
+        } else if (HatConfigHandler.shouldInjectLootChests && (e.name == CHESTS_SIMPLE_DUNGEON ||
                 e.name == CHESTS_STRONGHOLD_LIBRARY ||
                 e.name == CHESTS_END_CITY_TREASURE ||
                 e.name == CHESTS_IGLOO_CHEST ||
                 e.name == CHESTS_WOODLAND_MANSION ||
                 e.name == CHESTS_DESERT_PYRAMID ||
-                e.name == CHESTS_JUNGLE_TEMPLE)
+                e.name == CHESTS_JUNGLE_TEMPLE ||
+                e.name == GAMEPLAY_FISHING_TREASURE))
             e.table.addPool(pool)
     }
 
     @SubscribeEvent
     fun onBossDeath(e: LivingDropsEvent) {
+        if (!HatConfigHandler.shouldInjectLootBoss) return
+
         val boss = !e.entityLiving.isNonBoss
 
         val entity = e.entityLiving
