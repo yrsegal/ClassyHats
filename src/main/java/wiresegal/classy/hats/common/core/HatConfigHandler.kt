@@ -23,9 +23,6 @@ object HatConfigHandler {
     var rpl = File("")
         private set
 
-    var defaultWeight = 40
-    var elusiveWeight = 40
-
     var shouldInjectLootChests = true
     var shouldInjectLootBoss = true
 
@@ -50,8 +47,6 @@ object HatConfigHandler {
                 val blacklist = if (load.has("blacklist_hats")) load.getAsJsonArray("blacklist_hats") else JsonArray()
                 blacklist.map { it.asString.toLowerCase(Locale.ROOT) }.filter { it != "missingno" }.forEach { hats.remove(it) }
 
-                defaultWeight = if (load.has("default_weight")) load.getAsJsonPrimitive("default_weight").asInt else 40
-                elusiveWeight = if (load.has("elusive_weight")) load.getAsJsonPrimitive("elusive_weight").asInt else 40
 
                 shouldInjectLootChests = if (load.has("loot_hat_from_chests")) load.getAsJsonPrimitive("loot_hat_from_chests").asBoolean else true
                 shouldInjectLootBoss = if (load.has("loot_hat_from_boss")) load.getAsJsonPrimitive("loot_hat_from_boss").asBoolean else true
@@ -67,8 +62,7 @@ object HatConfigHandler {
                 this.hats.putAll(newHats)
 
                 this.hats.values.forEach { if (it != missingno && it.weight == -1) {
-                    if (it.elusive) it.weight = elusiveWeight
-                    else it.weight = defaultWeight
+                    it.weight = 40
                 }}
 
                 succeeded = true
@@ -82,13 +76,12 @@ object HatConfigHandler {
                 obj(
                         "__comment0" to "The folder classyhats_resources will act as a resource pack for any custom hats you want to add.",
                         "__comment1" to "Put any hat names from the default hats you don't want in the blacklist.",
+                        "__default_weight" to 40,
+                        "__example_custom_hat" to array(Hat("example", 2, true).toJson()),
                         "blacklist_hats" to array(),
-                        "default_weight" to 40,
-                        "elusive_weight" to 40,
                         "loot_hat_from_chests" to true,
                         "loot_hat_from_boss" to true,
-                        "custom_hats" to array(),
-                        "example_custom_hat" to array(Hat("example", 2, true).toJson())
+                        "custom_hats" to array()
                 )
             }.serialize())
         }
