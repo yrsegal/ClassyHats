@@ -26,7 +26,7 @@ object HatConfigHandler {
     var shouldInjectLootChests = true
     var shouldInjectLootBoss = true
 
-    data class Hat(val name: String, var weight: Int = -1, val elusive: Boolean = false) {
+    data class Hat(val name: String, val weight: Int = -1, val elusive: Boolean = false) {
         fun toJson() = json {
             obj(
                     "name" to name,
@@ -60,10 +60,6 @@ object HatConfigHandler {
                     newHats.put(name, Hat(name, weight, elusive))
                 }
                 this.hats.putAll(newHats)
-
-                this.hats.values.forEach { if (it != missingno && it.weight == -1) {
-                    it.weight = 40
-                }}
 
                 succeeded = true
             } catch (e: Exception) {

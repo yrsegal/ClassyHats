@@ -32,9 +32,9 @@ object LootTableFactory {
         val elusive = hats.filter { it.elusive }
         val regular = hats.filterNot { it.elusive }
 
-        val elusiveEntries = elusive.map { LootEntryItem(ItemHat, it.weight, 0,
+        val elusiveEntries = elusive.map { LootEntryItem(ItemHat, if (it.weight == -1) 40 else it.weight, 0,
                 arrayOf(SetNBT(arrayOf(), ItemHat.ofHat(it).tagCompound)), arrayOf(), it.name) }.toTypedArray()
-        val regularEntries = regular.map { LootEntryItem(ItemHat, it.weight, 0,
+        val regularEntries = regular.map { LootEntryItem(ItemHat, if (it.weight == -1) 40 else it.weight, 0,
                 arrayOf(SetNBT(arrayOf(), ItemHat.ofHat(it).tagCompound)), arrayOf(), it.name) }.toTypedArray()
 
         val elusivePool = LootPool(elusiveEntries, arrayOf(), RandomValueRange(1f), RandomValueRange(0f), "elusive")
