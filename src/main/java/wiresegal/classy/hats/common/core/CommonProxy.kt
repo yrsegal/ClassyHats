@@ -19,6 +19,7 @@ import wiresegal.classy.hats.common.hat.CapabilityHatsStorage
 import wiresegal.classy.hats.common.hat.IHatStorage
 import wiresegal.classy.hats.common.hat.ItemHat
 import wiresegal.classy.hats.common.misc.ItemPhantomThread
+import wiresegal.classy.hats.common.misc.LootTableFactory
 
 /**
  * @author WireSegal
@@ -42,6 +43,8 @@ open class CommonProxy {
         }
 
         ItemPhantomThread
+
+        LootTableFactory
 
         HatConfigHandler.loadPreInit(e)
         ItemHat
