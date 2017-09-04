@@ -14,4 +14,39 @@ item.classyhats:phantom_thread.name=Phantom Thread
 item.classyhats:phantom_thread.desc0=Craft with armor to make it invisible!
 item.classyhats:phantom_thread.desc1=Craft it again to make the armor visible.
 
+item.classyhats:shleep_0.name=Red Shleep
+item.classyhats:shleep_0.desc=A little friend for your head.
+item.classyhats:shleep_1.name=Orange Shleep
+item.classyhats:shleep_1.desc=A little friend for your head.
+item.classyhats:shleep_2.name=Yellow Shleep
+item.classyhats:shleep_2.desc=A little friend for your head.
+item.classyhats:shleep_3.name=Green Shleep
+item.classyhats:shleep_3.desc=A little friend for your head.
+item.classyhats:shleep_4.name=Cyan Shleep
+item.classyhats:shleep_4.desc=A little friend for your head.
+item.classyhats:shleep_5.name=Blue Shleep
+item.classyhats:shleep_5.desc=A little friend for your head.
+item.classyhats:shleep_6.name=Violet Shleep
+item.classyhats:shleep_6.desc=A little friend for your head.
+item.classyhats:shleep_7.name=Pink Shleep
+item.classyhats:shleep_7.desc=A little friend for your head.
+
+item.classyhats:top_slime_0.name=Red Top Slime
+item.classyhats:top_slime_0.desc=Even companions need to look classy!
+item.classyhats:top_slime_1.name=Orange Top Slime
+item.classyhats:top_slime_1.desc=Even companions need to look classy!
+item.classyhats:top_slime_2.name=Yellow Top Slime
+item.classyhats:top_slime_2.desc=Even companions need to look classy!
+item.classyhats:top_slime_3.name=Green Top Slime
+item.classyhats:top_slime_3.desc=Even companions need to look classy!
+item.classyhats:top_slime_4.name=Cyan Top Slime
+item.classyhats:top_slime_4.desc=Even companions need to look classy!
+item.classyhats:top_slime_5.name=Blue Top Slime
+item.classyhats:top_slime_5.desc=Even companions need to look classy!
+item.classyhats:top_slime_6.name=Violet Top Slime
+item.classyhats:top_slime_6.desc=Even companions need to look classy!
+item.classyhats:top_slime_7.name=Pink Top Slime
+item.classyhats:top_slime_7.desc=Even companions need to look classy!
+
+
 classyhats.misc.phantom=&bLined with Phantom Thread

@@ -17,24 +17,23 @@ object HatConfigHandler {
 
     val missingno = Hat("missingno", 0, true)
     val hats = mutableMapOf(
-            "missingno" to missingno,
-            "tophat" to Hat("tophat")
-    )
+            "missingno" to missingno
+    ).apply { defaultHats.forEach { this.put(it.name, it) } }
 
     var rpl = File("")
         private set
 
-    var defaultWeight = 1
-    var elusiveWeight = 1
+    var defaultWeight = 40
+    var elusiveWeight = 40
 
     var shouldInjectLootChests = true
     var shouldInjectLootBoss = true
 
-    data class Hat(val name: String, var weight: Int = 1, val elusive: Boolean = false) {
+    data class Hat(val name: String, var weight: Int = -1, val elusive: Boolean = false) {
         fun toJson() = json {
             obj(
                     "name" to name,
-                    *(if (weight != 1) arrayOf("weight" to weight) else arrayOf()),
+                    *(if (weight != -1) arrayOf("weight" to weight) else arrayOf()),
                     *(if (elusive) arrayOf("elusive" to elusive) else arrayOf())
             )
         }
@@ -51,26 +50,26 @@ object HatConfigHandler {
                 val blacklist = if (load.has("blacklist_hats")) load.getAsJsonArray("blacklist_hats") else JsonArray()
                 blacklist.map { it.asString.toLowerCase(Locale.ROOT) }.filter { it != "missingno" }.forEach { hats.remove(it) }
 
-                defaultWeight = if (load.has("default_weight")) load.getAsJsonPrimitive("default_weight").asInt else 1
-                elusiveWeight = if (load.has("elusive_weight")) load.getAsJsonPrimitive("elusive_weight").asInt else 1
+                defaultWeight = if (load.has("default_weight")) load.getAsJsonPrimitive("default_weight").asInt else 40
+                elusiveWeight = if (load.has("elusive_weight")) load.getAsJsonPrimitive("elusive_weight").asInt else 40
 
                 shouldInjectLootChests = if (load.has("loot_hat_from_chests")) load.getAsJsonPrimitive("loot_hat_from_chests").asBoolean else true
                 shouldInjectLootBoss = if (load.has("loot_hat_from_boss")) load.getAsJsonPrimitive("loot_hat_from_boss").asBoolean else true
-
-                hats.values.forEach { if (it != missingno) {
-                    if (it.elusive) it.weight = elusiveWeight
-                    else it.weight = defaultWeight
-                }}
 
                 val hats = if (load.has("custom_hats")) load.getAsJsonArray("custom_hats") else JsonArray()
                 for (hat in hats) {
                     val hatObj = hat.asJsonObject
                     val name = hatObj.getAsJsonPrimitive("name").asString.toLowerCase(Locale.ROOT)
-                    val weight = if (hatObj.has("weight")) hatObj.getAsJsonPrimitive("weight").asInt else 1
+                    val weight = if (hatObj.has("weight")) hatObj.getAsJsonPrimitive("weight").asInt else -1
                     val elusive = if (hatObj.has("elusive")) hatObj.getAsJsonPrimitive("elusive").asBoolean else false
                     newHats.put(name, Hat(name, weight, elusive))
                 }
                 this.hats.putAll(newHats)
+
+                this.hats.values.forEach { if (it != missingno && it.weight == -1) {
+                    if (it.elusive) it.weight = elusiveWeight
+                    else it.weight = defaultWeight
+                }}
 
                 succeeded = true
             } catch (e: Exception) {
@@ -84,8 +83,8 @@ object HatConfigHandler {
                         "__comment0" to "The folder classyhats_resources will act as a resource pack for any custom hats you want to add.",
                         "__comment1" to "Put any hat names from the default hats you don't want in the blacklist.",
                         "blacklist_hats" to array(),
-                        "default_weight" to 1,
-                        "elusive_weight" to 1,
+                        "default_weight" to 40,
+                        "elusive_weight" to 40,
                         "loot_hat_from_chests" to true,
                         "loot_hat_from_boss" to true,
                         "custom_hats" to array(),

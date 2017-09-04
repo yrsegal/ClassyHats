@@ -1,6 +1,6 @@
 {
   "parent": "classyhats:item/top_slime",
   "textures": {
-    "slime": "classyhats:items/top_slime_0"
+    "slime": "classyhats:items/top_slime_3"
   }
 }

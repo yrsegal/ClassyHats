@@ -1,6 +1,6 @@
 {
 	"parent": "classyhats:item/shleep",
 	"textures": {
-		"slime": "classyhats:items/shleep_0"
+		"slime": "classyhats:items/shleep_6"
 	}
 }
