@@ -16,7 +16,7 @@
         }, {
           "conditions": [],
           "type": "loot_table",
-          "name": "classyhats:elusiv",
+          "name": "classyhats:elusive",
           "functions": [],
           "weight": 1,
           "quality": 0
