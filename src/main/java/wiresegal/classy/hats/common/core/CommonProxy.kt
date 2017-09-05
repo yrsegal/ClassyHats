@@ -10,7 +10,6 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
 import net.minecraftforge.fml.common.network.NetworkRegistry
 import net.minecraftforge.fml.common.registry.GameRegistry
-import net.minecraftforge.oredict.OreDictionary
 import net.minecraftforge.oredict.ShapedOreRecipe
 import wiresegal.classy.hats.ClassyHats
 import wiresegal.classy.hats.common.gui.HatsGuiFactory
@@ -61,7 +60,7 @@ open class CommonProxy {
                 "WSW",
                 " WL",
                 'L', "gemLapis",
-                'W', ItemStack(Blocks.WOOL, 1, OreDictionary.WILDCARD_VALUE),
+                'W', "string",
                 'S', "stickWood"))
 
 
