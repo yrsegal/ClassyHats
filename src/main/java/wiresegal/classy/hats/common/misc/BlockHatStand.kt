@@ -52,9 +52,7 @@ object BlockHatStand : BlockModContainer("hat_stand", Material.WOOD, *StandMater
 
         if (stack.item == ItemHat) {
             te.inv.handler.setStackInSlot(0, stack.copy().apply { count = 1 })
-            stack.shrink(1)
-            if (stack.isEmpty)
-                playerIn.setHeldItem(hand, ItemStack.EMPTY)
+            stack.count--
 
             ret = true
         }
