@@ -18,6 +18,7 @@ import wiresegal.classy.hats.common.hat.BaseHatStorage
 import wiresegal.classy.hats.common.hat.CapabilityHatsStorage
 import wiresegal.classy.hats.common.hat.IHatStorage
 import wiresegal.classy.hats.common.hat.ItemHat
+import wiresegal.classy.hats.common.misc.BlockHatStand
 import wiresegal.classy.hats.common.misc.ItemPhantomThread
 import wiresegal.classy.hats.common.misc.LootTableFactory
 
@@ -27,7 +28,6 @@ import wiresegal.classy.hats.common.misc.LootTableFactory
  */
 open class CommonProxy {
     open fun pre(e: FMLPreInitializationEvent) {
-
         CapabilityManager.INSTANCE.register(IHatStorage::class.java, CapabilityHatsStorage(), ::BaseHatStorage)
         AttachmentHandler
 
@@ -42,12 +42,15 @@ open class CommonProxy {
                 }
         }
 
-        ItemPhantomThread
-
         LootTableFactory
 
         HatConfigHandler.loadPreInit(e)
         ItemHat
+
+
+        ItemPhantomThread
+
+        BlockHatStand
     }
 
     open fun init(e: FMLInitializationEvent) {
@@ -60,6 +63,77 @@ open class CommonProxy {
                 'L', "gemLapis",
                 'W', ItemStack(Blocks.WOOL, 1, OreDictionary.WILDCARD_VALUE),
                 'S', "stickWood"))
+
+
+        GameRegistry.addRecipe(ShapedOreRecipe(ItemStack(BlockHatStand, 1, 0), // Oak
+                "LLL",
+                " F ",
+                "FLF",
+                'L', ItemStack(Blocks.PLANKS, 1, 0), // Oak Planks
+                'F', ItemStack(Blocks.WOODEN_SLAB, 1, 0))) // Oak Slab
+
+        GameRegistry.addRecipe(ShapedOreRecipe(ItemStack(BlockHatStand, 1, 0), // Oak
+                "LLL",
+                " F ",
+                "FLF",
+                'L', "plankWood",
+                'F', "slabWood"))
+
+        GameRegistry.addRecipe(ShapedOreRecipe(ItemStack(BlockHatStand, 1, 1), // Spruce
+                "LLL",
+                " F ",
+                "FLF",
+                'L', ItemStack(Blocks.PLANKS, 1, 1), // Spruce Planks
+                'F', ItemStack(Blocks.WOODEN_SLAB, 1, 1))) // Spruce Slab
+
+        GameRegistry.addRecipe(ShapedOreRecipe(ItemStack(BlockHatStand, 1, 2), // Birch
+                "LLL",
+                " F ",
+                "FLF",
+                'L', ItemStack(Blocks.PLANKS, 1, 2), // Birch Planks
+                'F', ItemStack(Blocks.WOODEN_SLAB, 1, 2))) // Birch Slab
+
+        GameRegistry.addRecipe(ShapedOreRecipe(ItemStack(BlockHatStand, 1, 3), // Jungle
+                "LLL",
+                " F ",
+                "FLF",
+                'L', ItemStack(Blocks.PLANKS, 1, 3), // Spruce Planks
+                'F', ItemStack(Blocks.WOODEN_SLAB, 1, 3))) // Spruce Slab
+
+        GameRegistry.addRecipe(ShapedOreRecipe(ItemStack(BlockHatStand, 1, 4), // Acacia
+                "LLL",
+                " F ",
+                "FLF",
+                'L', ItemStack(Blocks.PLANKS, 1, 4), // Acacia Planks
+                'F', ItemStack(Blocks.WOODEN_SLAB, 1, 4))) // Acacia Slab
+
+        GameRegistry.addRecipe(ShapedOreRecipe(ItemStack(BlockHatStand, 1, 5), // Dark Oak
+                "LLL",
+                " F ",
+                "FLF",
+                'L', ItemStack(Blocks.PLANKS, 1, 5), // Dark Oak Planks
+                'F', ItemStack(Blocks.WOODEN_SLAB, 1, 5))) // Dark Oak Slab
+
+        GameRegistry.addRecipe(ShapedOreRecipe(ItemStack(BlockHatStand, 1, 6), // Stone
+                "LLL",
+                " F ",
+                "FLF",
+                'L', "stone",
+                'F', ItemStack(Blocks.STONE_SLAB, 1, 0))) // Stone Slab
+
+        GameRegistry.addRecipe(ShapedOreRecipe(ItemStack(BlockHatStand, 1, 7), // Quartz
+                "LLL",
+                " F ",
+                "FLF",
+                'L', "blockQuartz",
+                'F', ItemStack(Blocks.STONE_SLAB, 1, 7))) // Quartz Slab
+
+        GameRegistry.addRecipe(ShapedOreRecipe(ItemStack(BlockHatStand, 1, 8), // Obsidian
+                "LLL",
+                " F ",
+                "FLF",
+                'L', "obsidian",
+                'F', "ingotIron"))
     }
 
     open fun post(e: FMLPostInitializationEvent) {

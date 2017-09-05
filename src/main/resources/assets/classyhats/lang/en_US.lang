@@ -10,10 +10,6 @@ item.classyhats:missingno.desc3=Or this was just created manually.
 item.classyhats:tophat.name=Top Hat
 item.classyhats:tophat.desc=For black tie parties.
 
-item.classyhats:phantom_thread.name=Phantom Thread
-item.classyhats:phantom_thread.desc0=Craft with armor to make it invisible!
-item.classyhats:phantom_thread.desc1=Craft it again to make the armor visible.
-
 item.classyhats:shleep_0.name=Red Shleep
 item.classyhats:shleep_0.desc=A little friend for your head.
 item.classyhats:shleep_1.name=Orange Shleep
@@ -48,5 +44,18 @@ item.classyhats:top_slime_6.desc=Even companions need to look classy!
 item.classyhats:top_slime_7.name=Pink Top Slime
 item.classyhats:top_slime_7.desc=Even companions need to look classy!
 
-
 classyhats.misc.phantom=&bLined with Phantom Thread
+
+item.classyhats:phantom_thread.name=Phantom Thread
+item.classyhats:phantom_thread.desc0=Craft with armor to make it invisible!
+item.classyhats:phantom_thread.desc1=Craft it again to make the armor visible.
+
+tile.classyhats:hat_stand_oak.name=Oak Wood Hat Stand
+tile.classyhats:hat_stand_spruce.name=Spruce Wood Hat Stand
+tile.classyhats:hat_stand_birch.name=Birch Wood Hat Stand
+tile.classyhats:hat_stand_jungle.name=Jungle Wood Hat Stand
+tile.classyhats:hat_stand_acacia.name=Acacia Wood Hat Stand
+tile.classyhats:hat_stand_dark_oak.name=Dark Oak Wood Hat Stand
+tile.classyhats:hat_stand_stone.name=Stone Hat Stand
+tile.classyhats:hat_stand_quartz.name=Quartz Hat Stand
+tile.classyhats:hat_stand_obsidian.name=Obsidian Hat Stand

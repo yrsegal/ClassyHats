@@ -40,6 +40,8 @@ object ItemHat : ItemMod("hat"), IExtraVariantHolder {
         setMaxStackSize(1)
     }
 
+    override fun getContainerItem(itemStack: ItemStack): ItemStack
+            = itemStack.copy().apply { count = 1 }
 
     override val extraVariants: Array<out String>
         get() = HatConfigHandler.hats.values.map { it.name }.toTypedArray()

@@ -35,7 +35,6 @@ val PHANTOM_TAG = "classy_hat_invisible"
 object ItemPhantomThread : ItemMod("phantom_thread") {
 
     init {
-        containerItem = this
         setMaxStackSize(1)
 
         MinecraftForge.EVENT_BUS.register(this)
@@ -43,6 +42,9 @@ object ItemPhantomThread : ItemMod("phantom_thread") {
         RecipeSorter.register("${LibMisc.MOD_ID}:phantom", PhantomRecipe::class.java, RecipeSorter.Category.SHAPELESS, "")
         GameRegistry.addRecipe(PhantomRecipe)
     }
+
+    override fun getContainerItem(itemStack: ItemStack): ItemStack
+            = itemStack.copy().apply { count = 1 }
 
     override fun hasEffect(stack: ItemStack) = true
 

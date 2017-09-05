@@ -1,0 +1,6 @@
+{
+	"parent": "classyhats:block/hat_stand",
+	"textures": {
+		"material": "classyhats:block/hat_stand_acacia"
+	}
+}

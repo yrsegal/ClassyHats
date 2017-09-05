@@ -4,14 +4,17 @@ import com.google.common.base.Charsets
 import net.minecraft.client.Minecraft
 import net.minecraft.client.resources.FolderResourcePack
 import net.minecraft.client.resources.IResourcePack
+import net.minecraftforge.fml.client.registry.ClientRegistry
 import net.minecraftforge.fml.common.FMLLog
 import net.minecraftforge.fml.common.event.FMLInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
 import net.minecraftforge.fml.relauncher.ReflectionHelper
 import org.apache.logging.log4j.Level
 import wiresegal.classy.hats.client.render.LayerHat
+import wiresegal.classy.hats.client.render.TESRStand
 import wiresegal.classy.hats.common.core.CommonProxy
 import wiresegal.classy.hats.common.core.HatConfigHandler
+import wiresegal.classy.hats.common.misc.BlockHatStand
 import java.io.ByteArrayInputStream
 import java.io.File
 import java.io.IOException
@@ -37,6 +40,8 @@ class ClientProxy : CommonProxy() {
 
     override fun init(e: FMLInitializationEvent) {
         super.init(e)
+
+        ClientRegistry.bindTileEntitySpecialRenderer(BlockHatStand.TileHatStand::class.java, TESRStand)
 
         val skinMap = Minecraft.getMinecraft().renderManager.skinMap
         var render = skinMap["default"]

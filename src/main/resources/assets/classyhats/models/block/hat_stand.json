@@ -1,6 +1,9 @@
 {
 	"credit": "Made by Tristaric, utilizing Blockbench.",
-	"textures": {},
+	"parent": "block/block",
+	"textures": {
+		"particle": "#material"
+	},
 	"elements": [
 		{
 			"name": "cube",
@@ -10,31 +13,31 @@
 				"north": {
 					"uv": [0, 0, 16, 4],
 					"cullface": "north",
-					"texture": "#missing"
+					"texture": "#material"
 				},
 				"east": {
 					"uv": [0, 0, 16, 4],
 					"cullface": "east",
-					"texture": "#missing"
+					"texture": "#material"
 				},
 				"south": {
 					"uv": [0, 0, 16, 4],
 					"cullface": "south",
-					"texture": "#missing"
+					"texture": "#material"
 				},
 				"west": {
 					"uv": [0, 0, 16, 4],
 					"cullface": "west",
-					"texture": "#missing"
+					"texture": "#material"
 				},
 				"up": {
 					"uv": [0, 0, 16, 16],
 					"cullface": "up",
-					"texture": "#missing"
+					"texture": "#material"
 				},
 				"down": {
 					"uv": [0, 0, 16, 16],
-					"texture": "#missing"
+					"texture": "#material"
 				}
 			}
 		},
@@ -45,23 +48,23 @@
 			"faces": {
 				"north": {
 					"uv": [0, 0, 8, 2],
-					"texture": "#missing"
+					"texture": "#material"
 				},
 				"east": {
 					"uv": [4, 4, 12, 6],
-					"texture": "#missing"
+					"texture": "#material"
 				},
 				"south": {
 					"uv": [4, 4, 12, 6],
-					"texture": "#missing"
+					"texture": "#material"
 				},
 				"west": {
 					"uv": [4, 4, 12, 6],
-					"texture": "#missing"
+					"texture": "#material"
 				},
 				"down": {
 					"uv": [4, 4, 12, 12],
-					"texture": "#missing"
+					"texture": "#material"
 				}
 			}
 		},
@@ -72,19 +75,19 @@
 			"faces": {
 				"north": {
 					"uv": [5, 6, 11, 12],
-					"texture": "#missing"
+					"texture": "#material"
 				},
 				"east": {
 					"uv": [5, 6, 11, 12],
-					"texture": "#missing"
+					"texture": "#material"
 				},
 				"south": {
 					"uv": [5, 6, 11, 12],
-					"texture": "#missing"
+					"texture": "#material"
 				},
 				"west": {
 					"uv": [5, 6, 11, 12],
-					"texture": "#missing"
+					"texture": "#material"
 				}
 			}
 		},
@@ -95,65 +98,27 @@
 			"faces": {
 				"north": {
 					"uv": [3, 12, 13, 16],
-					"texture": "#missing"
+					"texture": "#material"
 				},
 				"east": {
 					"uv": [3, 12, 13, 16],
-					"texture": "#missing"
+					"texture": "#material"
 				},
 				"south": {
 					"uv": [3, 12, 13, 16],
-					"texture": "#missing"
+					"texture": "#material"
 				},
 				"west": {
 					"uv": [3, 12, 13, 16],
-					"texture": "#missing"
+					"texture": "#material"
 				},
-				"up": {"uv": [3, 3, 13, 13], "texture": "#missing"},
+				"up": {"uv": [3, 3, 13, 13], "texture": "#material"},
 				"down": {
 					"uv": [3, 3, 13, 13],
 					"cullface": "down",
-					"texture": "#missing"
+					"texture": "#material"
 				}
 			}
 		}
-	],
-	"display": {
-		"thirdperson_righthand": {
-			"scale": [0.375, 0.375, 0.375],
-			"rotation": [75, 45, 0],
-			"translation": [0, 2.5, 0]
-		},
-		"thirdperson_lefthand": {
-			"scale": [0.375, 0.375, 0.375],
-			"rotation": [75, 45, 0],
-			"translation": [0, 2.5, 0]
-		},
-		"firstperson_righthand": {
-			"scale": [0.4, 0.4, 0.4],
-			"rotation": [0, 45, 0],
-			"translation": [0, 0, 0]
-		},
-		"firstperson_lefthand": {
-			"scale": [0.4, 0.4, 0.4],
-			"rotation": [0, 225, 0],
-			"translation": [0, 0, 0]
-		},
-		"head": {"scale": [1, 1, 1]},
-		"ground": {
-			"scale": [0.25, 0.25, 0.25],
-			"rotation": [0, 0, 0],
-			"translation": [0, 3, 0]
-		},
-		"fixed": {
-			"scale": [0.5, 0.5, 0.5],
-			"rotation": [0, 0, 0],
-			"translation": [0, 0, 0]
-		},
-		"gui": {
-			"scale": [0.625, 0.625, 0.625],
-			"rotation": [30, 225, 0],
-			"translation": [0, 0, 0]
-		}
-	}
+	]
 }
