@@ -5,6 +5,7 @@ import net.minecraft.client.renderer.GlStateManager
 import net.minecraft.client.renderer.OpenGlHelper
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer
+import net.minecraft.util.math.MathHelper
 import wiresegal.classy.hats.common.misc.BlockHatStand
 
 /**
@@ -21,7 +22,13 @@ object TESRStand : TileEntitySpecialRenderer<BlockHatStand.TileHatStand>() {
 
             GlStateManager.scale(0.625, 0.625, 0.625)
 
-            val amount = Minecraft.getMinecraft().world.getCombinedLight(te.pos.up(), 0)
+            val xS = rendererDispatcher.entityX - (te.pos.x + 0.5)
+            val zS = rendererDispatcher.entityZ - (te.pos.z + 0.5)
+            val angle = MathHelper.atan2(zS, xS) * 180 / Math.PI + 90f
+
+            GlStateManager.rotate(angle.toFloat(), 0.0f, -1.0f, 0.0f)
+
+            val amount = rendererDispatcher.world.getCombinedLight(te.pos.up(), 0)
 
             val lX = (amount % (1 shl 16)).toFloat()
             val lY = (amount / (1 shl 16)).toFloat()

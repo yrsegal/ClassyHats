@@ -12,9 +12,14 @@ import net.minecraft.block.properties.PropertyEnum
 import net.minecraft.block.state.BlockStateContainer
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.Entity
+import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.inventory.InventoryHelper
 import net.minecraft.item.ItemStack
+import net.minecraft.util.EnumFacing
+import net.minecraft.util.EnumHand
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
+import net.minecraftforge.items.IItemHandler
 import net.minecraftforge.items.ItemStackHandler
 import wiresegal.classy.hats.common.hat.ItemHat
 import wiresegal.classy.hats.common.misc.BlockHatStand.StandMaterial.*
@@ -36,6 +41,59 @@ object BlockHatStand : BlockModContainer("hat_stand", Material.WOOD, *StandMater
 
     var PROPERTY: PropertyEnum<StandMaterial>? = null
         private set
+
+    override fun onBlockActivated(worldIn: World, pos: BlockPos, state: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
+        val stack = playerIn.getHeldItem(hand)
+
+        var ret = false
+
+        val te = worldIn.getTileEntity(pos) as TileHatStand
+        val invStack = te.inv.handler.getStackInSlot(0)
+
+        if (stack.item == ItemHat) {
+            te.inv.handler.setStackInSlot(0, stack.copy().apply { count = 1 })
+            stack.shrink(1)
+            if (stack.isEmpty)
+                playerIn.setHeldItem(hand, ItemStack.EMPTY)
+
+            ret = true
+        }
+
+        if (!invStack.isEmpty) {
+            val copy = invStack.copy()
+            if (playerIn.heldItemMainhand.isEmpty)
+                playerIn.setHeldItem(EnumHand.MAIN_HAND, copy)
+            else if (!playerIn.inventory.addItemStackToInventory(copy))
+                InventoryHelper.spawnItemStack(worldIn, pos.x.toDouble(), pos.y + 0.75, pos.z.toDouble(), copy)
+
+            if (!ret)
+                te.inv.handler.setStackInSlot(0, ItemStack.EMPTY)
+            ret = true
+        }
+
+        return ret
+    }
+
+    override fun getComparatorInputOverride(blockState: IBlockState, worldIn: World, pos: BlockPos): Int {
+        val capability = (worldIn.getTileEntity(pos) as TileHatStand).inv.handler
+        var percent = 0f
+        for (i in 0 until capability.slots) {
+            val inSlot = capability.getStackInSlot(i)
+            percent += inSlot.count.toFloat() / getMaxStackSize(i, capability, inSlot)
+        }
+        percent /= capability.slots
+        return (percent * 15).toInt() + if (percent > 0.0) 1 else 0
+    }
+
+    private fun getMaxStackSize(slot: Int, handler: IItemHandler, inSlot: ItemStack?): Int {
+        if (inSlot == null || inSlot.isEmpty) return 64
+        val stack = inSlot.copy()
+        stack.count = inSlot.maxStackSize - inSlot.count
+        val result = handler.insertItem(slot, stack, true)
+        return inSlot.maxStackSize - result.count
+    }
+
+    override fun hasComparatorInputOverride(state: IBlockState) = true
 
     override fun createBlockState(): BlockStateContainer {
         if (PROPERTY == null)
@@ -74,7 +132,7 @@ object BlockHatStand : BlockModContainer("hat_stand", Material.WOOD, *StandMater
         @Module
         val inv = ModuleInventory(object : ItemStackHandler() {
             override fun getStackLimit(slot: Int, stack: ItemStack): Int {
-                return if (stack.item == ItemHat) super.getStackLimit(slot, stack) else 0
+                return if (stack.item == ItemHat) 1 else 0
             }
 
             override fun onContentsChanged(slot: Int) {
