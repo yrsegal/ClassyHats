@@ -70,6 +70,8 @@ object BlockHatStand : BlockModContainer("hat_stand", Material.WOOD, *StandMater
         val invStack = te.inv.handler.getStackInSlot(0)
 
         if (stack.item == ItemHat) {
+            te.angle = playerIn.horizontalFacing.horizontalAngle
+
             te.inv.handler.setStackInSlot(0, stack.copy().apply { count = 1 })
             stack.count--
 
