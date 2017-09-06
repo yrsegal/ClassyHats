@@ -27,6 +27,8 @@ object HatConfigHandler {
     var shouldInjectLootBoss = true
 
     data class Hat(val name: String, val weight: Int = -1, val elusive: Boolean = false) {
+        constructor(name: String, weight: Double, elusive: Boolean = false) : this(name, (weight * 40).toInt(), elusive)
+
         fun toJson() = json {
             obj(
                     "name" to name,
