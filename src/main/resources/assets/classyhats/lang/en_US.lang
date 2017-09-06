@@ -1,7 +1,7 @@
 item_group.classyhats=Classy Hats
 classyhats.container.hats=Hats
 classyhats.misc.back_to_hat=Back to Inventory
-classyhats.misc.back_to_bag=Bag Storage
+classyhats.misc.back_to_bag=Hat Storage
 
 item.classyhats:missingno.name=Broken Hat
 item.classyhats:missingno.desc0=Oh no! Something went wrong!
