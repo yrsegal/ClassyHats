@@ -47,10 +47,8 @@ object BlockHatStand : BlockModContainer("hat_stand", Material.WOOD, *StandMater
         private set
 
     override fun onBlockPlacedBy(worldIn: World, pos: BlockPos, state: IBlockState, placer: EntityLivingBase, stack: ItemStack) {
-        val facing = placer.horizontalFacing
-        val angle = facing.horizontalAngle
         val te = worldIn.getTileEntity(pos) as TileHatStand
-        te.angle = angle
+        te.angle = ((placer.rotationYaw % 360) / 45).toInt() * 45f
     }
 
     override fun onBlockActivated(worldIn: World, pos: BlockPos, state: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
@@ -70,7 +68,7 @@ object BlockHatStand : BlockModContainer("hat_stand", Material.WOOD, *StandMater
         val invStack = te.inv.handler.getStackInSlot(0)
 
         if (stack.item == ItemHat) {
-            te.angle = playerIn.horizontalFacing.horizontalAngle
+            te.angle = ((playerIn.rotationYaw % 360) / 45).toInt() * 45f
 
             te.inv.handler.setStackInSlot(0, stack.copy().apply { count = 1 })
             playerIn.inventory.setInventorySlotContents(playerIn.inventory.currentItem, ItemStack.EMPTY)
