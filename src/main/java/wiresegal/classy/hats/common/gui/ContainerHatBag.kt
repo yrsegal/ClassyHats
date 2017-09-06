@@ -26,6 +26,8 @@ class ContainerHatBag(playerInv: InventoryPlayer, thePlayer: EntityPlayer) : Con
     val idxHatsEnd: Int
     val idxPlayerInvStart: Int
     val idxPlayerInvEnd: Int
+    val idxHotbarStart: Int
+    val idxHotbarEnd: Int
 
     init {
         this.addSlotToContainer(object : Slot(HatInventoryWrapper(hat), 0, 188, 110) {
@@ -46,10 +48,12 @@ class ContainerHatBag(playerInv: InventoryPlayer, thePlayer: EntityPlayer) : Con
         for (i in 0..2)
             for (j in 0..8)
                 this.addSlotToContainer(Slot(playerInv, j + (i + 1) * 9, 17 + j * 18, 110 + i * 18))
+        idxPlayerInvEnd = inventorySlots.size
 
+        idxHotbarStart = inventorySlots.size
         for (i in 0..8)
             this.addSlotToContainer(Slot(playerInv, i, 17 + i * 18, 168))
-        idxPlayerInvEnd = inventorySlots.size
+        idxHotbarEnd = inventorySlots.size
 
         this.addSlotToContainer(object : Slot(playerInv, 40, 188, 168) {
             override fun getSlotTexture() = "minecraft:items/empty_armor_slot_shield"
@@ -71,16 +75,22 @@ class ContainerHatBag(playerInv: InventoryPlayer, thePlayer: EntityPlayer) : Con
             if (index in idxPlayerHatStart until idxPlayerHatEnd) {
                 if (!this.mergeItemStack(inSlot, idxHatsStart, idxHatsEnd, false))
                     if (!this.mergeItemStack(inSlot, idxPlayerInvStart, idxPlayerInvEnd, false))
-                        return ItemStack.EMPTY
+                        if (!this.mergeItemStack(inSlot, idxHotbarStart, idxHotbarEnd, false))
+                            return ItemStack.EMPTY
             } else if (index in idxHatsStart until idxHatsEnd) {
                 if (!this.mergeItemStack(inSlot, idxPlayerHatStart, idxPlayerHatEnd, false))
                     if (!this.mergeItemStack(inSlot, idxPlayerInvStart, idxPlayerInvEnd, false))
-                        return ItemStack.EMPTY
-            } else if (index in idxPlayerInvStart until idxPlayerInvEnd + 1) {
+                        if (!this.mergeItemStack(inSlot, idxHotbarStart, idxHotbarEnd, false))
+                            return ItemStack.EMPTY
+            } else if (index in idxPlayerInvStart until idxPlayerInvEnd) {
                 if (!this.mergeItemStack(inSlot, idxHatsStart, idxHatsEnd, false))
                     if (!this.mergeItemStack(inSlot, idxPlayerHatStart, idxPlayerHatEnd, false))
-                        return ItemStack.EMPTY
-            }
+                        if (!this.mergeItemStack(inSlot, idxHotbarStart, idxHotbarEnd, false))
+                            return ItemStack.EMPTY
+            } else if (!this.mergeItemStack(inSlot, idxHatsStart, idxHatsEnd, false))
+                    if (!this.mergeItemStack(inSlot, idxPlayerHatStart, idxPlayerHatEnd, false))
+                        if (!this.mergeItemStack(inSlot, idxPlayerInvStart, idxPlayerInvEnd, false))
+                            return ItemStack.EMPTY
 
             if (inSlot.isEmpty) slot.putStack(ItemStack.EMPTY)
             else slot.onSlotChanged()

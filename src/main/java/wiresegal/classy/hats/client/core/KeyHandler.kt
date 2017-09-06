@@ -36,7 +36,7 @@ object KeyHandler {
         if (event.side == Side.SERVER) return
         if (event.phase == TickEvent.Phase.START) {
             if (key.isPressed && FMLClientHandler.instance().client.inGameHasFocus) {
-                PacketHandler.NETWORK.sendToServer(PacketHatGuiOpen(1))
+                PacketHandler.NETWORK.sendToServer(PacketHatGuiOpen(0))
             }
         }
     }

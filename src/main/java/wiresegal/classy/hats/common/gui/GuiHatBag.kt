@@ -1,10 +1,13 @@
 package wiresegal.classy.hats.common.gui
 
+import com.teamwizardry.librarianlib.features.network.PacketHandler
 import net.minecraft.client.gui.inventory.GuiContainer
 import net.minecraft.client.gui.inventory.GuiInventory
 import net.minecraft.client.renderer.GlStateManager
+import net.minecraft.client.resources.I18n
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.ResourceLocation
+import wiresegal.classy.hats.LibMisc
 
 
 /**
@@ -38,9 +41,28 @@ class GuiHatBag(player: EntityPlayer) : GuiContainer(ContainerHatBag(player.inve
         this.mc.textureManager.bindTexture(background)
         val k = this.guiLeft
         val l = this.guiTop
-        this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize)
+        drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize)
+        if (mouseX <= k + 192 + 8 && mouseX >= k + 192 && mouseY <= l + 143 + 8 && mouseY >= l + 143)
+            drawTexturedModalRect(k + 192, l + 143, 0, 240, 8, 8)
+        else
+            drawTexturedModalRect(k + 192, l + 143, 0, 248, 8, 8)
 
         GuiInventory.drawEntityOnScreen(k + 25 + 196, l + 83, 30, (k + 25 + 196).toFloat() - this.oldMouseX, (l + 83 - 50).toFloat() - this.oldMouseY, this.mc.player)
+    }
+
+    override fun mouseClicked(mouseX: Int, mouseY: Int, mouseButton: Int) {
+        super.mouseClicked(mouseX, mouseY, mouseButton)
+        val k = this.guiLeft
+        val l = this.guiTop
+        if (mouseButton == 0 && mouseX <= k + 192 + 8 && mouseX >= k + 192 && mouseY <= l + 143 + 8 && mouseY >= l + 143)
+            PacketHandler.NETWORK.sendToServer(PacketHatGuiOpen(0))
+    }
+
+    override fun drawGuiContainerForegroundLayer(mouseX: Int, mouseY: Int) {
+        val k = this.guiLeft
+        val l = this.guiTop
+        if (mouseX <= k + 192 + 8 && mouseX >= k + 192 && mouseY <= l + 143 + 8 && mouseY >= l + 143)
+            drawHoveringText(I18n.format("${LibMisc.MOD_ID}.misc.back_to_hat"), mouseX - k, mouseY - l)
     }
 
     companion object {

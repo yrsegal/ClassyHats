@@ -16,7 +16,7 @@ import wiresegal.classy.hats.ClassyHats
 class PacketHatGuiOpen(@Save var target: Int = 0) : PacketBase() {
     override fun handle(ctx: MessageContext) {
         val player = ctx.serverHandler.player
-        player.openContainer.onContainerClosed(player)
+        player.closeContainer()
         player.openGui(ClassyHats.INSTANCE, target, ctx.serverHandler.player.world, 0, 0, 0)
     }
 }
