@@ -8,6 +8,7 @@ import net.minecraft.inventory.*
 import net.minecraft.item.ItemArmor
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.CraftingManager
+import wiresegal.classy.hats.LibMisc
 import wiresegal.classy.hats.common.core.AttachmentHandler
 import wiresegal.classy.hats.common.hat.ItemHat
 
@@ -49,6 +50,7 @@ class ContainerHat(playerInv: InventoryPlayer, private val thePlayer: EntityPlay
 
         this.addSlotToContainer(object : Slot(HatInventoryWrapper(hat), 0, 77, 8) {
             override fun isItemValid(stack: ItemStack) = stack.item == ItemHat
+            override fun getSlotTexture() = "${LibMisc.MOD_ID}:gui/hat_slot"
         })
 
         for (i in 0..2)

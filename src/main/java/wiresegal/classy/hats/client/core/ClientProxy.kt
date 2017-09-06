@@ -4,12 +4,17 @@ import com.google.common.base.Charsets
 import net.minecraft.client.Minecraft
 import net.minecraft.client.resources.FolderResourcePack
 import net.minecraft.client.resources.IResourcePack
+import net.minecraft.util.ResourceLocation
+import net.minecraftforge.client.event.TextureStitchEvent
+import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.fml.client.registry.ClientRegistry
 import net.minecraftforge.fml.common.FMLLog
 import net.minecraftforge.fml.common.event.FMLInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.relauncher.ReflectionHelper
 import org.apache.logging.log4j.Level
+import wiresegal.classy.hats.LibMisc
 import wiresegal.classy.hats.client.render.LayerHat
 import wiresegal.classy.hats.client.render.TESRStand
 import wiresegal.classy.hats.common.core.CommonProxy
@@ -36,6 +41,13 @@ class ClientProxy : CommonProxy() {
         packs.add(CustomFolderResourcePack(HatConfigHandler.rpl, "classyhats_extra"))
 
         KeyHandler
+
+        MinecraftForge.EVENT_BUS.register(object {
+            @SubscribeEvent
+            fun onStitch(e: TextureStitchEvent.Pre) {
+                e.map.registerSprite(ResourceLocation(LibMisc.MOD_ID, "gui/hat_slot"))
+            }
+        })
     }
 
     override fun init(e: FMLInitializationEvent) {

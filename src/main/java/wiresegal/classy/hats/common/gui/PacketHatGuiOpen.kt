@@ -2,6 +2,7 @@ package wiresegal.classy.hats.common.gui
 
 import com.teamwizardry.librarianlib.features.autoregister.PacketRegister
 import com.teamwizardry.librarianlib.features.network.PacketBase
+import com.teamwizardry.librarianlib.features.saving.Save
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext
 import net.minecraftforge.fml.relauncher.Side
 import wiresegal.classy.hats.ClassyHats
@@ -12,10 +13,10 @@ import wiresegal.classy.hats.ClassyHats
  * Created at 4:31 PM on 9/1/17.
  */
 @PacketRegister(Side.SERVER)
-class PacketHatGuiOpen : PacketBase() {
+class PacketHatGuiOpen(@Save var target: Int = 0) : PacketBase() {
     override fun handle(ctx: MessageContext) {
         val player = ctx.serverHandler.player
         player.openContainer.onContainerClosed(player)
-        player.openGui(ClassyHats.INSTANCE, 0, ctx.serverHandler.player.world, 0, 0, 0)
+        player.openGui(ClassyHats.INSTANCE, target, ctx.serverHandler.player.world, 0, 0, 0)
     }
 }

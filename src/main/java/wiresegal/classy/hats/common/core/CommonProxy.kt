@@ -71,13 +71,6 @@ open class CommonProxy {
                 'L', ItemStack(Blocks.PLANKS, 1, 0), // Oak Planks
                 'F', ItemStack(Blocks.WOODEN_SLAB, 1, 0))) // Oak Slab
 
-        GameRegistry.addRecipe(ShapedOreRecipe(ItemStack(BlockHatStand, 1, 0), // Oak
-                "LLL",
-                " F ",
-                "FLF",
-                'L', "plankWood",
-                'F', "slabWood"))
-
         GameRegistry.addRecipe(ShapedOreRecipe(ItemStack(BlockHatStand, 1, 1), // Spruce
                 "LLL",
                 " F ",
@@ -112,6 +105,13 @@ open class CommonProxy {
                 "FLF",
                 'L', ItemStack(Blocks.PLANKS, 1, 5), // Dark Oak Planks
                 'F', ItemStack(Blocks.WOODEN_SLAB, 1, 5))) // Dark Oak Slab
+
+        GameRegistry.addRecipe(ShapedOreRecipe(ItemStack(BlockHatStand, 1, 0), // Catchall for wood
+                "LLL",
+                " F ",
+                "FLF",
+                'L', "plankWood",
+                'F', "slabWood"))
 
         GameRegistry.addRecipe(ShapedOreRecipe(ItemStack(BlockHatStand, 1, 6), // Stone
                 "LLL",

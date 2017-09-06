@@ -43,6 +43,8 @@ object ItemPhantomThread : ItemMod("phantom_thread") {
         GameRegistry.addRecipe(PhantomRecipe)
     }
 
+    override fun hasContainerItem(stack: ItemStack) = true
+
     override fun getContainerItem(itemStack: ItemStack): ItemStack
             = itemStack.copy().apply { count = 1 }
 

@@ -6,18 +6,22 @@ import com.teamwizardry.librarianlib.features.base.block.EnumStringSerializable
 import com.teamwizardry.librarianlib.features.base.block.TileMod
 import com.teamwizardry.librarianlib.features.base.block.module.ModuleInventory
 import com.teamwizardry.librarianlib.features.saving.Module
+import com.teamwizardry.librarianlib.features.saving.Save
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
 import net.minecraft.block.properties.PropertyEnum
 import net.minecraft.block.state.BlockStateContainer
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.Entity
+import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.InventoryHelper
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.MathHelper
+import net.minecraft.world.Explosion
 import net.minecraft.world.World
 import net.minecraftforge.items.IItemHandler
 import net.minecraftforge.items.ItemStackHandler
@@ -42,12 +46,27 @@ object BlockHatStand : BlockModContainer("hat_stand", Material.WOOD, *StandMater
     var PROPERTY: PropertyEnum<StandMaterial>? = null
         private set
 
+    override fun onBlockPlacedBy(worldIn: World, pos: BlockPos, state: IBlockState, placer: EntityLivingBase, stack: ItemStack) {
+        val facing = placer.horizontalFacing
+        val angle = facing.horizontalAngle
+        val te = worldIn.getTileEntity(pos) as TileHatStand
+        te.angle = angle
+    }
+
     override fun onBlockActivated(worldIn: World, pos: BlockPos, state: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
+        val te = worldIn.getTileEntity(pos) as TileHatStand
+
+        if (playerIn.isSneaking) {
+            val xS = playerIn.posX - (te.pos.x + 0.5)
+            val zS = playerIn.posZ - (te.pos.z + 0.5)
+            te.angle = (MathHelper.atan2(zS, xS) * 180 / Math.PI + 90).toFloat()
+            te.markDirty()
+            return true
+        }
+
         val stack = playerIn.getHeldItem(hand)
 
         var ret = false
-
-        val te = worldIn.getTileEntity(pos) as TileHatStand
         val invStack = te.inv.handler.getStackInSlot(0)
 
         if (stack.item == ItemHat) {
@@ -113,6 +132,21 @@ object BlockHatStand : BlockModContainer("hat_stand", Material.WOOD, *StandMater
         }
     }
 
+    override fun getBlockHardness(state: IBlockState, worldIn: World, pos: BlockPos): Float {
+        if (state.getValue(PROPERTY) == OBSIDIAN) return 50F
+        return super.getBlockHardness(state, worldIn, pos)
+    }
+
+    override fun getExplosionResistance(world: World, pos: BlockPos, exploder: Entity?, explosion: Explosion): Float {
+        if (world.getBlockState(pos).getValue(PROPERTY) == OBSIDIAN) return 2000F
+        return super.getExplosionResistance(world, pos, exploder, explosion)
+    }
+
+    override fun getHarvestLevel(state: IBlockState): Int {
+        if (state.getValue(PROPERTY) == OBSIDIAN) return 3
+        return super.getHarvestLevel(state)
+    }
+
     override fun isFullCube(state: IBlockState) = false
     override fun isOpaqueCube(blockState: IBlockState) = false
 
@@ -137,5 +171,8 @@ object BlockHatStand : BlockModContainer("hat_stand", Material.WOOD, *StandMater
                 markDirty()
             }
         })
+
+        @Save
+        var angle = 0f
     }
 }

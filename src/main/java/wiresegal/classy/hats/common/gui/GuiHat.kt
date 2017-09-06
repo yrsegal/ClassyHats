@@ -68,11 +68,6 @@ class GuiHat(player: EntityPlayer) : InventoryEffectRenderer(ContainerHat(player
         val l = this.guiTop
         this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize)
 
-        this.inventorySlots.inventorySlots.indices
-                .map { this.inventorySlots.inventorySlots[it] }
-                .filter { it.hasStack && it.slotStackLimit == 1 }
-                .forEach { this.drawTexturedModalRect(k + it.xPos, l + it.yPos, 200, 0, 16, 16) }
-
         GuiInventory.drawEntityOnScreen(k + 51, l + 75, 30, (k + 51).toFloat() - this.oldMouseX, (l + 75 - 50).toFloat() - this.oldMouseY, this.mc.player)
     }
 

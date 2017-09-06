@@ -40,6 +40,8 @@ object ItemHat : ItemMod("hat"), IExtraVariantHolder {
         setMaxStackSize(1)
     }
 
+    override fun hasContainerItem(stack: ItemStack) = true
+
     override fun getContainerItem(itemStack: ItemStack): ItemStack
             = itemStack.copy().apply { count = 1 }
 
