@@ -52,8 +52,7 @@ object ItemHat : ItemMod("hat"), IExtraVariantHolder {
         val stackInSlot = hatInv.equipped
 
         hatInv.equipped = stack.copy().apply { count = 1 }
-        if (!playerIn.capabilities.isCreativeMode)
-            playerIn.inventory.setInventorySlotContents(playerIn.inventory.currentItem, ItemStack.EMPTY)
+        playerIn.inventory.setInventorySlotContents(playerIn.inventory.currentItem, ItemStack.EMPTY)
 
         if (stackInSlot.isNotEmpty)
             return ActionResult.newResult(EnumActionResult.SUCCESS, stackInSlot.copy())
