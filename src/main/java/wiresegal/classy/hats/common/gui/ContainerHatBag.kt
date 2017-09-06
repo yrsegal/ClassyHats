@@ -30,6 +30,7 @@ class ContainerHatBag(playerInv: InventoryPlayer, thePlayer: EntityPlayer) : Con
     init {
         this.addSlotToContainer(object : Slot(HatInventoryWrapper(hat), 0, 188, 110) {
             override fun isItemValid(stack: ItemStack) = stack.item == ItemHat
+            override fun getSlotTexture() = "${LibMisc.MOD_ID}:gui/hat_slot"
         })
         idxPlayerHatEnd = inventorySlots.size
 
@@ -38,7 +39,6 @@ class ContainerHatBag(playerInv: InventoryPlayer, thePlayer: EntityPlayer) : Con
             for (i in 0..9)
                 this.addSlotToContainer(object : SlotItemHandler(hat.hats, i + j * 10, 8 + i * 18, 8 + j * 18) {
                     override fun isItemValid(stack: ItemStack) = stack.item == ItemHat
-                    override fun getSlotTexture() = "${LibMisc.MOD_ID}:gui/hat_slot"
                 })
         idxHatsEnd = inventorySlots.size
 
