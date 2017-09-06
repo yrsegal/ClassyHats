@@ -48,17 +48,23 @@ object BlockHatStand : BlockModContainer("hat_stand", Material.WOOD, *StandMater
 
     override fun onBlockPlacedBy(worldIn: World, pos: BlockPos, state: IBlockState, placer: EntityLivingBase, stack: ItemStack) {
         val te = worldIn.getTileEntity(pos) as TileHatStand
-        te.angle = ((placer.rotationYaw % 360) / 45).toInt() * 45f
+        val xS = placer.posX - (te.pos.x + 0.5)
+        val zS = placer.posZ - (te.pos.z + 0.5)
+        val angle = MathHelper.atan2(zS, xS) * 180 / Math.PI + 90
+        te.angle = Math.round(angle / 22.5) * 22.5f
     }
 
     override fun onBlockActivated(worldIn: World, pos: BlockPos, state: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
         val te = worldIn.getTileEntity(pos) as TileHatStand
 
         if (playerIn.isSneaking) {
-            val xS = playerIn.posX - (te.pos.x + 0.5)
-            val zS = playerIn.posZ - (te.pos.z + 0.5)
-            te.angle = (MathHelper.atan2(zS, xS) * 180 / Math.PI + 90).toFloat()
-            te.markDirty()
+            if (!worldIn.isRemote) {
+                val xS = playerIn.posX - (te.pos.x + 0.5)
+                val zS = playerIn.posZ - (te.pos.z + 0.5)
+                val angle = MathHelper.atan2(zS, xS) * 180 / Math.PI + 90
+                te.angle = Math.round(angle / 22.5) * 22.5f
+                te.markDirty()
+            }
             return true
         }
 
@@ -68,7 +74,10 @@ object BlockHatStand : BlockModContainer("hat_stand", Material.WOOD, *StandMater
         val invStack = te.inv.handler.getStackInSlot(0)
 
         if (stack.item == ItemHat) {
-            te.angle = ((playerIn.rotationYaw % 360) / 45).toInt() * 45f
+            val xS = playerIn.posX - (te.pos.x + 0.5)
+            val zS = playerIn.posZ - (te.pos.z + 0.5)
+            val angle = MathHelper.atan2(zS, xS) * 180 / Math.PI + 90
+            te.angle = Math.round(angle / 22.5) * 22.5f
 
             te.inv.handler.setStackInSlot(0, stack.copy().apply { count = 1 })
             playerIn.inventory.setInventorySlotContents(playerIn.inventory.currentItem, ItemStack.EMPTY)
