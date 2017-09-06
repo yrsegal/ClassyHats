@@ -22,6 +22,7 @@ import net.minecraft.util.EnumHand
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.MathHelper
 import net.minecraft.world.Explosion
+import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import net.minecraftforge.items.IItemHandler
 import net.minecraftforge.items.ItemStackHandler
@@ -52,6 +53,10 @@ object BlockHatStand : BlockModContainer("hat_stand", Material.WOOD, *StandMater
         val zS = placer.posZ - (te.pos.z + 0.5)
         val angle = MathHelper.atan2(zS, xS) * 180 / Math.PI + 90
         te.angle = Math.round(angle / 22.5) * 22.5f
+    }
+
+    override fun isSideSolid(baseState: IBlockState?, world: IBlockAccess?, pos: BlockPos?, side: EnumFacing?): Boolean {
+        return side == EnumFacing.UP
     }
 
     override fun onBlockActivated(worldIn: World, pos: BlockPos, state: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
@@ -142,13 +147,21 @@ object BlockHatStand : BlockModContainer("hat_stand", Material.WOOD, *StandMater
     }
 
     override fun getBlockHardness(state: IBlockState, worldIn: World, pos: BlockPos): Float {
-        if (state.getValue(PROPERTY) == OBSIDIAN) return 50F
-        return super.getBlockHardness(state, worldIn, pos)
+        return when (worldIn.getBlockState(pos).getValue(PROPERTY)) {
+            OBSIDIAN -> 50F
+            STONE -> 1.5F
+            QUARTZ -> 0.8F
+            else -> super.getBlockHardness(state, worldIn, pos)
+        }
     }
 
     override fun getExplosionResistance(world: World, pos: BlockPos, exploder: Entity?, explosion: Explosion): Float {
-        if (world.getBlockState(pos).getValue(PROPERTY) == OBSIDIAN) return 2000F
-        return super.getExplosionResistance(world, pos, exploder, explosion)
+        return when (world.getBlockState(pos).getValue(PROPERTY)) {
+            OBSIDIAN -> 2000F * 3 / 5
+            STONE -> 10F * 3 / 5
+            QUARTZ -> 4F * 3 / 5
+            else -> super.getExplosionResistance(world, pos, exploder, explosion)
+        }
     }
 
     override fun getHarvestLevel(state: IBlockState): Int {
