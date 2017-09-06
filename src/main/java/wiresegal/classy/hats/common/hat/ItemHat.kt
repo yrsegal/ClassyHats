@@ -5,6 +5,7 @@ import com.teamwizardry.librarianlib.core.client.ModelHandler
 import com.teamwizardry.librarianlib.features.base.IExtraVariantHolder
 import com.teamwizardry.librarianlib.features.base.item.ItemMod
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper
+import com.teamwizardry.librarianlib.features.kotlin.isNotEmpty
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.creativetab.CreativeTabs
@@ -12,8 +13,13 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.EnumRarity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
+import net.minecraft.util.ActionResult
+import net.minecraft.util.EnumActionResult
+import net.minecraft.util.EnumHand
 import net.minecraft.util.NonNullList
+import net.minecraft.world.World
 import wiresegal.classy.hats.LibMisc
+import wiresegal.classy.hats.common.core.AttachmentHandler
 import wiresegal.classy.hats.common.core.HatConfigHandler
 import wiresegal.classy.hats.common.core.HatConfigHandler.Hat
 
@@ -38,6 +44,21 @@ object ItemHat : ItemMod("hat"), IExtraVariantHolder {
 
     init {
         setMaxStackSize(1)
+    }
+
+    override fun onItemRightClick(worldIn: World, playerIn: EntityPlayer, handIn: EnumHand): ActionResult<ItemStack> {
+        val stack = playerIn.getHeldItem(handIn)
+        val hatInv = AttachmentHandler.getCapability(playerIn)
+        val stackInSlot = hatInv.equipped
+
+        hatInv.equipped = stack.copy().apply { count = 1 }
+        if (!playerIn.capabilities.isCreativeMode)
+            playerIn.inventory.setInventorySlotContents(playerIn.inventory.currentItem, ItemStack.EMPTY)
+
+        if (stackInSlot.isNotEmpty)
+            return ActionResult.newResult(EnumActionResult.SUCCESS, stackInSlot.copy())
+
+        return super.onItemRightClick(worldIn, playerIn, handIn)
     }
 
     override fun hasContainerItem(stack: ItemStack) = true

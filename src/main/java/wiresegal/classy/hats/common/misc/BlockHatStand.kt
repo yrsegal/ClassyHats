@@ -73,7 +73,7 @@ object BlockHatStand : BlockModContainer("hat_stand", Material.WOOD, *StandMater
             te.angle = playerIn.horizontalFacing.horizontalAngle
 
             te.inv.handler.setStackInSlot(0, stack.copy().apply { count = 1 })
-            stack.count--
+            playerIn.inventory.setInventorySlotContents(playerIn.inventory.currentItem, ItemStack.EMPTY)
 
             ret = true
         }
