@@ -54,7 +54,7 @@ class GuiHatBag(player: EntityPlayer) : GuiContainer(ContainerHatBag(player.inve
         super.mouseClicked(mouseX, mouseY, mouseButton)
         val k = this.guiLeft
         val l = this.guiTop
-        if (mouseButton == 0 && mouseX <= k + 192 + 8 && mouseX >= k + 192 && mouseY <= l + 143 + 8 && mouseY >= l + 143)
+        if ((mouseButton == 0 || mouseButton == 1) && mouseX <= k + 192 + 8 && mouseX >= k + 192 && mouseY <= l + 143 + 8 && mouseY >= l + 143)
             PacketHandler.NETWORK.sendToServer(PacketHatGuiOpen(0))
     }
 

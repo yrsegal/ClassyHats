@@ -61,7 +61,7 @@ class GuiHat(player: EntityPlayer) : InventoryEffectRenderer(ContainerHat(player
         super.mouseClicked(mouseX, mouseY, mouseButton)
         val k = this.guiLeft
         val l = this.guiTop
-        if (mouseButton == 0 && mouseX <= k + 81 + 8 && mouseX >= k + 81 && mouseY <= l + 39 + 8 && mouseY >= l + 39)
+        if ((mouseButton == 0 || mouseButton == 1) && mouseX <= k + 81 + 8 && mouseX >= k + 81 && mouseY <= l + 39 + 8 && mouseY >= l + 39)
             PacketHandler.NETWORK.sendToServer(PacketHatGuiOpen(1))
     }
 
