@@ -10,6 +10,7 @@ import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.init.SoundEvents
 import net.minecraft.item.EnumRarity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
@@ -52,6 +53,7 @@ object ItemHat : ItemMod("hat"), IExtraVariantHolder {
         val stackInSlot = hatInv.equipped
 
         hatInv.equipped = stack.copy().apply { count = 1 }
+        playerIn.playSound(SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 1f, 1f)
         playerIn.inventory.setInventorySlotContents(playerIn.inventory.currentItem, ItemStack.EMPTY)
 
         if (stackInSlot.isNotEmpty)
