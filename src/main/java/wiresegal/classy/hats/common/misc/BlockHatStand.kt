@@ -140,30 +140,27 @@ object BlockHatStand : BlockModContainer("hat_stand", Material.WOOD, *StandMater
 
     override fun getMetaFromState(state: IBlockState) = state.getValue(PROPERTY).ordinal
 
-    override fun getMaterial(state: IBlockState): Material {
-        return when (state.getValue(PROPERTY)) {
-            OAK, SPRUCE, BIRCH, JUNGLE, ACACIA, DARK_OAK -> Material.WOOD
-            else -> Material.ROCK
-        }
-    }
+    override fun getMaterial(state: IBlockState): Material
+            = when (state.getValue(PROPERTY)) {
+                OAK, SPRUCE, BIRCH, JUNGLE, ACACIA, DARK_OAK -> Material.WOOD
+                else -> Material.ROCK
+            }
 
-    override fun getBlockHardness(state: IBlockState, worldIn: World, pos: BlockPos): Float {
-        return when (worldIn.getBlockState(pos).getValue(PROPERTY)) {
-            OBSIDIAN -> 50F
-            STONE -> 1.5F
-            QUARTZ -> 0.8F
-            else -> super.getBlockHardness(state, worldIn, pos)
-        }
-    }
+    override fun getBlockHardness(state: IBlockState, worldIn: World, pos: BlockPos)
+            = when (worldIn.getBlockState(pos).getValue(PROPERTY)) {
+                OBSIDIAN -> 50F
+                STONE -> 1.5F
+                QUARTZ -> 0.8F
+                else -> super.getBlockHardness(state, worldIn, pos)
+            }
 
-    override fun getExplosionResistance(world: World, pos: BlockPos, exploder: Entity?, explosion: Explosion): Float {
-        return when (world.getBlockState(pos).getValue(PROPERTY)) {
-            OBSIDIAN -> 2000F * 3 / 5
-            STONE -> 10F * 3 / 5
-            QUARTZ -> 4F * 3 / 5
-            else -> super.getExplosionResistance(world, pos, exploder, explosion)
-        }
-    }
+    override fun getExplosionResistance(world: World, pos: BlockPos, exploder: Entity?, explosion: Explosion)
+            = when (world.getBlockState(pos).getValue(PROPERTY)) {
+                OBSIDIAN -> 2000F * 3 / 5
+                STONE -> 10F * 3 / 5
+                QUARTZ -> 4F * 3 / 5
+                else -> super.getExplosionResistance(world, pos, exploder, explosion)
+            }
 
     override fun getHarvestLevel(state: IBlockState): Int {
         if (state.getValue(PROPERTY) == OBSIDIAN) return 3
@@ -173,12 +170,11 @@ object BlockHatStand : BlockModContainer("hat_stand", Material.WOOD, *StandMater
     override fun isFullCube(state: IBlockState) = false
     override fun isOpaqueCube(blockState: IBlockState) = false
 
-    override fun getSoundType(state: IBlockState, world: World, pos: BlockPos, entity: Entity?): SoundType {
-        return when (state.getValue(PROPERTY)) {
-            OAK, SPRUCE, BIRCH, JUNGLE, ACACIA, DARK_OAK -> SoundType.WOOD
-            else -> SoundType.STONE
-        }
-    }
+    override fun getSoundType(state: IBlockState, world: World, pos: BlockPos, entity: Entity?): SoundType
+            = when (state.getValue(PROPERTY)) {
+                OAK, SPRUCE, BIRCH, JUNGLE, ACACIA, DARK_OAK -> SoundType.WOOD
+                else -> SoundType.STONE
+            }
 
     override fun createTileEntity(world: World, state: IBlockState) = TileHatStand()
 
@@ -186,13 +182,9 @@ object BlockHatStand : BlockModContainer("hat_stand", Material.WOOD, *StandMater
     class TileHatStand : TileMod() {
         @Module
         val inv = ModuleInventory(object : ItemStackHandler() {
-            override fun getStackLimit(slot: Int, stack: ItemStack): Int {
-                return if (stack.item == ItemHat) 1 else 0
-            }
+            override fun getStackLimit(slot: Int, stack: ItemStack) = if (stack.item == ItemHat) 1 else 0
 
-            override fun onContentsChanged(slot: Int) {
-                markDirty()
-            }
+            override fun onContentsChanged(slot: Int) = markDirty()
         })
 
         override fun getRenderBoundingBox(): AxisAlignedBB = AxisAlignedBB(pos, pos.add(1, 2, 1))
