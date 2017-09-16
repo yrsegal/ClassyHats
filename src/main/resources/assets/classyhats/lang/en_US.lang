@@ -47,6 +47,8 @@ item.classyhats:top_slime_7.name=Pink Top Slime
 item.classyhats:top_slime_7.desc=Even companions need to look classy!
 
 classyhats.misc.phantom=&bLined with Phantom Thread
+classyhats.misc.phantom.desc=Craft with other armor to camouflage!
+classyhats.misc.phantom.camo=Camouflaged as: %s
 
 item.classyhats:phantom_thread.name=Phantom Thread
 item.classyhats:phantom_thread.desc0=Craft with armor to make it invisible!
