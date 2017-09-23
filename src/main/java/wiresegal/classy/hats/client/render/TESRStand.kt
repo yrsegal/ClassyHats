@@ -17,9 +17,9 @@ object TESRStand : TileEntitySpecialRenderer<BlockHatStand.TileHatStand>() {
         if (!stack.isEmpty) {
             GlStateManager.pushMatrix()
 
-            GlStateManager.translate(x + 0.5, y + 0.75, z + 0.5)
+            GlStateManager.translate(x + 0.5, y + 1.4625, z + 0.5)
 
-            GlStateManager.scale(0.625, 0.625, 0.625)
+            GlStateManager.scale(0.9375, 0.9375, 0.9375)
 
             GlStateManager.rotate(te.angle, 0.0f, -1.0f, 0.0f)
 
@@ -33,7 +33,7 @@ object TESRStand : TileEntitySpecialRenderer<BlockHatStand.TileHatStand>() {
 
             OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lX, lY)
 
-            Minecraft.getMinecraft().renderItem.renderItem(stack, ItemCameraTransforms.TransformType.HEAD)
+            Minecraft.getMinecraft().renderItem.renderItem(stack, ItemCameraTransforms.TransformType.NONE)
 
             OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, prevX, prevY)
 
