@@ -46,6 +46,18 @@ item.classyhats:top_slime_6.desc=Even companions need to look classy!
 item.classyhats:top_slime_7.name=Pink Top Slime
 item.classyhats:top_slime_7.desc=Even companions need to look classy!
 
+item.classyhats:headtato.name=Tiny Headtato
+item.classyhats:headtato.desc=It believes in you!
+
+item.classyhats:japanese_headband.name=Japanese Headband
+item.classyhats:japanese_headband.desc=あなたはウィーバーです
+
+item.classyhats:menacing.name=Menacing
+item.classyhats:menacing.desc=ＴＨＩＳ ＭＵＳＴ ＢＥ ＴＨＥ ＷＯＲＫ ＯＦ ＡＮ ＥＮＥＭＹ 「ＳＴＡＮＤ」！！
+
+item.classyhats:thinking.name=:thonk:
+item.classyhats:thinking.desc=Sponsored by /r/hmmm
+
 classyhats.misc.phantom=&bLined with Phantom Thread
 classyhats.misc.phantom.desc=Craft with other armor to camouflage!
 classyhats.misc.phantom.camo=Camouflaged as: %s

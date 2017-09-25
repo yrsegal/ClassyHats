@@ -24,5 +24,9 @@ val defaultHats = listOf(
         Hat("top_slime_4", 0.125),
         Hat("top_slime_5", 0.125),
         Hat("top_slime_6", 0.125),
-        Hat("top_slime_7", 0.125)
+        Hat("top_slime_7", 0.125),
+        Hat("headtato"),
+        Hat("japanese_headband"),
+        Hat("menacing"),
+        Hat("thinking")
 )

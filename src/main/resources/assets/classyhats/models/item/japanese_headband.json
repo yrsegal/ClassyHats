@@ -1,8 +1,8 @@
 {
 	"credit": "Made by Tristaric, utilizing Blockbench.",
 	"textures": {
-		"0": "items/japanese_headband",
-		"particle": "items/japanese_headband"
+		"0": "classyhats:items/japanese_headband",
+		"particle": "classyhats:items/japanese_headband"
 	},
 	"elements": [
 		{

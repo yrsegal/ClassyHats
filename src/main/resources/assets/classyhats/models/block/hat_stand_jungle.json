@@ -1,6 +1,8 @@
 {
-	"parent": "classyhats:block/hat_stand",
-	"textures": {
-		"material": "classyhats:block/hat_stand_jungle"
-	}
+  "parent": "classyhats:block/hat_stand",
+  "textures": {
+    "top": "classyhats:blocks/stand_top_jungle",
+    "side": "classyhats:blocks/stand_side_jungle",
+    "bottom": "classyhats:blocks/stand_bottom_jungle"
+  }
 }
