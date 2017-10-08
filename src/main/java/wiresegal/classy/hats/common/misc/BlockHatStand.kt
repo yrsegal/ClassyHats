@@ -48,18 +48,19 @@ object BlockHatStand : BlockModContainer("hat_stand", Material.ROCK, *StandMater
                         variant == BIRCH ||
                         variant == JUNGLE ||
                         variant == ACACIA ||
-                        variant == DARK_OAK)
-                    300
+                        variant == DARK_OAK) 300
                 else 0
             } else 0
         }
+        defaultState = defaultState.withProperty(PROPERTY, OBSIDIAN)
     }
 
     enum class StandMaterial : EnumStringSerializable {
         OAK, SPRUCE, BIRCH, JUNGLE, ACACIA, DARK_OAK, STONE, QUARTZ, OBSIDIAN
     }
 
-    var PROPERTY: PropertyEnum<StandMaterial>? = null
+    private var madeProperty = false
+    lateinit var PROPERTY: PropertyEnum<StandMaterial>
         private set
 
     override fun onBlockPlacedBy(worldIn: World, pos: BlockPos, state: IBlockState, placer: EntityLivingBase, stack: ItemStack) {
@@ -142,8 +143,10 @@ object BlockHatStand : BlockModContainer("hat_stand", Material.ROCK, *StandMater
     override fun hasComparatorInputOverride(state: IBlockState) = true
 
     override fun createBlockState(): BlockStateContainer {
-        if (PROPERTY == null)
+        if (!madeProperty) {
             PROPERTY = PropertyEnum.create("material", StandMaterial::class.java)
+            madeProperty = true
+        }
         return BlockStateContainer(this, PROPERTY)
     }
 
