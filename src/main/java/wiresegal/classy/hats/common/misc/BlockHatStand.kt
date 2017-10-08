@@ -148,7 +148,7 @@ object BlockHatStand : BlockModContainer("hat_stand", Material.WOOD, *StandMater
 
     override fun getBlockHardness(state: IBlockState, worldIn: World, pos: BlockPos)
             = when (worldIn.getBlockState(pos).getValue(PROPERTY)) {
-                OBSIDIAN -> 50F
+                OBSIDIAN -> 22.5F
                 STONE -> 1.5F
                 QUARTZ -> 0.8F
                 else -> super.getBlockHardness(state, worldIn, pos)
