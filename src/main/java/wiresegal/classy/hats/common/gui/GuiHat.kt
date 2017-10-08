@@ -1,11 +1,13 @@
 package wiresegal.classy.hats.common.gui
 
 import com.teamwizardry.librarianlib.features.network.PacketHandler
+import net.minecraft.client.audio.PositionedSoundRecord
 import net.minecraft.client.gui.inventory.GuiInventory
 import net.minecraft.client.renderer.GlStateManager
 import net.minecraft.client.renderer.InventoryEffectRenderer
 import net.minecraft.client.resources.I18n
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.init.SoundEvents
 import net.minecraft.util.ResourceLocation
 import wiresegal.classy.hats.LibMisc
 
@@ -61,8 +63,12 @@ class GuiHat(player: EntityPlayer) : InventoryEffectRenderer(ContainerHat(player
         super.mouseClicked(mouseX, mouseY, mouseButton)
         val k = this.guiLeft
         val l = this.guiTop
-        if ((mouseButton == 0 || mouseButton == 1) && mouseX <= k + 81 + 8 && mouseX >= k + 81 && mouseY <= l + 39 + 8 && mouseY >= l + 39)
-            PacketHandler.NETWORK.sendToServer(PacketHatGuiOpen(1))
+        if ((mouseButton == 0 || mouseButton == 1) && mouseX <= k + 81 + 8 && mouseX >= k + 81 && mouseY <= l + 39 + 8 && mouseY >= l + 39) {
+            PacketHandler.NETWORK.sendToServer(PacketHatGuiOpen(1, -1))
+
+            val soundHandler = mc.soundHandler
+            soundHandler.playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.UI_BUTTON_CLICK, 1.0f))
+        }
     }
 
     /**

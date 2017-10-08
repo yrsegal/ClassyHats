@@ -11,12 +11,12 @@ import net.minecraftforge.fml.common.network.IGuiHandler
  */
 object HatsGuiFactory : IGuiHandler {
     override fun getClientGuiElement(ID: Int, player: EntityPlayer, world: World?, x: Int, y: Int, z: Int): Any? {
-        if (ID == 1) return GuiHatBag(player)
+        if (ID == 1) return GuiHatBag(player, x)
         return GuiHat(player)
     }
 
     override fun getServerGuiElement(ID: Int, player: EntityPlayer, world: World, x: Int, y: Int, z: Int): Any? {
-        if (ID == 1) return ContainerHatBag(player.inventory, player)
+        if (ID == 1) return ContainerHatBag(player.inventory, player, x)
         return ContainerHat(player.inventory, player)
     }
 }

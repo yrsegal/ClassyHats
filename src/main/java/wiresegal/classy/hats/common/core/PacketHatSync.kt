@@ -20,8 +20,8 @@ class PacketHatSync(@Save var entity: Int = -1, @Save var stack: ItemStack = Ite
         val player = LibrarianLib.PROXY.getClientPlayer().world.getEntityByID(entity)
         if (player is EntityPlayer) {
             val data = AttachmentHandler.getCapability(player)
-            data.equipped = stack
-            extraData?.let { data.hats.deserializeNBT(it) }
+            if (extraData?.let { data.deserializeNBT(it) } == null)
+                data.equipped = stack
         }
     }
 }

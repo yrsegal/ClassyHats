@@ -18,4 +18,6 @@ interface IHatStorage : INBTSerializable<NBTTagCompound> {
     var player: EntityPlayer?
 
     var equipped: ItemStack
+
+    var currentHatSection: Int
 }

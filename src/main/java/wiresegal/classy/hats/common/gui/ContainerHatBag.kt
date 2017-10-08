@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack
 import net.minecraftforge.items.SlotItemHandler
 import wiresegal.classy.hats.LibMisc
 import wiresegal.classy.hats.common.core.AttachmentHandler
+import wiresegal.classy.hats.common.hat.BaseHatStorage.Companion.HAT_SIZE
 import wiresegal.classy.hats.common.hat.ItemHat
 
 
@@ -16,7 +17,7 @@ import wiresegal.classy.hats.common.hat.ItemHat
  * Created at 4:11 PM on 9/1/17.
  */
 
-class ContainerHatBag(playerInv: InventoryPlayer, thePlayer: EntityPlayer) : Container() {
+class ContainerHatBag(playerInv: InventoryPlayer, thePlayer: EntityPlayer, private var slotPos: Int) : Container() {
 
     val hat = AttachmentHandler.getCapability(thePlayer)
 
@@ -37,9 +38,13 @@ class ContainerHatBag(playerInv: InventoryPlayer, thePlayer: EntityPlayer) : Con
         idxPlayerHatEnd = inventorySlots.size
 
         idxHatsStart = inventorySlots.size
+
+        val totalSlots = HAT_SIZE / 50 - 1
+        slotPos = Math.max(0, Math.min(totalSlots, slotPos))
+
         for (j in 0..4)
             for (i in 0..9)
-                this.addSlotToContainer(object : SlotItemHandler(hat.hats, i + j * 10, 8 + i * 18, 8 + j * 18) {
+                this.addSlotToContainer(object : SlotItemHandler(hat.hats, slotPos * 50 + i + j * 10, 8 + i * 18, 8 + j * 18) {
                     override fun isItemValid(stack: ItemStack) = stack.item == ItemHat
                 })
         idxHatsEnd = inventorySlots.size
