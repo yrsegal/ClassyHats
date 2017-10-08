@@ -25,6 +25,7 @@ import net.minecraft.util.math.MathHelper
 import net.minecraft.world.Explosion
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
+import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.items.IItemHandler
 import net.minecraftforge.items.ItemStackHandler
 import wiresegal.classy.hats.common.hat.ItemHat
@@ -34,11 +35,24 @@ import wiresegal.classy.hats.common.misc.BlockHatStand.StandMaterial.*
  * @author WireSegal
  * Created at 9:54 PM on 9/4/17.
  */
-object BlockHatStand : BlockModContainer("hat_stand", Material.WOOD, *StandMaterial.values().map { "hat_stand_${it.getName()}" }.toTypedArray()) {
+object BlockHatStand : BlockModContainer("hat_stand", Material.ROCK, *StandMaterial.values().map { "hat_stand_${it.getName()}" }.toTypedArray()) {
 
     init {
         setHardness(2.0F)
         setResistance(5.0F)
+        GameRegistry.registerFuelHandler {
+            if (it.item == itemForm) {
+                val variant = StandMaterial.values()[it.itemDamage % StandMaterial.values().size]
+                if (variant == OAK ||
+                        variant == SPRUCE ||
+                        variant == BIRCH ||
+                        variant == JUNGLE ||
+                        variant == ACACIA ||
+                        variant == DARK_OAK)
+                    300
+                else 0
+            } else 0
+        }
     }
 
     enum class StandMaterial : EnumStringSerializable {
