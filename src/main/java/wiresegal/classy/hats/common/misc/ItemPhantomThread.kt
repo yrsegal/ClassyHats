@@ -192,12 +192,13 @@ object PhantomRecipe : IRecipe {
         val phantom = ItemNBTHelper.getBoolean(armorCopy, PHANTOM_TAG, false)
         val camo = ItemStack(ItemNBTHelper.getCompound(armorCopy, PHANTOM_ITEM_TAG) ?: NBTTagCompound()).isNotEmpty
 
-        if (phantom && !camo)
+        if (phantom)
             ItemNBTHelper.removeEntry(armorCopy, PHANTOM_TAG)
-        else if (phantom && camo)
-            ItemNBTHelper.removeEntry(armorCopy, PHANTOM_ITEM_TAG)
         else
             ItemNBTHelper.setBoolean(armorCopy, PHANTOM_TAG, true)
+
+        if (phantom && camo)
+            ItemNBTHelper.removeEntry(armorCopy, PHANTOM_ITEM_TAG)
 
         val tag = armorCopy.tagCompound
         if (tag != null && tag.size == 0)
@@ -261,6 +262,7 @@ object PhantomCamoRecipe : IRecipe {
         val threadedTypes = mutableSetOf<EntityEquipmentSlot>()
         var armor: ItemStack = ItemStack.EMPTY
         var threaded: ItemStack = ItemStack.EMPTY
+        var thread: ItemStack = ItemStack.EMPTY
 
         mainLoop@ for (i in 0 until inv.sizeInventory) {
             val stack = inv.getStackInSlot(i)
@@ -278,8 +280,16 @@ object PhantomCamoRecipe : IRecipe {
                             return ItemStack.EMPTY
                         armor = stack
                     }
+
                     continue@mainLoop
                 }
+
+            if (stack.item == ItemPhantomThread) {
+                if (thread.isNotEmpty)
+                    return ItemStack.EMPTY
+                thread = stack
+                continue@mainLoop
+            }
 
             if (stack.isNotEmpty)
                 return ItemStack.EMPTY
@@ -301,6 +311,7 @@ object PhantomCamoRecipe : IRecipe {
         val threadedTypes = mutableSetOf<EntityEquipmentSlot>()
         var armor: ItemStack = ItemStack.EMPTY
         var threaded: ItemStack = ItemStack.EMPTY
+        var thread: ItemStack = ItemStack.EMPTY
 
         mainLoop@ for (i in 0 until inv.sizeInventory) {
             val stack = inv.getStackInSlot(i)
@@ -320,6 +331,13 @@ object PhantomCamoRecipe : IRecipe {
                     }
                     continue@mainLoop
                 }
+
+            if (stack.item == ItemPhantomThread) {
+                if (thread.isNotEmpty)
+                    return false
+                thread = stack
+                continue@mainLoop
+            }
 
             if (stack.isNotEmpty)
                 return false
