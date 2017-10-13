@@ -12,7 +12,7 @@ import wiresegal.classy.hats.common.misc.BlockHatStand
  * Created at 10:05 PM on 9/4/17.
  */
 object TESRStand : TileEntitySpecialRenderer<BlockHatStand.TileHatStand>() {
-    override fun renderTileEntityAt(te: BlockHatStand.TileHatStand, x: Double, y: Double, z: Double, partialTicks: Float, destroyStage: Int) {
+    override fun render(te: BlockHatStand.TileHatStand, x: Double, y: Double, z: Double, partialTicks: Float, destroyStage: Int, alpha: Float) {
         val stack = te.inv.handler.getStackInSlot(0)
         if (!stack.isEmpty) {
             GlStateManager.pushMatrix()

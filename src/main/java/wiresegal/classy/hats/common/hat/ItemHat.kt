@@ -8,11 +8,11 @@ import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper
 import com.teamwizardry.librarianlib.features.kotlin.isNotEmpty
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
+import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.SoundEvents
 import net.minecraft.item.EnumRarity
-import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ActionResult
 import net.minecraft.util.EnumActionResult
@@ -72,16 +72,17 @@ object ItemHat : ItemMod("hat"), IExtraVariantHolder {
     override val meshDefinition: ((stack: ItemStack) -> ModelResourceLocation)?
         get() = { ModelHandler.resourceLocations[LibMisc.MOD_ID]!![getHat(it).name] as ModelResourceLocation }
 
-    override fun getSubItems(itemIn: Item, tab: CreativeTabs?, subItems: NonNullList<ItemStack>) {
-        HatConfigHandler.hats.values
-                .filter { it != HatConfigHandler.missingno }
-                .mapTo(subItems) { ofHat(it) }
+    override fun getSubItems(tab: CreativeTabs?, subItems: NonNullList<ItemStack>) {
+        if (isInCreativeTab(tab))
+            HatConfigHandler.hats.values
+                    .filter { it != HatConfigHandler.missingno }
+                    .mapTo(subItems) { ofHat(it) }
     }
 
     override fun getUnlocalizedName(stack: ItemStack)
             = "item.${LibMisc.MOD_ID}:${getHat(stack).name}"
 
-    override fun addInformation(stack: ItemStack, playerIn: EntityPlayer, tooltip: MutableList<String>, advanced: Boolean) {
+    override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
         val desc = stack.unlocalizedName + ".desc"
         val used = if (LibrarianLib.PROXY.canTranslate(desc)) desc else "${desc}0"
         if (LibrarianLib.PROXY.canTranslate(used)) {

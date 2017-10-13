@@ -1,13 +1,14 @@
 package wiresegal.classy.hats.common.misc
 
 import com.teamwizardry.librarianlib.core.LibrarianLib
+import com.teamwizardry.librarianlib.core.common.RegistrationHandler
 import com.teamwizardry.librarianlib.features.base.item.ItemMod
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper
 import com.teamwizardry.librarianlib.features.kotlin.isNotEmpty
 import com.teamwizardry.librarianlib.features.kotlin.plus
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper
+import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.EntityLivingBase
-import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.EntityEquipmentSlot
 import net.minecraft.inventory.EntityEquipmentSlot.Type.ARMOR
 import net.minecraft.inventory.InventoryCrafting
@@ -25,10 +26,10 @@ import net.minecraftforge.event.entity.PlaySoundAtEntityEvent
 import net.minecraftforge.event.entity.player.ItemTooltipEvent
 import net.minecraftforge.fml.common.eventhandler.EventPriority
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
-import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.oredict.RecipeSorter
+import net.minecraftforge.registries.IForgeRegistryEntry
 import wiresegal.classy.hats.LibMisc
 
 /**
@@ -47,9 +48,9 @@ object ItemPhantomThread : ItemMod("phantom_thread") {
         MinecraftForge.EVENT_BUS.register(this)
 
         RecipeSorter.register("${LibMisc.MOD_ID}:phantom", PhantomRecipe::class.java, RecipeSorter.Category.SHAPELESS, "")
-        GameRegistry.addRecipe(PhantomRecipe)
+        RegistrationHandler.register(PhantomRecipe)
         RecipeSorter.register("${LibMisc.MOD_ID}:phantom_camo", PhantomCamoRecipe::class.java, RecipeSorter.Category.SHAPELESS, "")
-        GameRegistry.addRecipe(PhantomCamoRecipe)
+        RegistrationHandler.register(PhantomCamoRecipe)
     }
 
     override fun hasContainerItem(stack: ItemStack) = true
@@ -61,7 +62,7 @@ object ItemPhantomThread : ItemMod("phantom_thread") {
 
     override fun getRarity(stack: ItemStack) = EnumRarity.UNCOMMON
 
-    override fun addInformation(stack: ItemStack, playerIn: EntityPlayer, tooltip: MutableList<String>, advanced: Boolean) {
+    override fun addInformation(stack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
         val desc = stack.unlocalizedName + ".desc"
         val used = if (LibrarianLib.PROXY.canTranslate(desc)) desc else "${desc}0"
         if (LibrarianLib.PROXY.canTranslate(used)) {
@@ -148,7 +149,7 @@ object ItemPhantomThread : ItemMod("phantom_thread") {
     }
 }
 
-object PhantomRecipe : IRecipe {
+object PhantomRecipe : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
     override fun getRemainingItems(inv: InventoryCrafting): NonNullList<ItemStack> {
         val ret = NonNullList.withSize(inv.sizeInventory, ItemStack.EMPTY)
         for (i in ret.indices) {
@@ -160,6 +161,10 @@ object PhantomRecipe : IRecipe {
                 ret[i] = ForgeHooks.getContainerItem(inv.getStackInSlot(i))
         }
         return ret
+    }
+
+    override fun canFit(width: Int, height: Int): Boolean {
+        return width * height >= 2
     }
 
     override fun getCraftingResult(inv: InventoryCrafting): ItemStack {
@@ -208,8 +213,6 @@ object PhantomRecipe : IRecipe {
 
     override fun getRecipeOutput(): ItemStack = ItemStack.EMPTY
 
-    override fun getRecipeSize() = 10
-
     override fun matches(inv: InventoryCrafting, worldIn: World?): Boolean {
         var armor: ItemStack = ItemStack.EMPTY
         var thread: ItemStack = ItemStack.EMPTY
@@ -242,7 +245,7 @@ object PhantomRecipe : IRecipe {
     }
 }
 
-object PhantomCamoRecipe : IRecipe {
+object PhantomCamoRecipe : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
     override fun getRemainingItems(inv: InventoryCrafting): NonNullList<ItemStack> {
         val ret = NonNullList.withSize(inv.sizeInventory, ItemStack.EMPTY)
         for (i in ret.indices) {
@@ -256,6 +259,10 @@ object PhantomCamoRecipe : IRecipe {
                 ret[i] = ForgeHooks.getContainerItem(inv.getStackInSlot(i))
         }
         return ret
+    }
+
+    override fun canFit(width: Int, height: Int): Boolean {
+        return width * height >= 2
     }
 
     override fun getCraftingResult(inv: InventoryCrafting): ItemStack {
@@ -304,8 +311,6 @@ object PhantomCamoRecipe : IRecipe {
     }
 
     override fun getRecipeOutput(): ItemStack = ItemStack.EMPTY
-
-    override fun getRecipeSize() = 10
 
     override fun matches(inv: InventoryCrafting, worldIn: World?): Boolean {
         val threadedTypes = mutableSetOf<EntityEquipmentSlot>()

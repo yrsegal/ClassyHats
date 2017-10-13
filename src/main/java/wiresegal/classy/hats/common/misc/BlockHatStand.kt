@@ -1,10 +1,10 @@
 package wiresegal.classy.hats.common.misc
 
 import com.teamwizardry.librarianlib.features.autoregister.TileRegister
-import com.teamwizardry.librarianlib.features.base.block.BlockModContainer
 import com.teamwizardry.librarianlib.features.base.block.EnumStringSerializable
-import com.teamwizardry.librarianlib.features.base.block.TileMod
-import com.teamwizardry.librarianlib.features.base.block.module.ModuleInventory
+import com.teamwizardry.librarianlib.features.base.block.tile.BlockModContainer
+import com.teamwizardry.librarianlib.features.base.block.tile.TileMod
+import com.teamwizardry.librarianlib.features.base.block.tile.module.ModuleInventory
 import com.teamwizardry.librarianlib.features.saving.Module
 import com.teamwizardry.librarianlib.features.saving.Save
 import net.minecraft.block.SoundType
@@ -28,6 +28,7 @@ import net.minecraft.world.World
 import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.items.IItemHandler
 import net.minecraftforge.items.ItemStackHandler
+import sun.awt.image.SunWritableRaster.markDirty
 import wiresegal.classy.hats.common.hat.ItemHat
 import wiresegal.classy.hats.common.misc.BlockHatStand.StandMaterial.*
 

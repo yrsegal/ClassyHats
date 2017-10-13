@@ -7,7 +7,6 @@ import net.minecraft.entity.player.InventoryPlayer
 import net.minecraft.inventory.*
 import net.minecraft.item.ItemArmor
 import net.minecraft.item.ItemStack
-import net.minecraft.item.crafting.CraftingManager
 import wiresegal.classy.hats.LibMisc
 import wiresegal.classy.hats.common.core.AttachmentHandler
 import wiresegal.classy.hats.common.hat.ItemHat
@@ -71,7 +70,7 @@ class ContainerHat(playerInv: InventoryPlayer, private val thePlayer: EntityPlay
      * Callback for when the crafting matrix is changed.
      */
     override fun onCraftMatrixChanged(par1IInventory: IInventory) {
-        this.craftResult.setInventorySlotContents(0, CraftingManager.getInstance().findMatchingRecipe(this.craftMatrix, this.thePlayer.world))
+        slotChangedCraftingGrid(thePlayer.world, thePlayer, craftMatrix, craftResult)
     }
 
     /**
@@ -116,7 +115,7 @@ class ContainerHat(playerInv: InventoryPlayer, private val thePlayer: EntityPlay
             } else if (index >= 9 && index < 9 + slotShift) {
                 if (!this.mergeItemStack(inSlot, 9 + slotShift, 45 + slotShift, false))
                     return ItemStack.EMPTY
-            } else if (targetSlot.slotType == EntityEquipmentSlot.Type.ARMOR && !(this.inventorySlots.get(8 - targetSlot.index) as Slot).getHasStack()) {
+            } else if (targetSlot.slotType == EntityEquipmentSlot.Type.ARMOR && !(this.inventorySlots[8 - targetSlot.index] as Slot).hasStack) {
                 val i = 8 - targetSlot.index
                 if (!this.mergeItemStack(inSlot, i, i + 1, false))
                     return ItemStack.EMPTY
