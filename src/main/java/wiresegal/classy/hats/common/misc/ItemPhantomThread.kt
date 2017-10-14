@@ -29,7 +29,6 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
-import net.minecraftforge.oredict.RecipeSorter
 import net.minecraftforge.registries.IForgeRegistryEntry
 import wiresegal.classy.hats.LibMisc
 
@@ -48,9 +47,7 @@ object ItemPhantomThread : ItemMod("phantom_thread") {
 
         MinecraftForge.EVENT_BUS.register(this)
 
-        RecipeSorter.register("${LibMisc.MOD_ID}:phantom", PhantomRecipe::class.java, RecipeSorter.Category.SHAPELESS, "")
         RegistrationHandler.register(PhantomRecipe)
-        RecipeSorter.register("${LibMisc.MOD_ID}:phantom_camo", PhantomCamoRecipe::class.java, RecipeSorter.Category.SHAPELESS, "")
         RegistrationHandler.register(PhantomCamoRecipe)
     }
 
