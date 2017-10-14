@@ -17,6 +17,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.IRecipe
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.NonNullList
+import net.minecraft.util.ResourceLocation
 import net.minecraft.util.text.TextFormatting
 import net.minecraft.world.World
 import net.minecraftforge.client.event.RenderLivingEvent
@@ -150,6 +151,11 @@ object ItemPhantomThread : ItemMod("phantom_thread") {
 }
 
 object PhantomRecipe : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
+
+    init {
+        registryName = ResourceLocation(LibMisc.MOD_ID, "phantom")
+    }
+
     override fun getRemainingItems(inv: InventoryCrafting): NonNullList<ItemStack> {
         val ret = NonNullList.withSize(inv.sizeInventory, ItemStack.EMPTY)
         for (i in ret.indices) {
@@ -246,6 +252,11 @@ object PhantomRecipe : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
 }
 
 object PhantomCamoRecipe : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
+
+    init {
+        registryName = ResourceLocation(LibMisc.MOD_ID, "phantom_camo")
+    }
+
     override fun getRemainingItems(inv: InventoryCrafting): NonNullList<ItemStack> {
         val ret = NonNullList.withSize(inv.sizeInventory, ItemStack.EMPTY)
         for (i in ret.indices) {

@@ -77,7 +77,9 @@ class GuiHat(player: EntityPlayer) : InventoryEffectRenderer(ContainerHat(player
     override fun drawScreen(mouseX: Int, mouseY: Int, partialTicks: Float) {
         this.oldMouseX = mouseX.toFloat()
         this.oldMouseY = mouseY.toFloat()
+        this.drawDefaultBackground()
         super.drawScreen(mouseX, mouseY, partialTicks)
+        this.renderHoveredToolTip(mouseX, mouseY)
     }
 
     override fun drawGuiContainerBackgroundLayer(partTicks: Float, mouseX: Int, mouseY: Int) {

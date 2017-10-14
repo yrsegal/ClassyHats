@@ -1,0 +1,23 @@
+{
+	"type": "forge:ore_shaped",
+	"pattern": [
+		"LLL",
+		" F ",
+		"FLF"
+	],
+	"key": {
+		"L": {
+			"item": "minecraft:planks",
+			"data": 1
+		},
+		"F": {
+			"item": "minecraft:wooden_slab",
+			"data": 1
+		}
+	},
+	"result": {
+		"item": "classyhats:hat_stand",
+		"data": 1
+	},
+	"group": "hats"
+}

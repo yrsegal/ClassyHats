@@ -3,10 +3,12 @@ package wiresegal.classy.hats.common.hat
 import com.teamwizardry.librarianlib.core.LibrarianLib
 import com.teamwizardry.librarianlib.core.client.ModelHandler
 import com.teamwizardry.librarianlib.features.base.IExtraVariantHolder
+import com.teamwizardry.librarianlib.features.base.item.IGlowingItem
 import com.teamwizardry.librarianlib.features.base.item.ItemMod
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper
 import com.teamwizardry.librarianlib.features.kotlin.isNotEmpty
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper
+import net.minecraft.client.renderer.block.model.IBakedModel
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.creativetab.CreativeTabs
@@ -19,6 +21,8 @@ import net.minecraft.util.EnumActionResult
 import net.minecraft.util.EnumHand
 import net.minecraft.util.NonNullList
 import net.minecraft.world.World
+import net.minecraftforge.fml.relauncher.Side
+import net.minecraftforge.fml.relauncher.SideOnly
 import wiresegal.classy.hats.LibMisc
 import wiresegal.classy.hats.common.core.AttachmentHandler
 import wiresegal.classy.hats.common.core.HatConfigHandler
@@ -28,7 +32,7 @@ import wiresegal.classy.hats.common.core.HatConfigHandler.Hat
  * @author WireSegal
  * Created at 8:40 PM on 8/31/17.
  */
-object ItemHat : ItemMod("hat"), IExtraVariantHolder {
+object ItemHat : ItemMod("hat"), IExtraVariantHolder, IGlowingItem {
 
     fun getHat(stack: ItemStack): Hat {
         val hatId = ItemNBTHelper.getString(stack, "hat", null) ?: return HatConfigHandler.missingno
@@ -97,4 +101,9 @@ object ItemHat : ItemMod("hat"), IExtraVariantHolder {
             if (getHat(stack) == HatConfigHandler.missingno) EnumRarity.EPIC
             else if (getHat(stack).elusive) EnumRarity.UNCOMMON
             else EnumRarity.COMMON
+
+    @SideOnly(Side.CLIENT)
+    override fun transformToGlow(itemStack: ItemStack, model: IBakedModel): IBakedModel? {
+        return IGlowingItem.Helper.wrapperBake(model, false, 99)
+    }
 }

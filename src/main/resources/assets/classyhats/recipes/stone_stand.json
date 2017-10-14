@@ -1,0 +1,23 @@
+{
+	"type": "forge:ore_shaped",
+	"pattern": [
+		"LLL",
+		" F ",
+		"FLF"
+	],
+	"key": {
+		"L": {
+			"type": "forge:ore_dict",
+			"ore": "stone"
+		},
+		"F": {
+			"item": "minecraft:stone_slab",
+			"data": 0
+		}
+	},
+	"result": {
+		"item": "classyhats:hat_stand",
+		"data": 6
+	},
+	"group": "hats"
+}
