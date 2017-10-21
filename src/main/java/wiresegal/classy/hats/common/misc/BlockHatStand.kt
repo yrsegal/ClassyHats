@@ -25,10 +25,8 @@ import net.minecraft.util.math.MathHelper
 import net.minecraft.world.Explosion
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
-import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.items.IItemHandler
 import net.minecraftforge.items.ItemStackHandler
-import sun.awt.image.SunWritableRaster.markDirty
 import wiresegal.classy.hats.common.hat.ItemHat
 import wiresegal.classy.hats.common.misc.BlockHatStand.StandMaterial.*
 
@@ -41,19 +39,18 @@ object BlockHatStand : BlockModContainer("hat_stand", Material.ROCK, *StandMater
     init {
         setHardness(2.0F)
         setResistance(5.0F)
-        GameRegistry.registerFuelHandler {
-            if (it.item == itemForm) {
-                val variant = StandMaterial.values()[it.itemDamage % StandMaterial.values().size]
-                if (variant == OAK ||
-                        variant == SPRUCE ||
-                        variant == BIRCH ||
-                        variant == JUNGLE ||
-                        variant == ACACIA ||
-                        variant == DARK_OAK) 300
-                else 0
-            } else 0
-        }
-        defaultState = defaultState.withProperty(PROPERTY, OBSIDIAN)
+    }
+
+    override fun getBurnTime(stack: ItemStack): Int {
+        val variant = StandMaterial.values()[stack.itemDamage % StandMaterial.values().size]
+        return if (variant == OAK ||
+                variant == SPRUCE ||
+                variant == BIRCH ||
+                variant == JUNGLE ||
+                variant == ACACIA ||
+                variant == DARK_OAK)
+            300
+        else 0
     }
 
     enum class StandMaterial : EnumStringSerializable {

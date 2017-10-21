@@ -93,9 +93,9 @@ class ContainerHatBag(playerInv: InventoryPlayer, thePlayer: EntityPlayer, priva
                         if (!this.mergeItemStack(inSlot, idxHotbarStart, idxHotbarEnd, false))
                             return ItemStack.EMPTY
             } else if (!this.mergeItemStack(inSlot, idxHatsStart, idxHatsEnd, false))
-                    if (!this.mergeItemStack(inSlot, idxPlayerHatStart, idxPlayerHatEnd, false))
-                        if (!this.mergeItemStack(inSlot, idxPlayerInvStart, idxPlayerInvEnd, false))
-                            return ItemStack.EMPTY
+                if (!this.mergeItemStack(inSlot, idxPlayerHatStart, idxPlayerHatEnd, false))
+                    if (!this.mergeItemStack(inSlot, idxPlayerInvStart, idxPlayerInvEnd, false))
+                        return ItemStack.EMPTY
 
             if (inSlot.isEmpty) slot.putStack(ItemStack.EMPTY)
             else slot.onSlotChanged()
