@@ -150,7 +150,7 @@ object ItemPhantomThread : ItemMod("phantom_thread") {
 object PhantomRecipe : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
 
     init {
-        registryName = ResourceLocation(LibMisc.MOD_ID, "phantom")
+        registryName = ResourceLocation(LibMisc.MOD_ID, "phantom_invis")
     }
 
     override fun getRemainingItems(inv: InventoryCrafting): NonNullList<ItemStack> {
@@ -246,6 +246,8 @@ object PhantomRecipe : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
 
         return (camo || thread.isNotEmpty) && armor.isNotEmpty
     }
+
+    override fun isHidden() = true
 }
 
 object PhantomCamoRecipe : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
@@ -361,4 +363,6 @@ object PhantomCamoRecipe : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
 
         return armor.isNotEmpty && threaded.isNotEmpty
     }
+
+    override fun isHidden() = true
 }
