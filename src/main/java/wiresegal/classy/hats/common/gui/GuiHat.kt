@@ -2,50 +2,58 @@ package wiresegal.classy.hats.common.gui
 
 import com.teamwizardry.librarianlib.features.network.PacketHandler
 import net.minecraft.client.audio.PositionedSoundRecord
+import net.minecraft.client.gui.GuiButton
+import net.minecraft.client.gui.GuiButtonImage
+import net.minecraft.client.gui.inventory.GuiContainer
+import net.minecraft.client.gui.inventory.GuiContainerCreative
 import net.minecraft.client.gui.inventory.GuiInventory
+import net.minecraft.client.gui.recipebook.GuiRecipeBook
+import net.minecraft.client.gui.recipebook.IRecipeShownListener
 import net.minecraft.client.renderer.GlStateManager
 import net.minecraft.client.renderer.InventoryEffectRenderer
 import net.minecraft.client.resources.I18n
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.SoundEvents
+import net.minecraft.inventory.ClickType
+import net.minecraft.inventory.Slot
 import net.minecraft.util.ResourceLocation
 import wiresegal.classy.hats.LibMisc
+import java.io.IOException
 
 
 /**
  * @author WireSegal
  * Created at 4:09 PM on 9/1/17.
  */
-class GuiHat(player: EntityPlayer) : InventoryEffectRenderer(ContainerHat(player.inventory, player)) {
+class GuiHat(player: EntityPlayer) : InventoryEffectRenderer(ContainerHat(player.inventory, player)), IRecipeShownListener {
 
     /** The old x position of the mouse pointer  */
     private var oldMouseX: Float = 0.toFloat()
     /** The old y position of the mouse pointer  */
     private var oldMouseY: Float = 0.toFloat()
+    private lateinit var recipeButton: GuiButtonImage
+    private val recipeBookGui = GuiRecipeBook()
+    private var widthTooNarrow: Boolean = false
+    private var buttonClicked: Boolean = false
 
     init {
         this.allowUserInput = true
     }
 
-    private fun resetGuiLeft() {
-        this.guiLeft = (this.width - this.xSize) / 2
-    }
-
-    /**
-     * Called from the main game loop to update the screen.
-     */
-    override fun updateScreen() {
-        updateActivePotionEffects()
-        resetGuiLeft()
-    }
-
-    /**
-     * Adds the buttons (and other controls) to the screen in question.
-     */
     override fun initGui() {
         this.buttonList.clear()
-        super.initGui()
-        resetGuiLeft()
+
+        if (this.mc.playerController.isInCreativeMode) {
+            this.mc.displayGuiScreen(GuiContainerCreative(this.mc.player))
+        } else {
+            super.initGui()
+        }
+
+        this.widthTooNarrow = this.width < 379
+        this.recipeBookGui.func_194303_a(this.width, this.height, this.mc, this.widthTooNarrow, (this.inventorySlots as ContainerHat).craftMatrix)
+        this.guiLeft = this.recipeBookGui.updateScreenPosition(this.widthTooNarrow, this.width, this.xSize)
+        this.recipeButton = GuiButtonImage(10, this.guiLeft + 104, this.height / 2 - 22, 20, 18, 178, 0, 19, GuiContainer.INVENTORY_BACKGROUND)
+        this.buttonList.add(this.recipeButton)
     }
 
     /**
@@ -60,26 +68,64 @@ class GuiHat(player: EntityPlayer) : InventoryEffectRenderer(ContainerHat(player
     }
 
     override fun mouseClicked(mouseX: Int, mouseY: Int, mouseButton: Int) {
-        super.mouseClicked(mouseX, mouseY, mouseButton)
-        val k = this.guiLeft
-        val l = this.guiTop
-        if ((mouseButton == 0 || mouseButton == 1) && mouseX <= k + 81 + 8 && mouseX >= k + 81 && mouseY <= l + 39 + 8 && mouseY >= l + 39) {
-            PacketHandler.NETWORK.sendToServer(PacketHatGuiOpen(1, -1))
+        if (!this.recipeBookGui.mouseClicked(mouseX, mouseY, mouseButton)) {
+            if (!this.widthTooNarrow || !this.recipeBookGui.isVisible) {
+                super.mouseClicked(mouseX, mouseY, mouseButton)
+                val k = this.guiLeft
+                val l = this.guiTop
+                if ((mouseButton == 0 || mouseButton == 1) && mouseX <= k + 81 + 8 && mouseX >= k + 81 && mouseY <= l + 39 + 8 && mouseY >= l + 39) {
+                    PacketHandler.NETWORK.sendToServer(PacketHatGuiOpen(1, -1))
 
-            val soundHandler = mc.soundHandler
-            soundHandler.playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.UI_BUTTON_CLICK, 1.0f))
+                    val soundHandler = mc.soundHandler
+                    soundHandler.playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.UI_BUTTON_CLICK, 1.0f))
+                }
+            }
         }
     }
 
-    /**
-     * Draws the screen and all the components in it.
-     */
+    override fun hasClickedOutside(mouseX: Int, mouseY: Int, cornerX: Int, cornerY: Int): Boolean {
+        val flag = mouseX < cornerX || mouseY < cornerY || mouseX >= cornerX + this.xSize || mouseY >= cornerY + this.ySize
+        return this.recipeBookGui.hasClickedOutside(mouseX, mouseY, this.guiLeft, this.guiTop, this.xSize, this.ySize) && flag
+    }
+
     override fun drawScreen(mouseX: Int, mouseY: Int, partialTicks: Float) {
         this.oldMouseX = mouseX.toFloat()
         this.oldMouseY = mouseY.toFloat()
         this.drawDefaultBackground()
-        super.drawScreen(mouseX, mouseY, partialTicks)
+
+        if (this.recipeBookGui.isVisible && this.widthTooNarrow) {
+            this.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY)
+            this.recipeBookGui.render(mouseX, mouseY, partialTicks)
+        } else {
+            this.recipeBookGui.render(mouseX, mouseY, partialTicks)
+            super.drawScreen(mouseX, mouseY, partialTicks)
+            this.recipeBookGui.renderGhostRecipe(this.guiLeft, this.guiTop, false, partialTicks)
+        }
+
+        this.recipeBookGui.renderTooltip(this.guiLeft, this.guiTop, mouseX, mouseY)
         this.renderHoveredToolTip(mouseX, mouseY)
+    }
+
+    override fun isPointInRegion(rectX: Int, rectY: Int, rectWidth: Int, rectHeight: Int, pointX: Int, pointY: Int): Boolean {
+        return (!this.widthTooNarrow || !this.recipeBookGui.isVisible) && super.isPointInRegion(rectX, rectY, rectWidth, rectHeight, pointX, pointY)
+    }
+
+    override fun mouseReleased(mouseX: Int, mouseY: Int, state: Int) {
+        if (this.buttonClicked) {
+            this.buttonClicked = false
+        } else {
+            super.mouseReleased(mouseX, mouseY, state)
+        }
+    }
+
+    override fun actionPerformed(button: GuiButton) {
+        if (button.id == 10) {
+            this.recipeBookGui.initVisuals(this.widthTooNarrow, (this.inventorySlots as ContainerHat).craftMatrix)
+            this.recipeBookGui.toggleVisibility()
+            this.guiLeft = this.recipeBookGui.updateScreenPosition(this.widthTooNarrow, this.width, this.xSize)
+            this.recipeButton.setPosition(this.guiLeft + 104, this.height / 2 - 22)
+            this.buttonClicked = true
+        }
     }
 
     override fun drawGuiContainerBackgroundLayer(partTicks: Float, mouseX: Int, mouseY: Int) {
@@ -94,6 +140,31 @@ class GuiHat(player: EntityPlayer) : InventoryEffectRenderer(ContainerHat(player
             drawTexturedModalRect(k + 81, l + 39, 8, 248, 8, 8)
 
         GuiInventory.drawEntityOnScreen(k + 51, l + 75, 30, (k + 51).toFloat() - this.oldMouseX, (l + 75 - 50).toFloat() - this.oldMouseY, this.mc.player)
+    }
+
+    @Throws(IOException::class)
+    override fun keyTyped(typedChar: Char, keyCode: Int) {
+        if (!this.recipeBookGui.keyPressed(typedChar, keyCode)) {
+            super.keyTyped(typedChar, keyCode)
+        }
+    }
+
+    override fun handleMouseClick(slotIn: Slot?, slotId: Int, mouseButton: Int, type: ClickType) {
+        super.handleMouseClick(slotIn, slotId, mouseButton, type)
+        this.recipeBookGui.slotClicked(slotIn)
+    }
+
+    override fun recipesUpdated() {
+        this.recipeBookGui.recipesUpdated()
+    }
+
+    override fun onGuiClosed() {
+        this.recipeBookGui.removed()
+        super.onGuiClosed()
+    }
+
+    override fun func_194310_f(): GuiRecipeBook {
+        return this.recipeBookGui
     }
 
     companion object {
