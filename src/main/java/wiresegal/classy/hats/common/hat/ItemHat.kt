@@ -35,6 +35,7 @@ import wiresegal.classy.hats.common.core.HatConfigHandler.Hat
 object ItemHat : ItemMod("hat"), IExtraVariantHolder, IGlowingItem {
 
     fun getHat(stack: ItemStack): Hat {
+        if (!stack.hasTagCompound()) return HatConfigHandler.missingno
         val hatId = ItemNBTHelper.getString(stack, "hat", null) ?: return HatConfigHandler.missingno
         return HatConfigHandler.hats[hatId] ?: HatConfigHandler.missingno
     }
