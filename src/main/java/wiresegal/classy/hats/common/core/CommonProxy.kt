@@ -54,7 +54,7 @@ open class CommonProxy {
     open fun init(e: FMLInitializationEvent) {
         NetworkRegistry.INSTANCE.registerGuiHandler(ClassyHats.INSTANCE, HatsGuiFactory)
 
-        RecipeGeneratorHandler.addShapedRecipe("phantom", "hats", ItemStack(ItemPhantomThread),
+        RecipeGeneratorHandler.addShapedRecipe("phantom", null, ItemStack(ItemPhantomThread),
                 "LW ",
                 "WSW",
                 " WL",
@@ -63,70 +63,70 @@ open class CommonProxy {
                 'S', "stickWood")
 
 
-        RecipeGeneratorHandler.addShapedRecipe("oak_stand", "hats", ItemStack(BlockHatStand, 1, 0), // Oak
+        RecipeGeneratorHandler.addShapedRecipe("oak_stand", "hat_stand", ItemStack(BlockHatStand, 1, 0), // Oak
                 "LLL",
                 " F ",
                 "FLF",
                 'L', ItemStack(Blocks.PLANKS, 1, 0), // Oak Planks
                 'F', ItemStack(Blocks.WOODEN_SLAB, 1, 0)) // Oak Slab
 
-        RecipeGeneratorHandler.addShapedRecipe("spruce_stand", "hats", ItemStack(BlockHatStand, 1, 1), // Spruce
+        RecipeGeneratorHandler.addShapedRecipe("spruce_stand", "hat_stand", ItemStack(BlockHatStand, 1, 1), // Spruce
                 "LLL",
                 " F ",
                 "FLF",
                 'L', ItemStack(Blocks.PLANKS, 1, 1), // Spruce Planks
                 'F', ItemStack(Blocks.WOODEN_SLAB, 1, 1)) // Spruce Slab
 
-        RecipeGeneratorHandler.addShapedRecipe("birch_stand", "hats", ItemStack(BlockHatStand, 1, 2), // Birch
+        RecipeGeneratorHandler.addShapedRecipe("birch_stand", "hat_stand", ItemStack(BlockHatStand, 1, 2), // Birch
                 "LLL",
                 " F ",
                 "FLF",
                 'L', ItemStack(Blocks.PLANKS, 1, 2), // Birch Planks
                 'F', ItemStack(Blocks.WOODEN_SLAB, 1, 2)) // Birch Slab
 
-        RecipeGeneratorHandler.addShapedRecipe("jungle_stand", "hats", ItemStack(BlockHatStand, 1, 3), // Jungle
+        RecipeGeneratorHandler.addShapedRecipe("jungle_stand", "hat_stand", ItemStack(BlockHatStand, 1, 3), // Jungle
                 "LLL",
                 " F ",
                 "FLF",
                 'L', ItemStack(Blocks.PLANKS, 1, 3), // Spruce Planks
                 'F', ItemStack(Blocks.WOODEN_SLAB, 1, 3)) // Spruce Slab
 
-        RecipeGeneratorHandler.addShapedRecipe("acacia_stand", "hats", ItemStack(BlockHatStand, 1, 4), // Acacia
+        RecipeGeneratorHandler.addShapedRecipe("acacia_stand", "hat_stand", ItemStack(BlockHatStand, 1, 4), // Acacia
                 "LLL",
                 " F ",
                 "FLF",
                 'L', ItemStack(Blocks.PLANKS, 1, 4), // Acacia Planks
                 'F', ItemStack(Blocks.WOODEN_SLAB, 1, 4)) // Acacia Slab
 
-        RecipeGeneratorHandler.addShapedRecipe("dark_oak_stand", "hats", ItemStack(BlockHatStand, 1, 5), // Dark Oak
+        RecipeGeneratorHandler.addShapedRecipe("dark_oak_stand", "hat_stand", ItemStack(BlockHatStand, 1, 5), // Dark Oak
                 "LLL",
                 " F ",
                 "FLF",
                 'L', ItemStack(Blocks.PLANKS, 1, 5), // Dark Oak Planks
                 'F', ItemStack(Blocks.WOODEN_SLAB, 1, 5)) // Dark Oak Slab
 
-        RecipeGeneratorHandler.addShapedRecipe("generic_stand", "hats", ItemStack(BlockHatStand, 1, 0), // Catchall for wood
+        RecipeGeneratorHandler.addShapedRecipe("generic_stand", "hat_stand", ItemStack(BlockHatStand, 1, 0), // Catchall for wood
                 "LLL",
                 " F ",
                 "FLF",
                 'L', "plankWood",
                 'F', "slabWood")
 
-        RecipeGeneratorHandler.addShapedRecipe("stone_stand", "hats", ItemStack(BlockHatStand, 1, 6), // Stone
+        RecipeGeneratorHandler.addShapedRecipe("stone_stand", "hat_stand", ItemStack(BlockHatStand, 1, 6), // Stone
                 "LLL",
                 " F ",
                 "FLF",
                 'L', "stone",
                 'F', ItemStack(Blocks.STONE_SLAB, 1, 0)) // Stone Slab
 
-        RecipeGeneratorHandler.addShapedRecipe("quartz_stand", "hats", ItemStack(BlockHatStand, 1, 7), // Quartz
+        RecipeGeneratorHandler.addShapedRecipe("quartz_stand", "hat_stand", ItemStack(BlockHatStand, 1, 7), // Quartz
                 "LLL",
                 " F ",
                 "FLF",
                 'L', "blockQuartz",
                 'F', ItemStack(Blocks.STONE_SLAB, 1, 7)) // Quartz Slab
 
-        RecipeGeneratorHandler.addShapedRecipe("obsidian_stand", "hats", ItemStack(BlockHatStand, 1, 8), // Obsidian
+        RecipeGeneratorHandler.addShapedRecipe("obsidian_stand", "hat_stand", ItemStack(BlockHatStand, 1, 8), // Obsidian
                 "LLL",
                 " F ",
                 "FLF",
