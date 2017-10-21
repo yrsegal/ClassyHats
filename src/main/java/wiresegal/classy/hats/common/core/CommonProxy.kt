@@ -105,13 +105,6 @@ open class CommonProxy {
                 'L', ItemStack(Blocks.PLANKS, 1, 5), // Dark Oak Planks
                 'F', ItemStack(Blocks.WOODEN_SLAB, 1, 5)) // Dark Oak Slab
 
-        RecipeGeneratorHandler.addShapedRecipe("generic_stand", "wood_hat_stand", ItemStack(BlockHatStand, 1, 0), // Catchall for wood
-                "LLL",
-                " F ",
-                "FLF",
-                'L', "plankWood",
-                'F', "slabWood")
-
         RecipeGeneratorHandler.addShapedRecipe("stone_stand", ItemStack(BlockHatStand, 1, 6), // Stone
                 "LLL",
                 " F ",
