@@ -135,7 +135,7 @@ class GuiHat(player: EntityPlayer) : InventoryEffectRenderer(ContainerHat(player
         else
             drawTexturedModalRect(k + 81, l + 39, 8, 248, 8, 8)
 
-        GuiInventory.drawEntityOnScreen(k + 51, l + 75, 30, (k + 51).toFloat() - this.oldMouseX, (l + 75 - 50).toFloat() - this.oldMouseY, this.mc.player)
+        GuiInventory.drawEntityOnScreen(k + 51, l + 75, 25, (k + 51).toFloat() - this.oldMouseX, (l + 75 - 50).toFloat() - this.oldMouseY, this.mc.player)
     }
 
     @Throws(IOException::class)

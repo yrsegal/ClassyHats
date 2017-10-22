@@ -76,7 +76,7 @@ class GuiHatBag(player: EntityPlayer, private var slotPos: Int) : GuiContainer(C
         else
             drawTexturedModalRect(k + ARROW_DOWN_BUTTON_X, l + ARROW_DOWN_BUTTON_Y, 24, 248, 8, 8)
 
-        GuiInventory.drawEntityOnScreen(k + 25 + 196, l + 83, 30, (k + 25 + 196).toFloat() - this.oldMouseX, (l + 83 - 50).toFloat() - this.oldMouseY, this.mc.player)
+        GuiInventory.drawEntityOnScreen(k + 25 + 196, l + 83, 25, (k + 25 + 196).toFloat() - this.oldMouseX, (l + 83 - 50).toFloat() - this.oldMouseY, this.mc.player)
     }
 
     override fun mouseClicked(mouseX: Int, mouseY: Int, mouseButton: Int) {
