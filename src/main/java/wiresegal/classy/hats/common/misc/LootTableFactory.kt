@@ -88,7 +88,10 @@ object LootTableFactory {
             val killer = e.source.trueSource as? EntityPlayer
 
             val item = mutableListOf<ItemStack>()
-            pool.generateLoot(item, world.rand, LootContext(0f, world, world.lootTableManager, entity, killer, e.source))
+            val context = LootContext(0f, world, world.lootTableManager, entity, killer, e.source)
+            pool.generateLoot(item, world.rand, context)
+            if (item.size == 1)
+                item.addAll(elusiveTable.generateLootForPools(world.rand, context))
 
             for (i in item) {
                 val entityItem = EntityItem(world, entity.posX, entity.posY, entity.posZ, i)
