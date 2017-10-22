@@ -43,11 +43,7 @@ class GuiHat(player: EntityPlayer) : InventoryEffectRenderer(ContainerHat(player
     override fun initGui() {
         this.buttonList.clear()
 
-        if (this.mc.playerController.isInCreativeMode) {
-            this.mc.displayGuiScreen(GuiContainerCreative(this.mc.player))
-        } else {
-            super.initGui()
-        }
+        super.initGui()
 
         this.widthTooNarrow = this.width < 379
         this.recipeBookGui.func_194303_a(this.width, this.height, this.mc, this.widthTooNarrow, (this.inventorySlots as ContainerHat).craftMatrix)
