@@ -1,5 +1,6 @@
 package wiresegal.classy.hats.common.misc
 
+import net.minecraft.entity.Entity
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
@@ -9,12 +10,14 @@ import net.minecraft.world.storage.loot.*
 import net.minecraft.world.storage.loot.LootTableList.*
 import net.minecraft.world.storage.loot.functions.SetNBT
 import net.minecraftforge.common.MinecraftForge
+import net.minecraftforge.common.util.FakePlayer
 import net.minecraftforge.event.LootTableLoadEvent
 import net.minecraftforge.event.entity.living.LivingDropsEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import wiresegal.classy.hats.LibMisc
 import wiresegal.classy.hats.common.core.HatConfigHandler
 import wiresegal.classy.hats.common.hat.ItemHat
+
 
 /**
  * @author WireSegal
@@ -74,6 +77,10 @@ object LootTableFactory {
             e.table.addPool(pool)
     }
 
+    private val FAKE_PLAYER_PATTERN = "^(?:\\[.*\\])|(?:ComputerCraft)$".toRegex()
+    fun isTruePlayer(e: Entity)
+            = e !is EntityPlayer || !(e is FakePlayer || FAKE_PLAYER_PATTERN.matches(e.name))
+
     @SubscribeEvent
     fun onBossDeath(e: LivingDropsEvent) {
         if (!HatConfigHandler.shouldInjectLootBoss) return
@@ -84,19 +91,19 @@ object LootTableFactory {
         val world = entity.world
 
         if (world is WorldServer && boss && e.isRecentlyHit) {
-
             val killer = e.source.trueSource as? EntityPlayer
+            if (killer != null && isTruePlayer(killer)) {
+                val item = mutableListOf<ItemStack>()
+                val context = LootContext(0f, world, world.lootTableManager, entity, killer, e.source)
+                pool.generateLoot(item, world.rand, context)
+                if (item.size == 1)
+                    item.addAll(elusiveTable.generateLootForPools(world.rand, context))
 
-            val item = mutableListOf<ItemStack>()
-            val context = LootContext(0f, world, world.lootTableManager, entity, killer, e.source)
-            pool.generateLoot(item, world.rand, context)
-            if (item.size == 1)
-                item.addAll(elusiveTable.generateLootForPools(world.rand, context))
-
-            for (i in item) {
-                val entityItem = EntityItem(world, entity.posX, entity.posY, entity.posZ, i)
-                entityItem.setDefaultPickupDelay()
-                e.drops.add(entityItem)
+                for (i in item) {
+                    val entityItem = EntityItem(world, entity.posX, entity.posY, entity.posZ, i)
+                    entityItem.setDefaultPickupDelay()
+                    e.drops.add(entityItem)
+                }
             }
         }
     }
