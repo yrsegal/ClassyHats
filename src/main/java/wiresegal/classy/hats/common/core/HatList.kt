@@ -28,5 +28,18 @@ val defaultHats = listOf(
         Hat("headtato"),
         Hat("japanese_headband"),
         Hat("menacing"),
-        Hat("thinking")
+        Hat("thinking"),
+        Hat("catears_black", 0.2),
+        Hat("catears_brown", 0.2),
+        Hat("catears_darkbrown", 0.2),
+        Hat("catears_grey", 0.2),
+        Hat("catears_white", 0.2),
+        Hat("classygear"),
+        Hat("mask_happy", 0.25),
+        Hat("mask_neutral", 0.25),
+        Hat("mask_sad", 0.25),
+        Hat("mask_uwot", 0.25),
+        Hat("monocle"),
+        Hat("skull", 0.9),
+        Hat("skull_shattered", 0.1)
 )

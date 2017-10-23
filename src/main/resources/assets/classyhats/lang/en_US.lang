@@ -60,6 +60,38 @@ item.classyhats:menacing.desc=ＴＨＩＳ ＭＵＳＴ ＢＥ ＴＨＥ ＷＯ�
 item.classyhats:thinking.name=:thonk:
 item.classyhats:thinking.desc=Sponsored by /r/hmmm
 
+item.classyhats:catears_black.name=Black Cat Ears
+item.classyhats:catears_black.desc=+5 to Persuasion, +5 to Nya
+item.classyhats:catears_brown.name=Brown Cat Ears
+item.classyhats:catears_brown.desc=+5 to Persuasion, +5 to Nya
+item.classyhats:catears_darkbrown.name=Dark Brown Cat Ears
+item.classyhats:catears_darkbrown.desc=+5 to Persuasion, +5 to Nya
+item.classyhats:catears_grey.name=Gray Cat Ears
+item.classyhats:catears_grey.desc=+5 to Persuasion, +5 to Nya
+item.classyhats:catears_white.name=White Cat Ears
+item.classyhats:catears_white.desc=+5 to Persuasion, +5 to Nya
+
+item.classyhats:classygear.name=Classy Gear
+item.classyhats:classygear.desc=I do say, my good sir!
+
+item.classyhats:mask_happy.name=Smiling Drama Mask
+item.classyhats:mask_happy.desc=The show must go on!
+item.classyhats:mask_neutral.name=Neutral Drama Mask
+item.classyhats:mask_neutral.desc=The show must go on!
+item.classyhats:mask_sad.name=Downcast Drama Mask
+item.classyhats:mask_sad.desc=The show must go on!
+item.classyhats:mask_uwot.name=Angry Drama Mask
+item.classyhats:mask_uwot.desc=The show must go on!
+
+item.classyhats:monocle.name=Monocle
+item.classyhats:monocle.desc=For external use only.
+
+item.classyhats:skull.name=Skull Mask
+item.classyhats:skull.name=Straight from your anatomy classroom!
+
+item.classyhats:skull_shattered.name=Shattered Skull Mask
+item.classyhats:skull_shattered.name=Gives your face a bit of menace.
+
 classyhats.misc.phantom=&bLined with Phantom Thread
 classyhats.misc.phantom.desc=Craft with other armor to camouflage!
 classyhats.misc.phantom.camo=Camouflaged as: %s
