@@ -79,7 +79,7 @@ object LootTableFactory {
 
     private val FAKE_PLAYER_PATTERN = "^(?:\\[.*\\])|(?:ComputerCraft)$".toRegex()
     fun isTruePlayer(e: Entity)
-            = e !is EntityPlayer || !(e is FakePlayer || FAKE_PLAYER_PATTERN.matches(e.name))
+            = e !is EntityPlayer || e !is FakePlayer && !FAKE_PLAYER_PATTERN.matches(e.name)
 
     @SubscribeEvent
     fun onBossDeath(e: LivingDropsEvent) {
