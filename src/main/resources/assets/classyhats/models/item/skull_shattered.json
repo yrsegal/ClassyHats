@@ -1,9 +1,9 @@
 {
 	"credit": "Made by Tristaric, utilizing Blockbench.",
 	"textures": {
-		"0": "items/skull_shattered",
-		"1": "items/skull",
-		"particle": "items/skull_shattered"
+		"0": "classyhats:items/skull_shattered",
+		"1": "classyhats:items/skull",
+		"particle": "classyhats:items/skull_shattered"
 	},
 	"elements": [
 		{

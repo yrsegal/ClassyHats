@@ -1,6 +1,6 @@
 {
 	"credit": "Made by Tristaric, utilizing Blockbench.",
-	"textures": {"3": "items/mask_wot"},
+	"textures": {"3": "classyhats:items/mask_wot"},
 	"elements": [
 		{
 			"name": "mask_wot_0",

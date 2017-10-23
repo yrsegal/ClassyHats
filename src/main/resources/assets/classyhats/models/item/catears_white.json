@@ -1,8 +1,8 @@
 {
 	"credit": "Made by Tristaric, utilizing Blockbench.",
 	"textures": {
-		"0": "items/catears_white",
-		"particle": "items/catears_white"
+		"0": "classyhats:items/catears_white",
+		"particle": "classyhats:items/catears_white"
 	},
 	"elements": [
 		{

@@ -87,10 +87,10 @@ item.classyhats:monocle.name=Monocle
 item.classyhats:monocle.desc=For external use only.
 
 item.classyhats:skull.name=Skull Mask
-item.classyhats:skull.name=Straight from your anatomy classroom!
+item.classyhats:skull.desc=Alas, poor Yorick!
 
 item.classyhats:skull_shattered.name=Shattered Skull Mask
-item.classyhats:skull_shattered.name=Gives your face a bit of menace.
+item.classyhats:skull_shattered.desc=Gives your face a bit of menace.
 
 classyhats.misc.phantom=&bLined with Phantom Thread
 classyhats.misc.phantom.desc=Craft with other armor to camouflage!

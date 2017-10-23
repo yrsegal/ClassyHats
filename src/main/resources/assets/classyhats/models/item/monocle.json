@@ -1,8 +1,8 @@
 {
 	"credit": "Made by Tristaric, utilizing Blockbench.",
 	"textures": {
-		"0": "items/monocle",
-		"particle": "items/monocle"
+		"0": "classyhats:items/monocle",
+		"particle": "classyhats:items/monocle"
 	},
 	"elements": [
 		{

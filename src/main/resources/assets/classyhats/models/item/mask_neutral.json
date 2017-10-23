@@ -1,6 +1,6 @@
 {
 	"credit": "Made by Tristaric, utilizing Blockbench.",
-	"textures": {"1": "items/mask_wha"},
+	"textures": {"1": "classyhats:items/mask_wha"},
 	"elements": [
 		{
 			"name": "mask_wha_0",

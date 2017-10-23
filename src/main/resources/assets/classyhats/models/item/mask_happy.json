@@ -1,8 +1,8 @@
 {
 	"credit": "Made by Tristaric, utilizing Blockbench.",
 	"textures": {
-		"0": "items/mask_wee",
-		"particle": "items/mask_wee"
+		"0": "classyhats:items/mask_wee",
+		"particle": "classyhats:items/mask_wee"
 	},
 	"elements": [
 		{

@@ -1,9 +1,9 @@
 {
 	"credit": "Made by Tristaric, utilizing Blockbench.",
 	"textures": {
-		"1": "items/monocle",
-		"1_0": "items/tophat_gold",
-		"particle": "items/tophat_gold"
+		"1": "classyhats:items/monocle",
+		"1_0": "classyhats:items/tophat_gold",
+		"particle": "classyhats:items/tophat_gold"
 	},
 	"elements": [
 		{
