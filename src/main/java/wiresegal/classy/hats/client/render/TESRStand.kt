@@ -6,6 +6,17 @@ import net.minecraft.client.renderer.OpenGlHelper
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer
 import wiresegal.classy.hats.common.misc.BlockHatStand
+import net.minecraft.client.renderer.RenderGlobal
+import net.minecraft.util.math.AxisAlignedBB
+import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.util.math.BlockPos
+import net.minecraftforge.client.event.DrawBlockHighlightEvent
+import net.minecraftforge.common.MinecraftForge
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
+
+
+
+
 
 /**
  * @author WireSegal
@@ -38,6 +49,48 @@ object TESRStand : TileEntitySpecialRenderer<BlockHatStand.TileHatStand>() {
             OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, prevX, prevY)
 
             GlStateManager.popMatrix()
+        }
+    }
+
+    init {
+        MinecraftForge.EVENT_BUS.register(this)
+    }
+
+    fun renderSelectionBox(selectionBox: AxisAlignedBB, pos: BlockPos, player: EntityPlayer, partialTicks: Float) {
+        GlStateManager.disableAlpha()
+        GlStateManager.enableBlend()
+        GlStateManager.tryBlendFuncSeparate(
+                GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
+                GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO
+        )
+        GlStateManager.glLineWidth(2.0f)
+        GlStateManager.disableTexture2D()
+        GlStateManager.depthMask(false)
+        val offsetX = player.lastTickPosX + (player.posX - player.lastTickPosX) * partialTicks
+        val offsetY = player.lastTickPosY + (player.posY - player.lastTickPosY) * partialTicks
+        val offsetZ = player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * partialTicks
+        val target = selectionBox.grow(0.002).offset(pos).offset(-offsetX, -offsetY, -offsetZ)
+        RenderGlobal.drawSelectionBoundingBox(target, 0.0f, 0.0f, 0.0f, 0.4f)
+        GlStateManager.depthMask(true)
+        GlStateManager.enableTexture2D()
+        GlStateManager.disableBlend()
+        GlStateManager.enableAlpha()
+    }
+
+    @SubscribeEvent
+    fun onDrawBlockHighlight(event: DrawBlockHighlightEvent) {
+
+        if (event.target.blockPos != null) {
+            val pos = event.target.blockPos
+            val player = event.player
+            val world = player.entityWorld
+            val state = world.getBlockState(pos)
+            val block = state.block
+            if (block is BlockHatStand) {
+                for (aabb in block.getCollisionBoxes())
+                    renderSelectionBox(aabb, pos, player, event.partialTicks)
+                event.isCanceled = true
+            }
         }
     }
 }

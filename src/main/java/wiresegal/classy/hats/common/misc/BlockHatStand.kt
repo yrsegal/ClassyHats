@@ -10,6 +10,7 @@ import com.teamwizardry.librarianlib.features.saving.Save
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
 import net.minecraft.block.properties.PropertyEnum
+import net.minecraft.block.state.BlockFaceShape
 import net.minecraft.block.state.BlockStateContainer
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.Entity
@@ -19,9 +20,7 @@ import net.minecraft.inventory.InventoryHelper
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
-import net.minecraft.util.math.AxisAlignedBB
-import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.MathHelper
+import net.minecraft.util.math.*
 import net.minecraft.world.Explosion
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
@@ -117,6 +116,44 @@ object BlockHatStand : BlockModContainer("hat_stand", Material.ROCK, *StandMater
         }
 
         return ret
+    }
+
+    override fun getBlockFaceShape(world: IBlockAccess, state: IBlockState, pos: BlockPos, facing: EnumFacing?): BlockFaceShape {
+        return if (facing == EnumFacing.UP) BlockFaceShape.SOLID else if (facing == EnumFacing.DOWN) BlockFaceShape.CENTER_BIG else BlockFaceShape.UNDEFINED
+    }
+
+    override fun isTopSolid(state: IBlockState): Boolean {
+        return true
+    }
+
+    fun getCollisionBoxes(): List<AxisAlignedBB> {
+        val list = mutableListOf<AxisAlignedBB>()
+
+        fun addBox(x0: Int, y0: Int, z0: Int, x1: Int, y1: Int, z1: Int) {
+            val baseX = x0 / 16.0
+            val baseY = y0 / 16.0
+            val baseZ = z0 / 16.0
+            val targetX = x1 / 16.0
+            val targetY = y1 / 16.0
+            val targetZ = z1 / 16.0
+            list.add(AxisAlignedBB(baseX, baseY, baseZ, targetX, targetY, targetZ))
+        }
+
+        addBox(0, 12, 0, 16, 16, 16)
+        addBox(4, 10, 4, 12, 12, 12)
+        addBox(5,  4, 5, 11, 10, 11)
+        addBox(3,  0, 3, 13,  4, 13)
+        return list
+    }
+
+    override fun collisionRayTrace(blockState: IBlockState, worldIn: World, pos: BlockPos, start: Vec3d, end: Vec3d)
+            = getCollisionBoxes()
+            .map { rayTrace(pos, start, end, it) }
+            .firstOrNull { it != null }
+
+    override fun addCollisionBoxToList(state: IBlockState, worldIn: World, pos: BlockPos, entityBox: AxisAlignedBB, collidingBoxes: MutableList<AxisAlignedBB>, entityIn: Entity?, actual: Boolean) {
+        for (box in getCollisionBoxes())
+            addCollisionBoxToList(pos, entityBox, collidingBoxes, box)
     }
 
     override fun getComparatorInputOverride(blockState: IBlockState, worldIn: World, pos: BlockPos): Int {

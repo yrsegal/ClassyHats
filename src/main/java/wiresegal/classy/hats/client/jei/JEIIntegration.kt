@@ -12,7 +12,8 @@ import wiresegal.classy.hats.common.gui.ContainerHat
  */
 @JEIPlugin
 class JEIIntegration : IModPlugin {
-    override fun register(registry: IModRegistry) {
-        registry.recipeTransferRegistry.addRecipeTransferHandler(HatRecipeTransferHandler(registry.jeiHelpers.recipeTransferHandlerHelper()), VanillaRecipeCategoryUid.CRAFTING)
-    }
+    override fun register(registry: IModRegistry)
+            = registry.recipeTransferRegistry.addRecipeTransferHandler(HatRecipeTransferHandler(
+                    registry.jeiHelpers.recipeTransferHandlerHelper()),
+                    VanillaRecipeCategoryUid.CRAFTING)
 }
