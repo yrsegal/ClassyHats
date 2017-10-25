@@ -9,7 +9,9 @@ import net.minecraft.client.resources.I18n
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.SoundEvents
 import net.minecraft.util.ResourceLocation
+import sun.audio.AudioPlayer.player
 import wiresegal.classy.hats.LibMisc
+import wiresegal.classy.hats.common.core.AttachmentHandler
 import wiresegal.classy.hats.common.hat.BaseHatStorage
 
 
@@ -17,7 +19,7 @@ import wiresegal.classy.hats.common.hat.BaseHatStorage
  * @author WireSegal
  * Created at 4:09 PM on 9/1/17.
  */
-class GuiHatBag(player: EntityPlayer, private var slotPos: Int) : GuiContainer(ContainerHatBag(player.inventory, player, slotPos)) {
+class GuiHatBag(player: EntityPlayer) : GuiContainer(ContainerHatBag(player.inventory, player, AttachmentHandler.getCapability(player).currentHatSection)) {
 
     /** The old x position of the mouse pointer  */
     private var oldMouseX: Float = 0.toFloat()
@@ -34,6 +36,8 @@ class GuiHatBag(player: EntityPlayer, private var slotPos: Int) : GuiContainer(C
     val ARROW_DOWN_BUTTON_Y = 95
 
     private val totalSlots = BaseHatStorage.HAT_SIZE / 50 - 1
+
+    private var slotPos = AttachmentHandler.getCapability(player).currentHatSection
 
     init {
         this.allowUserInput = true
@@ -90,15 +94,17 @@ class GuiHatBag(player: EntityPlayer, private var slotPos: Int) : GuiContainer(C
             soundHandler.playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.UI_BUTTON_CLICK, 1.0f))
         }
 
-
         if ((slotPos != 0) && (mouseButton == 0 || mouseButton == 1) && mouseX <= k + ARROW_UP_BUTTON_X + 8 && mouseX >= k + ARROW_UP_BUTTON_X && mouseY <= l + ARROW_UP_BUTTON_Y + 8 && mouseY >= l + ARROW_UP_BUTTON_Y) {
-            PacketHandler.NETWORK.sendToServer(PacketHatGuiOpen(1, slotPos - 1))
+            (inventorySlots as ContainerHatBag).setSlot(slotPos - 1)
+            slotPos = Math.max(0, Math.min(totalSlots, slotPos - 1))
 
             val soundHandler = mc.soundHandler
             soundHandler.playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.UI_BUTTON_CLICK, 1.0f))
         }
         if ((slotPos != totalSlots) && (mouseButton == 0 || mouseButton == 1) && mouseX <= k + ARROW_DOWN_BUTTON_X + 8 && mouseX >= k + ARROW_DOWN_BUTTON_X && mouseY <= l + ARROW_DOWN_BUTTON_Y + 8 && mouseY >= l + ARROW_DOWN_BUTTON_Y) {
-            PacketHandler.NETWORK.sendToServer(PacketHatGuiOpen(1, slotPos + 1))
+            (inventorySlots as ContainerHatBag).setSlot(slotPos + 1)
+            slotPos = Math.max(0, Math.min(totalSlots, slotPos + 1))
+
 
             val soundHandler = mc.soundHandler
             soundHandler.playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.UI_BUTTON_CLICK, 1.0f))
@@ -127,6 +133,12 @@ class GuiHatBag(player: EntityPlayer, private var slotPos: Int) : GuiContainer(C
             drawHoveringText(I18n.format("${LibMisc.MOD_ID}.misc.go_to", slotPos + 2), mouseX - k, mouseY - l)
 
 
+    }
+
+    override fun onGuiClosed() {
+        val pos = (inventorySlots as ContainerHatBag).slotPos
+        PacketHandler.NETWORK.sendToServer(PacketSyncLastSelectedSection(pos))
+        AttachmentHandler.getCapability(mc.player).currentHatSection = pos
     }
 
     companion object {

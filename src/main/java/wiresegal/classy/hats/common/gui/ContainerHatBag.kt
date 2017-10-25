@@ -17,7 +17,7 @@ import wiresegal.classy.hats.common.hat.ItemHat
  * Created at 4:11 PM on 9/1/17.
  */
 
-class ContainerHatBag(playerInv: InventoryPlayer, thePlayer: EntityPlayer, private var slotPos: Int) : Container() {
+class ContainerHatBag(playerInv: InventoryPlayer, thePlayer: EntityPlayer, var slotPos: Int) : Container() {
 
     val hat = AttachmentHandler.getCapability(thePlayer)
 
@@ -67,6 +67,21 @@ class ContainerHatBag(playerInv: InventoryPlayer, thePlayer: EntityPlayer, priva
 
     override fun canInteractWith(par1EntityPlayer: EntityPlayer): Boolean {
         return true
+    }
+
+    fun setSlot(slotPos: Int) {
+        val totalSlots = HAT_SIZE / 50 - 1
+        this.slotPos = Math.max(0, Math.min(totalSlots, slotPos))
+
+        for (j in 0..4)
+            for (i in 0..9) {
+                val slot = object : SlotItemHandler(hat.hats, this.slotPos * 50 + i + j * 10, 8 + i * 18, 8 + j * 18) {
+                    override fun isItemValid(stack: ItemStack) = stack.item == ItemHat
+                }
+                slot.slotNumber = j * 10 + i + idxHatsStart
+                this.inventorySlots[slot.slotNumber] = slot
+                this.inventoryItemStacks[slot.slotNumber] = slot.stack
+            }
     }
 
     override fun transferStackInSlot(playerIn: EntityPlayer, index: Int): ItemStack {

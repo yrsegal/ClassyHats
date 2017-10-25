@@ -70,7 +70,7 @@ class GuiHat(player: EntityPlayer) : InventoryEffectRenderer(ContainerHat(player
                 val k = this.guiLeft
                 val l = this.guiTop
                 if ((mouseButton == 0 || mouseButton == 1) && mouseX <= k + 81 + 8 && mouseX >= k + 81 && mouseY <= l + 39 + 8 && mouseY >= l + 39) {
-                    PacketHandler.NETWORK.sendToServer(PacketHatGuiOpen(1, -1))
+                    PacketHandler.NETWORK.sendToServer(PacketHatGuiOpen(1))
 
                     val soundHandler = mc.soundHandler
                     soundHandler.playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.UI_BUTTON_CLICK, 1.0f))

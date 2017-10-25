@@ -14,9 +14,9 @@ import wiresegal.classy.hats.common.core.AttachmentHandler
  * Created at 4:31 PM on 9/1/17.
  */
 @PacketRegister(Side.SERVER)
-class PacketHatGuiOpen(@Save var target: Int = 0) : PacketBase() {
+class PacketSyncLastSelectedSection(@Save var target: Int = 0) : PacketBase() {
     override fun handle(ctx: MessageContext) {
         val player = ctx.serverHandler.player
-        player.openGui(ClassyHats.INSTANCE, target, ctx.serverHandler.player.world, 0, 0, 0)
+        AttachmentHandler.getCapability(player).currentHatSection = target
     }
 }
