@@ -2,8 +2,13 @@ package wiresegal.classy.hats.client.core
 
 import com.google.common.base.Charsets
 import net.minecraft.client.Minecraft
+import net.minecraft.client.model.ModelBiped
+import net.minecraft.client.renderer.entity.RenderLiving
 import net.minecraft.client.resources.FolderResourcePack
 import net.minecraft.client.resources.IResourcePack
+import net.minecraft.entity.EntityList
+import net.minecraft.entity.EntityLiving
+import net.minecraft.entity.EntityLivingBase
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.client.event.TextureStitchEvent
 import net.minecraftforge.common.MinecraftForge
@@ -15,6 +20,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.relauncher.ReflectionHelper
 import org.apache.logging.log4j.Level
 import wiresegal.classy.hats.LibMisc
+import wiresegal.classy.hats.client.render.LayerEntityHat
 import wiresegal.classy.hats.client.render.LayerHat
 import wiresegal.classy.hats.client.render.TESRStand
 import wiresegal.classy.hats.common.core.CommonProxy
@@ -61,6 +67,17 @@ class ClientProxy : CommonProxy() {
 
         render = skinMap["slim"]
         render?.addLayer(LayerHat(render.mainModel.bipedHead))
+
+        val map = Minecraft.getMinecraft().renderManager.entityRenderMap
+        for (entity in EntityList.getEntityNameList()) if (entity.toString() in HatConfigHandler.names) {
+            val clazz = EntityList.getClass(entity)
+            val entityRenderer = map[clazz]
+            if (entityRenderer is RenderLiving) {
+                val main = entityRenderer.getMainModel()
+                val renderer = if (main is ModelBiped) main.bipedHead else null
+                entityRenderer.addLayer(LayerEntityHat(renderer))
+            }
+        }
     }
 
     class CustomFolderResourcePack(source: File, private val name: String) : FolderResourcePack(source) {

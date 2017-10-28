@@ -1,6 +1,7 @@
 package wiresegal.classy.hats.common.misc
 
 import net.minecraft.entity.Entity
+import net.minecraft.entity.EntityList
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
@@ -14,7 +15,9 @@ import net.minecraftforge.common.util.FakePlayer
 import net.minecraftforge.event.LootTableLoadEvent
 import net.minecraftforge.event.entity.living.LivingDropsEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
+import sun.audio.AudioPlayer.player
 import wiresegal.classy.hats.LibMisc
+import wiresegal.classy.hats.common.core.AttachmentHandler
 import wiresegal.classy.hats.common.core.HatConfigHandler
 import wiresegal.classy.hats.common.hat.ItemHat
 
@@ -90,19 +93,33 @@ object LootTableFactory {
         val entity = e.entityLiving
         val world = entity.world
 
-        if (world is WorldServer && boss && e.isRecentlyHit) {
-            val killer = e.source.trueSource as? EntityPlayer
-            if (killer != null && isTruePlayer(killer)) {
-                val item = mutableListOf<ItemStack>()
-                val context = LootContext(0f, world, world.lootTableManager, entity, killer, e.source)
-                pool.generateLoot(item, world.rand, context)
-                if (item.size == 1)
-                    item.addAll(elusiveTable.generateLootForPools(world.rand, context))
+        if (world is WorldServer && e.isRecentlyHit) {
+            if (boss) {
+                val killer = e.source.trueSource as? EntityPlayer
+                if (killer != null && isTruePlayer(killer)) {
+                    val item = mutableListOf<ItemStack>()
+                    val context = LootContext(0f, world, world.lootTableManager, entity, killer, e.source)
+                    pool.generateLoot(item, world.rand, context)
+                    if (item.size == 1)
+                        item.addAll(elusiveTable.generateLootForPools(world.rand, context))
 
-                for (i in item) {
-                    val entityItem = EntityItem(world, entity.posX, entity.posY, entity.posZ, i)
-                    entityItem.setDefaultPickupDelay()
-                    e.drops.add(entityItem)
+                    for (i in item) {
+                        val entityItem = EntityItem(world, entity.posX, entity.posY, entity.posZ, i)
+                        entityItem.setDefaultPickupDelay()
+                        e.drops.add(entityItem)
+                    }
+                }
+            } else {
+                if (EntityList.getKey(entity).toString() in HatConfigHandler.names) {
+                    val data = entity.entityData
+                    if (data.hasKey(AttachmentHandler.customKey)) {
+                        val str = data.getString(AttachmentHandler.customKey)
+                        if (str.isNotEmpty()) {
+                            val entityItem = EntityItem(world, entity.posX, entity.posY, entity.posZ, ItemHat.ofHat(str))
+                            entityItem.setDefaultPickupDelay()
+                            e.drops.add(entityItem)
+                        }
+                    }
                 }
             }
         }

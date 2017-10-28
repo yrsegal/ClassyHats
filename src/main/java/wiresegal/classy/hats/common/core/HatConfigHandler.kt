@@ -1,10 +1,12 @@
 package wiresegal.classy.hats.common.core
 
 import com.google.gson.JsonArray
+import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import com.teamwizardry.librarianlib.features.kotlin.json
 import com.teamwizardry.librarianlib.features.kotlin.serialize
+import net.minecraft.util.ResourceLocation
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
 import wiresegal.classy.hats.ClassyHats
 import wiresegal.classy.hats.LibMisc
@@ -28,6 +30,14 @@ object HatConfigHandler {
     var shouldInjectLootChests = true
     var shouldInjectLootBoss = true
 
+    var names = listOf(
+            "minecraft:minecraft:zombie", "minecraft:zombie_villager", "minecraft:zombie_pigman",
+            "minecraft:wither_skeleton", "minecraft:skeleton",
+            "minecraft:evocation_illager", "minecraft:vex", "minecraft:vindication_illager", "minecraft:vindication_illager", "minecraft:witch"
+    )
+    var hatSpawnPercentage = 0.05f
+
+
     data class Hat(val name: String, val weight: Int = -1, val elusive: Boolean = false) {
         constructor(name: String, weight: Double, elusive: Boolean = false) : this(name, (weight * 40).toInt(), elusive)
 
@@ -44,10 +54,6 @@ object HatConfigHandler {
         val path = File(e.modConfigurationDirectory, "${LibMisc.MOD_ID}.json")
         var succeeded = false
 
-        var loadedBlacklist = false
-        var loadedHatInjections = false
-        var loadedCustomHats = false
-
         var json: JsonObject? = null
         if (path.exists()) {
             try {
@@ -57,11 +63,11 @@ object HatConfigHandler {
 
                 val blacklist = if (load.has("blacklist_hats")) load.getAsJsonArray("blacklist_hats") else JsonArray()
                 blacklist.map { it.asString.toLowerCase(Locale.ROOT) }.filter { it != "missingno" }.forEach { hats.remove(it) }
-                loadedBlacklist = true
 
-                shouldInjectLootChests = if (load.has("loot_hat_from_chests")) load.getAsJsonPrimitive("loot_hat_from_chests").asBoolean else true
-                shouldInjectLootBoss = if (load.has("loot_hat_from_boss")) load.getAsJsonPrimitive("loot_hat_from_boss").asBoolean else true
-                loadedHatInjections = true
+                shouldInjectLootChests = if (load.has("loot_hat_from_chests")) load.getAsJsonPrimitive("loot_hat_from_chests").asBoolean else shouldInjectLootChests
+                shouldInjectLootBoss = if (load.has("loot_hat_from_boss")) load.getAsJsonPrimitive("loot_hat_from_boss").asBoolean else shouldInjectLootBoss
+                names = if (load.has("hat_wearing_entities")) load.getAsJsonArray("hat_wearing_entities").map(JsonElement::getAsString).map { ResourceLocation(it).toString() } else names
+                hatSpawnPercentage = if (load.has("chance_of_entities_wearing_hats")) load.getAsJsonPrimitive("chance_of_entities_wearing_hats").asFloat else hatSpawnPercentage
 
                 val hats = if (load.has("custom_hats")) load.getAsJsonArray("custom_hats") else JsonArray()
                 for (hat in hats) {
@@ -72,7 +78,6 @@ object HatConfigHandler {
                     newHats.put(name, Hat(name, weight, elusive))
                 }
                 this.hats.putAll(newHats)
-                loadedCustomHats = true
 
                 succeeded = true
             } catch (e: Exception) {
@@ -80,32 +85,35 @@ object HatConfigHandler {
             }
         }
 
-        if (!succeeded) {
-            val baseJson = json {
-                obj(
-                        "__comment0" to "The folder ${LibMisc.MOD_ID}_resources will act as a resource pack for any custom hats you want to add.",
-                        "__comment1" to "Put any hat names from the default hats you don't want in the blacklist.",
-                        "__default_weight" to 40,
-                        "__example_custom_hat" to array(Hat("example", 2, true).toJson()),
-                        "blacklist_hats" to array(),
-                        "loot_hat_from_chests" to true,
-                        "loot_hat_from_boss" to true,
-                        "custom_hats" to array()
-                )
-            } as JsonObject
-            if (loadedBlacklist) baseJson.remove("blacklist_hats")
-            if (loadedHatInjections) {
-                baseJson.remove("loot_hat_from_chests")
-                baseJson.remove("loot_hat_from_boss")
-            }
-            if (loadedCustomHats) baseJson.remove("custom_hats")
+        val baseJson = json {
+            obj(
+                    "__comment0" to "The folder ${LibMisc.MOD_ID}_resources will act as a resource pack for any custom hats you want to add.",
+                    "__comment1" to "Put any hat names from the default hats you don't want in the blacklist.",
+                    "__default_weight" to 40,
+                    "__example_custom_hat" to array(Hat("example", 2, true).toJson()),
+                    "blacklist_hats" to array(),
+                    "loot_hat_from_chests" to true,
+                    "loot_hat_from_boss" to true,
+                    "custom_hats" to array(),
+                    "hat_wearing_entities" to array(*names.toTypedArray()),
+                    "chance_of_entities_wearing_hats" to hatSpawnPercentage
+            )
+        } as JsonObject
 
-            val newJson = json ?: JsonObject()
-            for ((k, v) in newJson.entrySet())
-                baseJson.add(k, v)
-
-            path.writeText(baseJson.serialize())
+        if (succeeded) {
+            val toRemove = mutableListOf<String>()
+            for ((k, _) in baseJson.entrySet())
+                if (k.startsWith("__"))
+                    toRemove.add(k)
+            for (k in toRemove)
+                baseJson.remove(k)
         }
+
+        val newJson = json ?: JsonObject()
+        for ((k, v) in newJson.entrySet())
+            baseJson.add(k, v)
+
+        path.writeText(baseJson.serialize())
 
         // A failsafe
         hats.put("missingno", missingno)
