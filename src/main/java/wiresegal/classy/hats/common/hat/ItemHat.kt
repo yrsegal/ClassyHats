@@ -87,6 +87,7 @@ object ItemHat : ItemMod("hat"), IExtraVariantHolder, IGlowingItem {
     override fun getUnlocalizedName(stack: ItemStack)
             = "item.${LibMisc.MOD_ID}:${getHat(stack).name}"
 
+    @SideOnly(Side.CLIENT)
     override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
         val desc = stack.unlocalizedName + ".desc"
         val used = if (LibrarianLib.PROXY.canTranslate(desc)) desc else "${desc}0"

@@ -109,3 +109,5 @@ tile.classyhats:hat_stand_dark_oak.name=Dark Oak Wood Hat Stand
 tile.classyhats:hat_stand_stone.name=Stone Hat Stand
 tile.classyhats:hat_stand_quartz.name=Quartz Hat Stand
 tile.classyhats:hat_stand_obsidian.name=Obsidian Hat Stand
+
+keybind.hatsinventory=Hat Inventory

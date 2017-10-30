@@ -60,6 +60,7 @@ object ItemPhantomThread : ItemMod("phantom_thread") {
 
     override fun getRarity(stack: ItemStack) = EnumRarity.UNCOMMON
 
+    @SideOnly(Side.CLIENT)
     override fun addInformation(stack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
         val desc = stack.unlocalizedName + ".desc"
         val used = if (LibrarianLib.PROXY.canTranslate(desc)) desc else "${desc}0"
