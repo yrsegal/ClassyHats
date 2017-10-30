@@ -41,5 +41,6 @@ val defaultHats = listOf(
         Hat("mask_uwot", 0.25),
         Hat("monocle"),
         Hat("skull", 0.9),
-        Hat("skull_shattered", 0.1)
+        Hat("skull_shattered", 0.1),
+        Hat("halo")
 )
