@@ -93,7 +93,9 @@ item.classyhats:skull_shattered.name=Shattered Skull Mask
 item.classyhats:skull_shattered.desc=Alas, poor Yorick!
 
 item.classyhats:halo.name=Halo
-item.classyhats:halo.desc=To steal a halo is to steal the light from the stars.
+item.classyhats:halo.desc0=An angel is anything but innocent.
+item.classyhats:halo.desc1=Do not mistake optimism for oblivion.
+
 
 classyhats.misc.phantom=&bLined with Phantom Thread
 classyhats.misc.phantom.desc=Craft with other armor to camouflage!
