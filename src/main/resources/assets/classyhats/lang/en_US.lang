@@ -103,7 +103,7 @@ classyhats.misc.phantom.camo=Camouflaged as: %s
 
 item.classyhats:phantom_thread.name=Phantom Thread
 item.classyhats:phantom_thread.desc0=Craft with armor to make it invisible!
-item.classyhats:phantom_thread.desc1=Craft invisible armor with other armor to camoflague.
+item.classyhats:phantom_thread.desc1=Craft invisible armor with other armor to camouflage.
 item.classyhats:phantom_thread.desc2=Craft with thread again to make the armor visible.
 
 tile.classyhats:hat_stand_oak.name=Oak Wood Hat Stand
