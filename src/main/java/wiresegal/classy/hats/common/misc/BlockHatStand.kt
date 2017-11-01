@@ -157,22 +157,8 @@ object BlockHatStand : BlockModContainer("hat_stand", Material.ROCK, *StandMater
     }
 
     override fun getComparatorInputOverride(blockState: IBlockState, worldIn: World, pos: BlockPos): Int {
-        val capability = (worldIn.getTileEntity(pos) as TileHatStand).inv.handler
-        var percent = 0f
-        for (i in 0 until capability.slots) {
-            val inSlot = capability.getStackInSlot(i)
-            percent += inSlot.count.toFloat() / getMaxStackSize(i, capability, inSlot)
-        }
-        percent /= capability.slots
-        return (percent * 15).toInt() + if (percent > 0.0) 1 else 0
-    }
-
-    private fun getMaxStackSize(slot: Int, handler: IItemHandler, inSlot: ItemStack?): Int {
-        if (inSlot == null || inSlot.isEmpty) return 64
-        val stack = inSlot.copy()
-        stack.count = inSlot.maxStackSize - inSlot.count
-        val result = handler.insertItem(slot, stack, true)
-        return inSlot.maxStackSize - result.count
+        val te = worldIn.getTileEntity(pos) as TileHatStand
+        return ModuleInventory.getPowerLevel(ModuleInventory.getPowerLevel(te.inv.handler))
     }
 
     override fun hasComparatorInputOverride(state: IBlockState?) = true
