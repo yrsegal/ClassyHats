@@ -175,7 +175,7 @@ object BlockHatStand : BlockModContainer("hat_stand", Material.ROCK, *StandMater
         return inSlot.maxStackSize - result.count
     }
 
-    override fun hasComparatorInputOverride(state: IBlockState) = true
+    override fun hasComparatorInputOverride(state: IBlockState?) = true
 
     override fun createBlockState(): BlockStateContainer {
         if (!madeProperty) {

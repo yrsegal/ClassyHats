@@ -7,6 +7,7 @@ import net.minecraft.entity.player.InventoryPlayer
 import net.minecraft.inventory.*
 import net.minecraft.item.ItemArmor
 import net.minecraft.item.ItemStack
+import net.minecraftforge.common.crafting.IRecipeContainer
 import wiresegal.classy.hats.LibMisc
 import wiresegal.classy.hats.common.core.AttachmentHandler
 import wiresegal.classy.hats.common.hat.ItemHat
@@ -17,12 +18,12 @@ import wiresegal.classy.hats.common.hat.ItemHat
  * Created at 4:11 PM on 9/1/17.
  */
 
-class ContainerHat(playerInv: InventoryPlayer, private val thePlayer: EntityPlayer) : Container() {
+class ContainerHat(playerInv: InventoryPlayer, private val thePlayer: EntityPlayer) : Container(), IRecipeContainer {
     /**
      * The crafting matrix inventory.
      */
-    val craftMatrix = InventoryCrafting(this, 2, 2)
-    val craftResult = InventoryCraftResult()
+    private val craftMatrix = InventoryCrafting(this, 2, 2)
+    private val craftResult = InventoryCraftResult()
     val hat = AttachmentHandler.getCapability(thePlayer)
 
     init {
@@ -151,6 +152,9 @@ class ContainerHat(playerInv: InventoryPlayer, private val thePlayer: EntityPlay
     override fun canMergeSlot(stack: ItemStack, slot: Slot): Boolean {
         return slot.inventory !== this.craftResult && super.canMergeSlot(stack, slot)
     }
+
+    override fun getCraftResult() = craftResult
+    override fun getCraftMatrix() = craftMatrix
 
     companion object {
         private val equipmentSlots = arrayOf(EntityEquipmentSlot.HEAD, EntityEquipmentSlot.CHEST, EntityEquipmentSlot.LEGS, EntityEquipmentSlot.FEET)
