@@ -96,6 +96,24 @@ item.classyhats:halo.name=Halo
 item.classyhats:halo.desc0=An angel is anything but innocent.
 item.classyhats:halo.desc1=Do not mistake optimism for oblivion.
 
+item.classyhats:snowball.name=Snowball
+item.classyhats:snowball.desc=Freeze! Don't move!
+
+item.classyhats:snowball_golden.name=Golden Snowball
+item.classyhats:snowball_golden.desc0=SR can buy you happiness.
+item.classyhats:snowball_golden.desc1=Just buy one of these.
+
+item.classyhats:pachimari.name=Pachimari
+item.classyhats:pachimari.desc=Half onion, Half octopus, All cute.
+
+item.classyhats:pachimari_sombra.name=Pachimari, Sombra Edition
+item.classyhats:pachimari_sombra.desc=Boop!
+
+item.classyhats:moonman.name=Moon Man
+item.classyhats:moonman.desc=Is the flag still there?
+
+item.classyhats:top_kek.name=Top Kek
+item.classyhats:top_kek.desc=forty keks
 
 classyhats.misc.phantom=&bLined with Phantom Thread
 classyhats.misc.phantom.desc=Craft with other armor to camouflage!
