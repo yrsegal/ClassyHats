@@ -1,7 +1,7 @@
 {
 	"credit": "Made by Tristaric, utilizing Blockbench.",
 	"textures": {
-		"0": "items/snowball_gold",
+		"0": "classyhats:items/snowball_gold",
 		"particle": "classyhats:items/snowball_gold"
 	},
 	"elements": [

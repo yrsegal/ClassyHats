@@ -1,7 +1,7 @@
 {
 	"credit": "Made by Tristaric, utilizing Blockbench.",
 	"textures": {
-		"0": "items/pachimari_sombra",
+		"0": "classyhats:items/pachimari_sombra",
 		"particle": "classyhats:items/pachimari_sombra"
 	},
 	"elements": [

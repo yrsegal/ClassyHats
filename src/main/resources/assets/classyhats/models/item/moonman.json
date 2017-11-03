@@ -2,7 +2,7 @@
 	"credit": "Made by Tristaric, utilizing Blockbench.",
 	"textures": {
 		"0": "classyhats:items/moonman",
-		"particle": "items/moonman"
+		"particle": "classyhats:items/moonman"
 	},
 	"elements": [
 		{
