@@ -5,7 +5,7 @@ package wiresegal.classy.hats
  * Created at 8:31 PM on 8/31/17.
  */
 object LibMisc {
-    const val DEPENDENCIES = ""
+    const val DEPENDENCIES = "required-after:librarianlib"
     const val BUILD = "GRADLE:BUILD"
     const val VERSION_ID = "GRADLE:VERSION"
     const val VERSION = BUILD + "-" + VERSION_ID

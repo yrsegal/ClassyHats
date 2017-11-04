@@ -19,6 +19,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.relauncher.ReflectionHelper
 import org.apache.logging.log4j.Level
+import org.apache.logging.log4j.Logger
 import wiresegal.classy.hats.LibMisc
 import wiresegal.classy.hats.client.render.LayerEntityHat
 import wiresegal.classy.hats.client.render.LayerHat
@@ -40,11 +41,17 @@ class ClientProxy : CommonProxy() {
 
     val DEFAULT_RESOURCE_PACKS = arrayOf("aD", "field_110449_ao", "defaultResourcePacks")
 
+    companion object {
+        private lateinit var log: Logger
+    }
+
     override fun pre(e: FMLPreInitializationEvent) {
         super.pre(e)
         Minecraft.getMinecraft().resourceManager
         val packs = ReflectionHelper.getPrivateValue<MutableList<IResourcePack>, Minecraft>(Minecraft::class.java, Minecraft.getMinecraft(), *DEFAULT_RESOURCE_PACKS)
         packs.add(CustomFolderResourcePack(HatConfigHandler.rpl, "classyhats_extra"))
+
+        log = e.modLog
 
         KeyHandler
 
@@ -96,7 +103,7 @@ class ClientProxy : CommonProxy() {
                 return super.getInputStreamByName(resourceName)
             } catch (ioe: IOException) {
                 if ("pack.mcmeta" == resourceName) {
-                    FMLLog.log(name, Level.DEBUG, "Mod %s is missing a pack.mcmeta file, substituting a dummy one", name)
+                    ClientProxy.log.debug("Mod %s is missing a pack.mcmeta file, substituting a dummy one", name)
                     return ByteArrayInputStream(("{\n" +
                             " \"pack\": {\n" +
                             "   \"description\": \"dummy FML pack for " + name + "\",\n" +
