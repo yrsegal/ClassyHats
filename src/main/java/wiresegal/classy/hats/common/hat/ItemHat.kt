@@ -78,10 +78,14 @@ object ItemHat : ItemMod("hat"), IExtraVariantHolder, IGlowingItem {
         get() = { ModelHandler.resourceLocations[LibMisc.MOD_ID]!![getHat(it).name] as ModelResourceLocation }
 
     override fun getSubItems(tab: CreativeTabs?, subItems: NonNullList<ItemStack>) {
-        if (isInCreativeTab(tab))
+        if (isInCreativeTab(tab)) {
             HatConfigHandler.hats.values
-                    .filter { it != HatConfigHandler.missingno }
+                    .filter { it != HatConfigHandler.missingno && !it.elusive }
                     .mapTo(subItems) { ofHat(it) }
+            HatConfigHandler.hats.values
+                    .filter { it != HatConfigHandler.missingno && it.elusive }
+                    .mapTo(subItems) { ofHat(it) }
+        }
     }
 
     override fun getUnlocalizedName(stack: ItemStack)
