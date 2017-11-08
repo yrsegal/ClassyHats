@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
+import wiresegal.classy.hats.common.core.CommandChangeHat
 import wiresegal.classy.hats.common.core.CommonProxy
 
 /**
@@ -36,7 +37,7 @@ class ClassyHats {
 
     @Mod.EventHandler
     fun serverStart(e: FMLServerStartingEvent) {
-        // NO-OP
+        e.registerServerCommand(CommandChangeHat)
     }
 
     companion object {
