@@ -12,8 +12,10 @@ import net.minecraft.client.renderer.block.model.IBakedModel
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.creativetab.CreativeTabs
+import net.minecraft.entity.Entity
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.SoundEvents
+import net.minecraft.inventory.EntityEquipmentSlot
 import net.minecraft.item.EnumRarity
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ActionResult
@@ -24,6 +26,8 @@ import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import wiresegal.classy.hats.LibMisc
+import wiresegal.classy.hats.client.core.KeyHandler
+import wiresegal.classy.hats.client.core.KeyHandler.key
 import wiresegal.classy.hats.common.core.AttachmentHandler
 import wiresegal.classy.hats.common.core.HatConfigHandler
 import wiresegal.classy.hats.common.core.HatConfigHandler.Hat
@@ -51,6 +55,8 @@ object ItemHat : ItemMod("hat"), IExtraVariantHolder, IGlowingItem {
     init {
         setMaxStackSize(1)
     }
+
+    override fun getEquipmentSlot(stack: ItemStack) = EntityEquipmentSlot.HEAD
 
     override fun onItemRightClick(worldIn: World, playerIn: EntityPlayer, handIn: EnumHand): ActionResult<ItemStack> {
         val stack = playerIn.getHeldItem(handIn)
@@ -101,6 +107,8 @@ object ItemHat : ItemMod("hat"), IExtraVariantHolder, IGlowingItem {
             while (LibrarianLib.PROXY.canTranslate("$desc${++i}"))
                 TooltipHelper.addToTooltip(tooltip, "$desc$i")
         }
+
+        TooltipHelper.addToTooltip(tooltip, "${LibMisc.MOD_ID}.hat_inv_tooltip", KeyHandler.key.displayName)
     }
 
     override fun getRarity(stack: ItemStack) =

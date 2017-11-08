@@ -124,6 +124,8 @@ classyhats.replacehat.usage.equipped=/replacehat <player> equipped <hat|none>
 classyhats.replacehat.usage.page=/replacehat <player> page <page.n.n> <hat|none>
 classyhats.replacehat.usage.invalid.page=Invalid page ID (%s)
 
+classyhats.hat_inv_tooltip=Press &b%s&7 to open the Hat Inventory
+
 item.classyhats:phantom_thread.name=Phantom Thread
 item.classyhats:phantom_thread.desc0=Craft with armor to make it invisible!
 item.classyhats:phantom_thread.desc1=Craft invisible armor with other armor to camouflage.
