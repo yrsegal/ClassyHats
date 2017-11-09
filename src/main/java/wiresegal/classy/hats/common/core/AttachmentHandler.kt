@@ -17,14 +17,17 @@ import net.minecraft.world.storage.loot.LootTableManager
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.event.AttachCapabilitiesEvent
 import net.minecraftforge.event.entity.EntityJoinWorldEvent
+import net.minecraftforge.event.entity.living.LivingEvent
 import net.minecraftforge.event.entity.player.PlayerEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.*
 import wiresegal.classy.hats.ClassyHats
 import wiresegal.classy.hats.LibMisc
+import wiresegal.classy.hats.common.hat.BaseHatStorage
 import wiresegal.classy.hats.common.hat.CapabilityHat
 import wiresegal.classy.hats.common.hat.HatStorageProvider
 import wiresegal.classy.hats.common.hat.ItemHat
+import java.util.*
 
 
 /**
@@ -65,16 +68,39 @@ object AttachmentHandler {
         val customData = event.entity.entityData
         val world = event.world
         val name = EntityList.getKey(event.entity).toString()
-        if (name in HatConfigHandler.names && !customData.hasKey(customKey) && world is WorldServer && event.entity is EntityLiving) {
-            val stack = world.lootTableManager.getLootTableFromLocation(ResourceLocation(LibMisc.MOD_ID, "combined"))
-                    .generateLootForPools(world.rand, LootContext(0f, world, world.lootTableManager, null, null, null))
-            if (stack.isNotEmpty() && world.rand.nextFloat() < HatConfigHandler.hatSpawnPercentage)
-                customData.setString(customKey, ItemHat.getHat(stack[0]).name)
-            else
-                customData.setString(customKey, "")
+        val entity = event.entity
+        if (name in HatConfigHandler.names && world is WorldServer && entity is EntityLiving) {
+            if (!customData.hasKey(customKey)) {
+                val stack = world.lootTableManager.getLootTableFromLocation(ResourceLocation(LibMisc.MOD_ID, "combined"))
+                        .generateLootForPools(world.rand, LootContext(0f, world, world.lootTableManager, null, null, null))
+                if (stack.isNotEmpty() && world.rand.nextFloat() < HatConfigHandler.hatSpawnPercentage)
+                    customData.setString(customKey, ItemHat.getHat(stack[0]).name)
+                else
+                    customData.setString(customKey, "")
+            }
+            mapOfEntity.put(entity, customData.getString(customKey))
         }
     }
 
+    private val mapOfEntity = WeakHashMap<EntityLiving, String>()
+
+    @SubscribeEvent
+    fun onEntityUpdate(event: LivingEvent.LivingUpdateEvent) {
+        val customData = event.entity.entityData
+        val entity = event.entity
+        val world = entity.world
+        val name = EntityList.getKey(event.entity).toString()
+        if (name in HatConfigHandler.names && world is WorldServer && entity is EntityLiving) {
+            val hat = customData.getString(customKey)
+            val prev = mapOfEntity[entity]
+            if (hat != prev) {
+                mapOfEntity.put(entity, hat)
+                BaseHatStorage.getEntry(entity, world)?.trackingPlayers?.forEach {
+                    PacketHandler.NETWORK.sendTo(PacketEntityHatSync(entity.entityId, hat), it)
+                }
+            }
+        }
+    }
 
     @SubscribeEvent
     fun onPlayerStartTracking(event: PlayerEvent.StartTracking) {

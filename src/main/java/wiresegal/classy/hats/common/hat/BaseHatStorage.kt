@@ -1,6 +1,7 @@
 package wiresegal.classy.hats.common.hat
 
 import com.teamwizardry.librarianlib.features.methodhandles.MethodHandleHelper
+import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityTracker
 import net.minecraft.entity.EntityTrackerEntry
 import net.minecraft.entity.player.EntityPlayer
@@ -8,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.IntHashMap
+import net.minecraft.world.WorldServer
 import net.minecraftforge.items.ItemStackHandler
 import wiresegal.classy.hats.common.core.AttachmentHandler
 
@@ -26,7 +28,7 @@ class BaseHatStorage : IHatStorage {
             field = value
             val pl = player
             if (pl is EntityPlayerMP) {
-                val entry = getEntry(pl)
+                val entry = getEntry(pl, pl.serverWorld)
                 if (entry != null) for (player in entry.trackingPlayers)
                     AttachmentHandler.syncDataFor(pl, player)
             }
@@ -40,8 +42,8 @@ class BaseHatStorage : IHatStorage {
 
         val handle = MethodHandleHelper.wrapperForGetter(EntityTracker::class.java, "field_72794_c", "trackedEntityHashTable")
 
-        private fun getEntry(player: EntityPlayerMP): EntityTrackerEntry? {
-            return (handle(player.serverWorld.entityTracker) as IntHashMap<*>).lookup(player.entityId) as? EntityTrackerEntry
+        fun getEntry(player: Entity, worldServer: WorldServer): EntityTrackerEntry? {
+            return (handle(worldServer.entityTracker) as IntHashMap<*>).lookup(player.entityId) as? EntityTrackerEntry
         }
     }
 
