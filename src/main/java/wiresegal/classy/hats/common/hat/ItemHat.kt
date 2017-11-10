@@ -12,7 +12,6 @@ import net.minecraft.client.renderer.block.model.IBakedModel
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.creativetab.CreativeTabs
-import net.minecraft.entity.Entity
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.SoundEvents
 import net.minecraft.inventory.EntityEquipmentSlot
@@ -25,9 +24,9 @@ import net.minecraft.util.NonNullList
 import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
+import wiresegal.classy.hats.ClassyHats
 import wiresegal.classy.hats.LibMisc
 import wiresegal.classy.hats.client.core.KeyHandler
-import wiresegal.classy.hats.client.core.KeyHandler.key
 import wiresegal.classy.hats.common.core.AttachmentHandler
 import wiresegal.classy.hats.common.core.HatConfigHandler
 import wiresegal.classy.hats.common.core.HatConfigHandler.Hat
@@ -60,6 +59,12 @@ object ItemHat : ItemMod("hat"), IExtraVariantHolder, IGlowingItem {
 
     override fun onItemRightClick(worldIn: World, playerIn: EntityPlayer, handIn: EnumHand): ActionResult<ItemStack> {
         val stack = playerIn.getHeldItem(handIn)
+
+        if (playerIn.isSneaking) {
+            playerIn.openGui(ClassyHats.INSTANCE, 0, worldIn, 0, 0, 0)
+            return ActionResult.newResult(EnumActionResult.SUCCESS, stack)
+        }
+
         val hatInv = AttachmentHandler.getCapability(playerIn)
         val stackInSlot = hatInv.equipped
 
@@ -99,6 +104,7 @@ object ItemHat : ItemMod("hat"), IExtraVariantHolder, IGlowingItem {
 
     @SideOnly(Side.CLIENT)
     override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
+
         val desc = stack.unlocalizedName + ".desc"
         val used = if (LibrarianLib.PROXY.canTranslate(desc)) desc else "${desc}0"
         if (LibrarianLib.PROXY.canTranslate(used)) {
@@ -108,7 +114,12 @@ object ItemHat : ItemMod("hat"), IExtraVariantHolder, IGlowingItem {
                 TooltipHelper.addToTooltip(tooltip, "$desc$i")
         }
 
-        TooltipHelper.addToTooltip(tooltip, "${LibMisc.MOD_ID}.hat_inv_tooltip", KeyHandler.key.displayName)
+        tooltip.add("")
+        TooltipHelper.tooltipIfShift(tooltip) {
+            TooltipHelper.addToTooltip(tooltip, "${LibMisc.MOD_ID}.hat_inv_tooltip", KeyHandler.key.displayName)
+            TooltipHelper.addToTooltip(tooltip, "${LibMisc.MOD_ID}.hat_inv_tooltip_sneak")
+        }
+
     }
 
     override fun getRarity(stack: ItemStack) =
@@ -119,5 +130,9 @@ object ItemHat : ItemMod("hat"), IExtraVariantHolder, IGlowingItem {
     @SideOnly(Side.CLIENT)
     override fun transformToGlow(itemStack: ItemStack, model: IBakedModel): IBakedModel? {
         return IGlowingItem.Helper.wrapperBake(model, false, 99)
+    }
+
+    override fun shouldDisableLightingForGlow(itemStack: ItemStack, model: IBakedModel): Boolean {
+        return true
     }
 }

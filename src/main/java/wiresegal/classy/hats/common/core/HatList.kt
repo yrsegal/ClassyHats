@@ -48,5 +48,6 @@ val defaultHats = listOf(
         Hat("top_kek", elusive = true),
         Hat("pachimari_sombra", elusive = true),
         Hat("moonman"),
-        Hat("snowball_golden", elusive = true)
+        Hat("snowball_golden", elusive = true),
+        Hat("eye", elusive = true)
 )

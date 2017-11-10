@@ -104,7 +104,7 @@ item.classyhats:snowball_golden.desc0=SR can buy you happiness.
 item.classyhats:snowball_golden.desc1=Just buy one of these.
 
 item.classyhats:pachimari.name=Pachimari
-item.classyhats:pachimari.desc=Half onion, Half octopus, All cute.
+item.classyhats:pachimari.desc=Half onion, half octopus, all cute.
 
 item.classyhats:pachimari_sombra.name=Hacked Pachimari
 item.classyhats:pachimari_sombra.desc=Boop!
@@ -115,6 +115,12 @@ item.classyhats:moonman.desc=Goodbye, moonmen...
 item.classyhats:top_kek.name=Top Kek
 item.classyhats:top_kek.desc=forty keks
 
+item.classyhats:eye.name=The Horned Eye
+item.classyhats:eye.desc0=The Eye of Ea stands at the gate
+item.classyhats:eye.desc1=It shatters the limits your mind can create
+item.classyhats:eye.desc2=It sees the blight and it knows your soul
+item.classyhats:eye.desc3=And toward the center it bids you go
+
 classyhats.misc.phantom=&bLined with Phantom Thread
 classyhats.misc.phantom.desc=Craft with other armor to camouflage!
 classyhats.misc.phantom.camo=Camouflaged as: %s
@@ -124,7 +130,8 @@ classyhats.replacehat.usage.equipped=/replacehat <player> equipped <hat|none>
 classyhats.replacehat.usage.page=/replacehat <player> page <page.n.n> <hat|none>
 classyhats.replacehat.usage.invalid.page=Invalid page ID (%s)
 
-classyhats.hat_inv_tooltip=Press &b%s&7 to open the Hat Inventory
+classyhats.hat_inv_tooltip=Press &6%s&7 to open the Hat Inventory
+classyhats.hat_inv_tooltip_sneak=Sneak-using this item will do the same
 
 item.classyhats:phantom_thread.name=Phantom Thread
 item.classyhats:phantom_thread.desc0=Craft with armor to make it invisible!
