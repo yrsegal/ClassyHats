@@ -107,22 +107,22 @@ object ItemPhantomThread : ItemMod("phantom_thread") {
 
         captureSounds = true
 
-        if (ItemNBTHelper.getBoolean(head, PHANTOM_TAG, false)) {
+        if (head.hasTagCompound() && ItemNBTHelper.getBoolean(head, PHANTOM_TAG, false)) {
             this.head = head
             e.entity.setItemStackToSlot(EntityEquipmentSlot.HEAD, ItemStack(ItemNBTHelper.getCompound(head, PHANTOM_ITEM_TAG) ?: NBTTagCompound()))
         } else this.head = ItemStack.EMPTY
 
-        if (ItemNBTHelper.getBoolean(chest, PHANTOM_TAG, false)) {
+        if (chest.hasTagCompound() && ItemNBTHelper.getBoolean(chest, PHANTOM_TAG, false)) {
             this.chest = chest
             e.entity.setItemStackToSlot(EntityEquipmentSlot.CHEST, ItemStack(ItemNBTHelper.getCompound(chest, PHANTOM_ITEM_TAG) ?: NBTTagCompound())) 
         } else this.chest = ItemStack.EMPTY
 
-        if (ItemNBTHelper.getBoolean(legs, PHANTOM_TAG, false)) {
+        if (legs.hasTagCompound() && ItemNBTHelper.getBoolean(legs, PHANTOM_TAG, false)) {
             this.legs = legs
             e.entity.setItemStackToSlot(EntityEquipmentSlot.LEGS, ItemStack(ItemNBTHelper.getCompound(legs, PHANTOM_ITEM_TAG) ?: NBTTagCompound())) 
         } else this.legs = ItemStack.EMPTY
 
-        if (ItemNBTHelper.getBoolean(feet, PHANTOM_TAG, false)) {
+        if (feet.hasTagCompound() && ItemNBTHelper.getBoolean(feet, PHANTOM_TAG, false)) {
             this.feet = feet
             e.entity.setItemStackToSlot(EntityEquipmentSlot.FEET, ItemStack(ItemNBTHelper.getCompound(feet, PHANTOM_ITEM_TAG) ?: NBTTagCompound())) 
         } else this.feet = ItemStack.EMPTY
@@ -158,7 +158,7 @@ object PhantomRecipe : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
         val ret = NonNullList.withSize(inv.sizeInventory, ItemStack.EMPTY)
         for (i in ret.indices) {
             val stack = inv.getStackInSlot(i)
-            if (ItemNBTHelper.getBoolean(stack, PHANTOM_TAG, false)) {
+            if (stack.hasTagCompound() && ItemNBTHelper.getBoolean(stack, PHANTOM_TAG, false)) {
                 val container = ItemStack(ItemNBTHelper.getCompound(stack, PHANTOM_ITEM_TAG) ?: NBTTagCompound())
                 ret[i] = container
             } else
