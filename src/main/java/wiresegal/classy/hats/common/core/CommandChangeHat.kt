@@ -36,12 +36,12 @@ object CommandChangeHat : CommandBase() {
                 throw WrongUsageException(getUsage("equipped"))
             val player = getEntity(server, sender, args[0])
             val hatId = args[2]
+            val stack = if (hatId != "none")
+                ItemHat.ofHat(hatId)
+            else
+                ItemStack.EMPTY
             if (player is EntityPlayerMP) {
                 val cap = AttachmentHandler.getCapability(player)
-                val stack = if (hatId != "none")
-                    ItemHat.ofHat(hatId)
-                else
-                    ItemStack.EMPTY
                 if (ItemHat.getHat(cap.equipped) == ItemHat.getHat(stack))
                     throw CommandException("commands.replaceitem.failed", "equipped", 1, if (stack.isEmpty) "Air" else stack.textComponent)
                 else {
@@ -51,10 +51,7 @@ object CommandChangeHat : CommandBase() {
                 }
             } else if (EntityList.getKey(player).toString() in HatConfigHandler.names && player is EntityLiving) {
                 val prev = player.entityData.getString(AttachmentHandler.customKey)
-                val stack = if (hatId != "none")
-                    ItemHat.ofHat(hatId)
-                else
-                    ItemStack.EMPTY
+
                 if (prev == hatId)
                     throw CommandException("commands.replaceitem.failed", "equipped", 1, if (stack.isEmpty) "Air" else stack.textComponent)
                 else {
@@ -64,9 +61,9 @@ object CommandChangeHat : CommandBase() {
                     else
                         player.entityData.setString(AttachmentHandler.customKey, hatId)
                     notifyCommandListener(sender, this, "commands.replaceitem.success", "equipped", 1, if (stack.isEmpty) "Air" else stack.textComponent)
-
                 }
-            }
+            } else
+                    throw CommandException("commands.replaceitem.failed", "equipped", 1, if (stack.isEmpty) "Air" else stack.textComponent)
         } else if (type == "page") {
             if (args.size < 4)
                 throw WrongUsageException(getUsage("page"))
