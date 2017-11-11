@@ -31,7 +31,7 @@ object HatConfigHandler {
     var shouldInjectLootBoss = true
 
     var names = listOf(
-            "minecraft:minecraft:zombie", "minecraft:zombie_villager", "minecraft:zombie_pigman",
+            "minecraft:zombie", "minecraft:zombie_villager", "minecraft:zombie_pigman",
             "minecraft:wither_skeleton", "minecraft:skeleton",
             "minecraft:evocation_illager", "minecraft:vex", "minecraft:vindication_illager", "minecraft:vindication_illager", "minecraft:witch"
     )
