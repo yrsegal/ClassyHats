@@ -209,7 +209,7 @@ object PhantomRecipe : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
                 ItemNBTHelper.setBoolean(armorCopy, PHANTOM_TAG, true)
         }
 
-        if (thread.isNotEmpty && camo)
+        if (camo)
             ItemNBTHelper.removeEntry(armorCopy, PHANTOM_ITEM_TAG)
 
         val tag = armorCopy.tagCompound
