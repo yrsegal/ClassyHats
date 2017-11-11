@@ -202,12 +202,14 @@ object PhantomRecipe : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
         val phantom = ItemNBTHelper.getBoolean(armorCopy, PHANTOM_TAG, false)
         val camo = ItemStack(ItemNBTHelper.getCompound(armorCopy, PHANTOM_ITEM_TAG) ?: NBTTagCompound()).isNotEmpty
 
-        if (phantom)
-            ItemNBTHelper.removeEntry(armorCopy, PHANTOM_TAG)
-        else
-            ItemNBTHelper.setBoolean(armorCopy, PHANTOM_TAG, true)
+        if (!camo || thread.isNotEmpty) {
+            if (phantom)
+                ItemNBTHelper.removeEntry(armorCopy, PHANTOM_TAG)
+            else
+                ItemNBTHelper.setBoolean(armorCopy, PHANTOM_TAG, true)
+        }
 
-        if (phantom && camo)
+        if (thread.isNotEmpty && camo)
             ItemNBTHelper.removeEntry(armorCopy, PHANTOM_ITEM_TAG)
 
         val tag = armorCopy.tagCompound
