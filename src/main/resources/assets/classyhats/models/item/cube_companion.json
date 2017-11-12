@@ -2,7 +2,7 @@
 	"credit": "Made by Tristaric, utilizing Blockbench.",
 	"ambientocclusion": false,
 	"textures": {
-		"0": "items/cube_companion",
+		"0": "classyhats:items/cube_companion",
 		"particle": "items/cube_companion"
 	},
 	"elements": [

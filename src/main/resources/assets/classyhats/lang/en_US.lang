@@ -121,6 +121,28 @@ item.classyhats:eye.desc1=It shatters the limits your mind can create
 item.classyhats:eye.desc2=It sees the blight and it knows your soul
 item.classyhats:eye.desc3=And toward the center it bids you go
 
+item.classyhats:artificial_inteligence.name=Artificial Intelligence
+item.classyhats:artificial_inteligence.desc=01101110 01100101 01100001 01110100
+
+item.classyhats:companion_cube.name=Companion Cube
+item.classyhats:companion_cube.desc=Science!
+
+item.classyhats:cube_companion.name=Cube Companion
+item.classyhats:cube_companion.desc=Ok we might've gone a bit far.
+
+item.classyhats:head_hiss.name=Head Hiss
+item.classyhats:head_hiss.desc=With 80% less gunpowder.
+
+item.classyhats:jarhead.name=Jarhead
+item.classyhats:jarhead.desc=People can now see how small your brain is.
+
+item.classyhats:miracle_seer.name=Miracle Seer
+item.classyhats:miracle_seer.desc0=Memorate miraculos absentes.
+item.classyhats:miracle_seer.desc1=Semper vivunt ea in nostri animis.
+
+item.classyhats:warped.name=Warped
+item.classyhats:warped.desc=Oh god they're real-
+
 classyhats.misc.phantom=&bLined with Phantom Thread
 classyhats.misc.phantom.desc=Craft with other armor to camouflage!
 classyhats.misc.phantom.camo=Camouflaged as: %s

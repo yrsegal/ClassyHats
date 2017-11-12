@@ -49,5 +49,13 @@ val defaultHats = listOf(
         Hat("pachimari_sombra", elusive = true),
         Hat("moonman"),
         Hat("snowball_golden", elusive = true),
-        Hat("eye", elusive = true)
+        Hat("eye", elusive = true),
+        Hat("artificial_inteligence", elusive = true),
+        Hat("companion_cube"),
+        Hat("cube_companion", elusive = true),
+        Hat("dungeon_companion", elusive = true),
+        Hat("head_hiss"),
+        Hat("jarhead"),
+        Hat("miracle_seer", elusive = true),
+        Hat("warped", elusive = true)
 )

@@ -1,7 +1,7 @@
 {
 	"credit": "Made by Tristaric, utilizing Blockbench.",
 	"textures": {
-		"0": "items/artificial_inteligence",
+		"0": "classyhats:items/artificial_inteligence",
 		"particle": "items/artificial_inteligence"
 	},
 	"elements": [
