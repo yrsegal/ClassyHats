@@ -143,6 +143,9 @@ item.classyhats:miracle_seer.desc1=Semper vivunt ea in nostri animis.
 item.classyhats:warped.name=Warped
 item.classyhats:warped.desc=Oh god they're real-
 
+item.classyhats:dungeon_companion.name=Dungeon Companion
+item.classyhats:dungeon_companion.desc=Why was a swet stuck in a chest in the middle of the Slider's dungeon...?
+
 classyhats.misc.phantom=&bLined with Phantom Thread
 classyhats.misc.phantom.desc=Craft with other armor to camouflage!
 classyhats.misc.phantom.camo=Camouflaged as: %s
