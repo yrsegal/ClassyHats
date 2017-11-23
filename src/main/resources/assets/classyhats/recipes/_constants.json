@@ -14,7 +14,10 @@
     { "ingredient": { "item": "minecraft:wooden_slab", "data": 4 }, "name": "slab_acacia" },
     { "ingredient": { "item": "minecraft:wooden_slab", "data": 5 }, "name": "slab_dark_oak" },
     { "ingredient": { "ore": "blockQuartz", "type": "forge:ore_dict" }, "name": "block_quartz" },
+    { "ingredient": { "ore": "gemLapis", "type": "forge:ore_dict" }, "name": "lapis" },
     { "ingredient": { "ore": "ingotIron", "type": "forge:ore_dict" }, "name": "ingot_iron" },
     { "ingredient": { "ore": "obsidian", "type": "forge:ore_dict" }, "name": "obsidian" },
-    { "ingredient": { "ore": "stone", "type": "forge:ore_dict" }, "name": "stone" }
+    { "ingredient": { "ore": "stickWood", "type": "forge:ore_dict" }, "name": "stick" },
+    { "ingredient": { "ore": "stone", "type": "forge:ore_dict" }, "name": "stone" },
+    { "ingredient": { "ore": "string", "type": "forge:ore_dict" }, "name": "string" }
 ]
