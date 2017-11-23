@@ -49,8 +49,7 @@ minecraft {
     runDir = "run"
     mappings = config.mc_mappings
 
-    replace 'GRADLE:BUILD', config.build_number
-    replace 'GRADLE:VERSION', config.version
+    replace '%VERSION%', "${config.build_number}-${config.version}"
 
     replaceIn 'LibMisc.java'
     replaceIn 'LibMisc.kt'

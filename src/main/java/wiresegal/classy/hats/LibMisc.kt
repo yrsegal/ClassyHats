@@ -6,9 +6,7 @@ package wiresegal.classy.hats
  */
 object LibMisc {
     const val DEPENDENCIES = "required-after:librarianlib"
-    const val BUILD = "GRADLE:BUILD"
-    const val VERSION_ID = "GRADLE:VERSION"
-    const val VERSION = BUILD + "-" + VERSION_ID
+    const val VERSION = "%VERSION%"
     const val MOD_ID = "classyhats"
     const val NAME = "Classy Hats"
 
