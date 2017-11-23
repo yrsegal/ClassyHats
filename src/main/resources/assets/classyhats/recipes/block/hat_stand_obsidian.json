@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "result": { "item": "classyhats:hat_stand", "data": 8 },
+    "pattern": [ "PPP", " S ", "SPS" ],
+    "key": {
+        "P": { "ore": "obsidian", "type": "forge:ore_dict" },
+        "S": { "ore": "ingotIron", "type": "forge:ore_dict" }
+    }
+}

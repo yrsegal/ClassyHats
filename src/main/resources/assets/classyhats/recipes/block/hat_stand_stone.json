@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "result": { "item": "classyhats:hat_stand", "data": 6 },
+    "pattern": [ "PPP", " S ", "SPS" ],
+    "key": {
+        "P": { "ore": "stone", "type": "forge:ore_dict" },
+        "S": { "item": "#slab_stone" }
+    }
+}

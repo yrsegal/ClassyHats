@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "result": { "item": "classyhats:hat_stand", "data": 0 },
+    "pattern": [ "PPP", " S ", "SPS" ],
+    "key": {
+        "P": { "item": "#planks_oak" },
+        "S": { "item": "#slab_oak" }
+    }
+}
