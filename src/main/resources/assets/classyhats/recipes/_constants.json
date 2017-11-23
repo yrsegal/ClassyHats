@@ -5,12 +5,16 @@
     { "ingredient": { "item": "minecraft:planks", "data": 3 }, "name": "planks_jungle" },
     { "ingredient": { "item": "minecraft:planks", "data": 4 }, "name": "planks_acacia" },
     { "ingredient": { "item": "minecraft:planks", "data": 5 }, "name": "planks_dark_oak" },
+    { "ingredient": { "item": "minecraft:stone_slab", "data": 0 }, "name": "slab_stone" },
+    { "ingredient": { "item": "minecraft:stone_slab", "data": 7 }, "name": "slab_quartz" },
     { "ingredient": { "item": "minecraft:wooden_slab", "data": 0 }, "name": "slab_oak" },
     { "ingredient": { "item": "minecraft:wooden_slab", "data": 1 }, "name": "slab_spruce" },
     { "ingredient": { "item": "minecraft:wooden_slab", "data": 2 }, "name": "slab_birch" },
     { "ingredient": { "item": "minecraft:wooden_slab", "data": 3 }, "name": "slab_jungle" },
     { "ingredient": { "item": "minecraft:wooden_slab", "data": 4 }, "name": "slab_acacia" },
     { "ingredient": { "item": "minecraft:wooden_slab", "data": 5 }, "name": "slab_dark_oak" },
-    { "ingredient": { "item": "minecraft:stone_slab", "data": 0 }, "name": "slab_stone" },
-    { "ingredient": { "item": "minecraft:stone_slab", "data": 7 }, "name": "slab_quartz" }
+    { "ingredient": { "ore": "blockQuartz", "type": "forge:ore_dict" }, "name": "block_quartz" },
+    { "ingredient": { "ore": "ingotIron", "type": "forge:ore_dict" }, "name": "ingot_iron" },
+    { "ingredient": { "ore": "obsidian", "type": "forge:ore_dict" }, "name": "obsidian" },
+    { "ingredient": { "ore": "stone", "type": "forge:ore_dict" }, "name": "stone" }
 ]

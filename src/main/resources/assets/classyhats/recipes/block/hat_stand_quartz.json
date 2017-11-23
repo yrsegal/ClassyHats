@@ -3,7 +3,7 @@
     "result": { "item": "classyhats:hat_stand", "data": 7 },
     "pattern": [ "PPP", " S ", "SPS" ],
     "key": {
-        "P": { "ore": "blockQuartz", "type": "forge:ore_dict" },
+        "P": { "item": "#block_quartz" },
         "S": { "item": "#slab_quartz" }
     }
 }
