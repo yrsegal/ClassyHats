@@ -3,7 +3,7 @@
 	"ambientocclusion": false,
 	"textures": {
 		"0": "classyhats:items/companion_cube",
-		"particle": "items/companion_cube"
+		"particle": "classyhats:items/companion_cube"
 	},
 	"elements": [
 		{

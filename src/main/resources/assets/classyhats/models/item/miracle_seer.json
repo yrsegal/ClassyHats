@@ -3,7 +3,7 @@
 	"ambientocclusion": false,
 	"textures": {
 		"0": "classyhats:items/miracleseer",
-		"particle": "items/miracleseer"
+		"particle": "classyhats:items/miracleseer"
 	},
 	"elements": [
 		{

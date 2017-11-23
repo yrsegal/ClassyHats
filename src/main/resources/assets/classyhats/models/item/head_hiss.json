@@ -2,7 +2,7 @@
 	"credit": "Made by Tristaric, utilizing Blockbench.",
 	"textures": {
 		"0": "classyhats:items/head_hiss",
-		"particle": "items/head_hiss"
+		"particle": "classyhats:items/head_hiss"
 	},
 	"elements": [
 		{

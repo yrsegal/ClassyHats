@@ -3,7 +3,7 @@
 	"ambientocclusion": false,
 	"textures": {
 		"0": "classyhats:items/warped",
-		"particle": "items/warped"
+		"particle": "classyhats:items/warped"
 	},
 	"elements": [
 		{

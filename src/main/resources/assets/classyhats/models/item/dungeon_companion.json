@@ -3,7 +3,7 @@
 	"ambientocclusion": false,
 	"textures": {
 		"0": "classyhats:items/pink_swet",
-		"particle": "items/pink_swet"
+		"particle": "classyhats:items/pink_swet"
 	},
 	"elements": [
 		{
