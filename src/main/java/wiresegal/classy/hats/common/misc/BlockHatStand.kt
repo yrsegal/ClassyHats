@@ -20,10 +20,7 @@ import net.minecraft.inventory.InventoryHelper
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
-import net.minecraft.util.math.AxisAlignedBB
-import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.MathHelper
-import net.minecraft.util.math.Vec3d
+import net.minecraft.util.math.*
 import net.minecraft.world.Explosion
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
@@ -43,19 +40,20 @@ object BlockHatStand : BlockModContainer("hat_stand", Material.ROCK, *StandMater
     }
 
     override fun getBurnTime(stack: ItemStack): Int {
-        val variant = StandMaterial.values()[stack.itemDamage % StandMaterial.values().size]
-        return if (variant == OAK ||
-                variant == SPRUCE ||
-                variant == BIRCH ||
-                variant == JUNGLE ||
-                variant == ACACIA ||
-                variant == DARK_OAK)
-            300
-        else 0
+        return if (StandMaterial.getSafely(stack.itemDamage).material.canBurn) 300 else 0
     }
 
-    enum class StandMaterial : EnumStringSerializable {
-        OAK, SPRUCE, BIRCH, JUNGLE, ACACIA, DARK_OAK, STONE, QUARTZ, OBSIDIAN
+    enum class StandMaterial(val material: Material = Material.WOOD, val soundType: SoundType = SoundType.WOOD) : EnumStringSerializable {
+        OAK, SPRUCE, BIRCH, JUNGLE, ACACIA, DARK_OAK,
+        STONE(Material.ROCK, SoundType.STONE),
+        QUARTZ(Material.ROCK, SoundType.STONE),
+        OBSIDIAN(Material.ROCK, SoundType.STONE);
+
+        companion object {
+            fun getSafely(ordinal: Int): StandMaterial {
+                return values()[if (ordinal >= 0) ordinal % values().size else 0]
+            }
+        }
     }
 
     private var madeProperty = false
@@ -121,11 +119,11 @@ object BlockHatStand : BlockModContainer("hat_stand", Material.ROCK, *StandMater
     }
 
     override fun getBlockFaceShape(world: IBlockAccess, state: IBlockState, pos: BlockPos, facing: EnumFacing?): BlockFaceShape {
-        return if (facing == EnumFacing.UP) BlockFaceShape.SOLID else if (facing == EnumFacing.DOWN) BlockFaceShape.CENTER_BIG else BlockFaceShape.UNDEFINED
-    }
-
-    override fun isTopSolid(state: IBlockState): Boolean {
-        return true
+        return when (facing) {
+            EnumFacing.UP -> BlockFaceShape.SOLID
+            EnumFacing.DOWN -> BlockFaceShape.CENTER_BIG
+            else -> BlockFaceShape.UNDEFINED
+        }
     }
 
     fun getCollisionBoxes(): List<AxisAlignedBB> {
@@ -148,20 +146,16 @@ object BlockHatStand : BlockModContainer("hat_stand", Material.ROCK, *StandMater
         return list
     }
 
-    override fun collisionRayTrace(blockState: IBlockState, worldIn: World, pos: BlockPos, start: Vec3d, end: Vec3d)
-            = getCollisionBoxes()
-            .map { rayTrace(pos, start, end, it) }
-            .firstOrNull { it != null }
+    override fun collisionRayTrace(blockState: IBlockState, worldIn: World, pos: BlockPos, start: Vec3d, end: Vec3d): RayTraceResult? {
+        return getCollisionBoxes().map { rayTrace(pos, start, end, it) }.firstOrNull { it != null }
+    }
 
     override fun addCollisionBoxToList(state: IBlockState, worldIn: World, pos: BlockPos, entityBox: AxisAlignedBB, collidingBoxes: MutableList<AxisAlignedBB>, entityIn: Entity?, actual: Boolean) {
-        for (box in getCollisionBoxes())
-            addCollisionBoxToList(pos, entityBox, collidingBoxes, box)
+        getCollisionBoxes().forEach { addCollisionBoxToList(pos, entityBox, collidingBoxes, it) }
     }
 
-    override fun getComparatorInputOverride(blockState: IBlockState, worldIn: World, pos: BlockPos): Int {
-        val te = worldIn.getTileEntity(pos) as TileHatStand
-        return ModuleInventory.getPowerLevel(ModuleInventory.getPowerLevel(te.inv.handler))
-    }
+    override fun getComparatorInputOverride(blockState: IBlockState, worldIn: World, pos: BlockPos): Int =
+            ModuleInventory.getPowerLevel(ModuleInventory.getPowerLevel((worldIn.getTileEntity(pos) as TileHatStand).inv.handler))
 
     override fun hasComparatorInputOverride(state: IBlockState?) = true
 
@@ -175,8 +169,8 @@ object BlockHatStand : BlockModContainer("hat_stand", Material.ROCK, *StandMater
 
     override fun damageDropped(state: IBlockState) = getMetaFromState(state)
 
-    override fun getStateFromMeta(meta: Int): IBlockState
-            = defaultState.withProperty(PROPERTY, StandMaterial.values()[meta % StandMaterial.values().size])
+    override fun getStateFromMeta(meta: Int): IBlockState =
+            defaultState.withProperty(PROPERTY, StandMaterial.getSafely(meta))
 
     override fun getMetaFromState(state: IBlockState) = state.getValue(PROPERTY).ordinal
 
@@ -202,19 +196,16 @@ object BlockHatStand : BlockModContainer("hat_stand", Material.ROCK, *StandMater
         else -> super.getExplosionResistance(world, pos, exploder, explosion)
     }
 
-    override fun getHarvestLevel(state: IBlockState): Int {
-        if (state.getValue(PROPERTY) == OBSIDIAN) return 3
-        return super.getHarvestLevel(state)
+    override fun getHarvestLevel(state: IBlockState): Int = when (OBSIDIAN) {
+        state.getValue(PROPERTY) -> 3
+        else -> super.getHarvestLevel(state)
     }
 
     override fun isFullCube(state: IBlockState) = false
     override fun isOpaqueCube(blockState: IBlockState) = false
 
-    override fun getSoundType(state: IBlockState, world: World, pos: BlockPos, entity: Entity?): SoundType
-            = when (state.getValue(PROPERTY)) {
-        OAK, SPRUCE, BIRCH, JUNGLE, ACACIA, DARK_OAK -> SoundType.WOOD
-        else -> SoundType.STONE
-    }
+    override fun getSoundType(state: IBlockState, world: World, pos: BlockPos, entity: Entity?)
+            = state.getValue(PROPERTY).soundType
 
     override fun createTileEntity(world: World, state: IBlockState) = TileHatStand()
 
