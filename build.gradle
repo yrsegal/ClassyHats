@@ -1,32 +1,22 @@
 buildscript {
-    ext.kotlin_version = '1.1.1'
     repositories {
         jcenter()
-        maven {
-            name = "forge"
-            url = "http://files.minecraftforge.net/maven"
-        }
+        maven { url 'http://files.minecraftforge.net/maven' }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.1.4-3'
     }
 }
-
 
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'kotlin'
 apply plugin: 'idea'
 
-allprojects {
-    tasks.withType(JavaCompile) {
-        sourceCompatibility = '1.8'
-        targetCompatibility = '1.8'
-    }
-}
-
 sourceCompatibility = 1.8
-targetCompatibility = 1.8
+version = modVersion
+group = 'wiresegal.classy.hats'
+archivesBaseName = 'ClassyHats'
 
 compileKotlin {
     kotlinOptions {
@@ -35,66 +25,41 @@ compileKotlin {
     }
 }
 
-ext.configFile = file('build.properties')
-ext.config = parseConfig(configFile)
-
-version = "${config.version}.${config.build_number}"
-group = "wiresegal.classy.hats"
-archivesBaseName = config.mod_name
-ext.corePlugin = config.core_plugin
-
 minecraft {
-    useDepAts = true
-    version = "${config.mc_version}-${config.forge_version}"
-    runDir = "run"
-    mappings = config.mc_mappings
-
-    replace '%VERSION%', "${config.build_number}-${config.version}"
+    version = mcfVersion
+    mappings = mcpMappings
+    runDir = 'run'
 
     replaceIn 'LibMisc.java'
     replaceIn 'LibMisc.kt'
+    replace '%VERSION%', modVersion
 
     clientJvmArgs = ["-Dfml.coreMods.load=$corePlugin"]
     serverJvmArgs = ["-Dfml.coreMods.load=$corePlugin"]
 }
 
 repositories {
-    maven {
-        url "http://maven.bluexin.be/repository/snapshots/"
-    }
-    maven {
-        url "http://dvs1.progwml6.com/files/maven"
-    }
+    maven { url 'http://maven.bluexin.be/repository/snapshots' }
+    maven { url 'http://dvs1.progwml6.com/files/maven' }
 }
 
 dependencies {
-    deobfCompile "mezz.jei:jei_${config.jei_version}"
-    compile "com.teamwizardry.librarianlib:librarianlib-1.12:4.0-SNAPSHOT:deobf"
-}
-
-def parseConfig(File config) {
-    config.withReader {
-        def prop = new Properties()
-        prop.load(it)
-        return (new ConfigSlurper().parse(prop))
-    }
+    deobfCompile "com.teamwizardry.librarianlib:librarianlib-$liblibVersion"
+    deobfProvided "mezz.jei:jei_$jeiVersion:api"
+    runtime "mezz.jei:jei_$jeiVersion"
 }
 
 sourceSets { main.java.srcDirs += 'src/main/kotlin' }
+
 idea {
-    module {
-        inheritOutputDirs = true
-    }
-    project {
-        languageLevel = '1.8'
-    }
+    module { inheritOutputDirs = true }
+    project { languageLevel = '1.8' }
 }
 
 processResources {
-    inputs.property 'version', project.version
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info', 'pack.mcmeta'
-        expand 'version': project.version
+        expand 'version': modVersion
     }
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info', 'pack.mcmeta'
