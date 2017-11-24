@@ -1,8 +1,8 @@
 {
-  "parent": "classyhats:block/hat_stand",
-  "textures": {
-    "top": "classyhats:blocks/stand_top_obsidian",
-    "side": "classyhats:blocks/stand_side_obsidian",
-    "bottom": "classyhats:blocks/stand_bottom_obsidian"
-  }
+    "parent": "classyhats:block/hat_stand",
+    "textures": {
+        "top": "classyhats:blocks/stand_top_obsidian",
+        "side": "classyhats:blocks/stand_side_obsidian",
+        "bottom": "classyhats:blocks/stand_bottom_obsidian"
+    }
 }

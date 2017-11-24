@@ -1,31 +1,13 @@
 {
-	"variants": {
-		"material=oak": {
-			"model": "classyhats:hat_stand_oak"
-		},
-		"material=spruce": {
-			"model": "classyhats:hat_stand_spruce"
-		},
-		"material=birch": {
-			"model": "classyhats:hat_stand_birch"
-		},
-		"material=jungle": {
-			"model": "classyhats:hat_stand_jungle"
-		},
-		"material=acacia": {
-			"model": "classyhats:hat_stand_acacia"
-		},
-		"material=dark_oak": {
-			"model": "classyhats:hat_stand_dark_oak"
-		},
-		"material=stone": {
-			"model": "classyhats:hat_stand_stone"
-		},
-		"material=quartz": {
-			"model": "classyhats:hat_stand_quartz"
-		},
-		"material=obsidian": {
-			"model": "classyhats:hat_stand_obsidian"
-		}
-	}
+    "variants": {
+        "material=oak": { "model": "classyhats:hat_stand_oak" },
+        "material=spruce": { "model": "classyhats:hat_stand_spruce" },
+        "material=birch": { "model": "classyhats:hat_stand_birch" },
+        "material=jungle": { "model": "classyhats:hat_stand_jungle" },
+        "material=acacia": { "model": "classyhats:hat_stand_acacia" },
+        "material=dark_oak": { "model": "classyhats:hat_stand_dark_oak" },
+        "material=stone": { "model": "classyhats:hat_stand_stone" },
+        "material=quartz": { "model": "classyhats:hat_stand_quartz" },
+        "material=obsidian": { "model": "classyhats:hat_stand_obsidian" }
+    }
 }

@@ -1,8 +1,8 @@
 {
-  "parent": "classyhats:block/hat_stand",
-  "textures": {
-    "top": "classyhats:blocks/stand_top_darkoak",
-    "side": "classyhats:blocks/stand_side_darkoak",
-    "bottom": "classyhats:blocks/stand_bottom_darkoak"
-  }
+    "parent": "classyhats:block/hat_stand",
+    "textures": {
+        "top": "classyhats:blocks/stand_top_dark_oak",
+        "side": "classyhats:blocks/stand_side_dark_oak",
+        "bottom": "classyhats:blocks/stand_bottom_dark_oak"
+    }
 }

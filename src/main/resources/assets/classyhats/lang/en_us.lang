@@ -11,8 +11,8 @@ item.classyhats:missingno.desc1=The server might have different configs...
 item.classyhats:missingno.desc2=This might be from an old version...
 item.classyhats:missingno.desc3=Or this was just created manually.
 
-item.classyhats:tophat.name=Top Hat
-item.classyhats:tophat.desc=For black tie parties.
+item.classyhats:top_hat.name=Top Hat
+item.classyhats:top_hat.desc=For black tie parties.
 
 item.classyhats:shleep_0.name=Red Shleep
 item.classyhats:shleep_0.desc=A little friend for your head.
@@ -60,19 +60,19 @@ item.classyhats:menacing.desc=ＴＨＩＳ ＭＵＳＴ ＢＥ ＴＨＥ ＷＯ�
 item.classyhats:thinking.name=:thonk:
 item.classyhats:thinking.desc=Sponsored by /r/hmmm
 
-item.classyhats:catears_black.name=Black Cat Ears
-item.classyhats:catears_black.desc=+5 to Persuasion, +5 to Nya
-item.classyhats:catears_brown.name=Brown Cat Ears
-item.classyhats:catears_brown.desc=+5 to Persuasion, +5 to Nya
-item.classyhats:catears_darkbrown.name=Dark Brown Cat Ears
-item.classyhats:catears_darkbrown.desc=+5 to Persuasion, +5 to Nya
-item.classyhats:catears_grey.name=Gray Cat Ears
-item.classyhats:catears_grey.desc=+5 to Persuasion, +5 to Nya
-item.classyhats:catears_white.name=White Cat Ears
-item.classyhats:catears_white.desc=+5 to Persuasion, +5 to Nya
+item.classyhats:cat_ears_black.name=Black Cat Ears
+item.classyhats:cat_ears_black.desc=+5 to Persuasion, +5 to Nya
+item.classyhats:cat_ears_brown.name=Brown Cat Ears
+item.classyhats:cat_ears_brown.desc=+5 to Persuasion, +5 to Nya
+item.classyhats:cat_ears_dark_brown.name=Dark Brown Cat Ears
+item.classyhats:cat_ears_dark_brown.desc=+5 to Persuasion, +5 to Nya
+item.classyhats:cat_ears_grey.name=Gray Cat Ears
+item.classyhats:cat_ears_grey.desc=+5 to Persuasion, +5 to Nya
+item.classyhats:cat_ears_white.name=White Cat Ears
+item.classyhats:cat_ears_white.desc=+5 to Persuasion, +5 to Nya
 
-item.classyhats:classygear.name=Classy Gear
-item.classyhats:classygear.desc=I do say, my good sir!
+item.classyhats:classy_gear.name=Classy Gear
+item.classyhats:classy_gear.desc=I do say, my good sir!
 
 item.classyhats:mask_happy.name=Smiling Drama Mask
 item.classyhats:mask_happy.desc=The show must go on!
@@ -109,8 +109,8 @@ item.classyhats:pachimari.desc=Half onion, half octopus, all cute.
 item.classyhats:pachimari_sombra.name=Hacked Pachimari
 item.classyhats:pachimari_sombra.desc=Boop!
 
-item.classyhats:moonman.name=Moon Man
-item.classyhats:moonman.desc=Goodbye, moonmen...
+item.classyhats:moon_man.name=Moon Man
+item.classyhats:moon_man.desc=Goodbye, moon men...
 
 item.classyhats:top_kek.name=Top Kek
 item.classyhats:top_kek.desc=forty keks
@@ -121,8 +121,8 @@ item.classyhats:eye.desc1=It shatters the limits your mind can create
 item.classyhats:eye.desc2=It sees the blight and it knows your soul
 item.classyhats:eye.desc3=And toward the center it bids you go
 
-item.classyhats:artificial_inteligence.name=Artificial Intelligence
-item.classyhats:artificial_inteligence.desc=01101110 01100101 01100001 01110100
+item.classyhats:artificial_intelligence.name=Artificial Intelligence
+item.classyhats:artificial_intelligence.desc=01101110 01100101 01100001 01110100
 
 item.classyhats:companion_cube.name=Companion Cube
 item.classyhats:companion_cube.desc=Science!
@@ -133,8 +133,8 @@ item.classyhats:cube_companion.desc=We &omight've&7 gone a bit far.
 item.classyhats:head_hiss.name=Head Hiss
 item.classyhats:head_hiss.desc=With 80%% less gunpowder.
 
-item.classyhats:jarhead.name=Jarhead
-item.classyhats:jarhead.desc=Now they can all see how small your brain is.
+item.classyhats:jar_head.name=Jarhead
+item.classyhats:jar_head.desc=Now they can all see how small your brain is.
 
 item.classyhats:miracle_seer.name=Miracle Seer
 item.classyhats:miracle_seer.desc0=Memorate miraculos absentes.
@@ -174,4 +174,4 @@ tile.classyhats:hat_stand_stone.name=Stone Hat Stand
 tile.classyhats:hat_stand_quartz.name=Quartz Hat Stand
 tile.classyhats:hat_stand_obsidian.name=Obsidian Hat Stand
 
-keybind.hatsinventory=Hat Inventory
+keybind.hats_inv=Hat Inventory

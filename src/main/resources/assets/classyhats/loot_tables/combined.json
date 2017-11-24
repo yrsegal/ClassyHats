@@ -1,27 +1,27 @@
 {
-  "pools": [
-    {
-      "name": "combined",
-      "conditions": [],
-      "rolls": 1,
-      "bonus_rolls": 0,
-      "entries": [
+    "pools": [
         {
-          "conditions": [],
-          "type": "loot_table",
-          "name": "classyhats:regular",
-          "functions": [],
-          "weight": 19,
-          "quality": 0
-        }, {
-          "conditions": [],
-          "type": "loot_table",
-          "name": "classyhats:elusive",
-          "functions": [],
-          "weight": 1,
-          "quality": 0
+            "name": "combined",
+            "conditions": [ ],
+            "rolls": 1,
+            "bonus_rolls": 0,
+            "entries": [
+                {
+                    "conditions": [ ],
+                    "type": "loot_table",
+                    "name": "classyhats:regular",
+                    "functions": [ ],
+                    "weight": 19,
+                    "quality": 0
+                }, {
+                    "conditions": [ ],
+                    "type": "loot_table",
+                    "name": "classyhats:elusive",
+                    "functions": [ ],
+                    "weight": 1,
+                    "quality": 0
+                }
+            ]
         }
-      ]
-    }
-  ]
+    ]
 }
