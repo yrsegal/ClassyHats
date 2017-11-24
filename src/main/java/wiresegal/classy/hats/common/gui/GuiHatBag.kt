@@ -9,7 +9,6 @@ import net.minecraft.client.resources.I18n
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.SoundEvents
 import net.minecraft.util.ResourceLocation
-import sun.audio.AudioPlayer.player
 import wiresegal.classy.hats.LibMisc
 import wiresegal.classy.hats.common.core.AttachmentHandler
 import wiresegal.classy.hats.common.hat.BaseHatStorage

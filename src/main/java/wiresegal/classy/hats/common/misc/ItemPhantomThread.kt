@@ -115,17 +115,17 @@ object ItemPhantomThread : ItemMod("phantom_thread") {
 
         if (chest.hasTagCompound() && ItemNBTHelper.getBoolean(chest, PHANTOM_TAG, false)) {
             this.chest = chest
-            e.entity.setItemStackToSlot(EntityEquipmentSlot.CHEST, ItemStack(ItemNBTHelper.getCompound(chest, PHANTOM_ITEM_TAG) ?: NBTTagCompound())) 
+            e.entity.setItemStackToSlot(EntityEquipmentSlot.CHEST, ItemStack(ItemNBTHelper.getCompound(chest, PHANTOM_ITEM_TAG) ?: NBTTagCompound()))
         } else this.chest = ItemStack.EMPTY
 
         if (legs.hasTagCompound() && ItemNBTHelper.getBoolean(legs, PHANTOM_TAG, false)) {
             this.legs = legs
-            e.entity.setItemStackToSlot(EntityEquipmentSlot.LEGS, ItemStack(ItemNBTHelper.getCompound(legs, PHANTOM_ITEM_TAG) ?: NBTTagCompound())) 
+            e.entity.setItemStackToSlot(EntityEquipmentSlot.LEGS, ItemStack(ItemNBTHelper.getCompound(legs, PHANTOM_ITEM_TAG) ?: NBTTagCompound()))
         } else this.legs = ItemStack.EMPTY
 
         if (feet.hasTagCompound() && ItemNBTHelper.getBoolean(feet, PHANTOM_TAG, false)) {
             this.feet = feet
-            e.entity.setItemStackToSlot(EntityEquipmentSlot.FEET, ItemStack(ItemNBTHelper.getCompound(feet, PHANTOM_ITEM_TAG) ?: NBTTagCompound())) 
+            e.entity.setItemStackToSlot(EntityEquipmentSlot.FEET, ItemStack(ItemNBTHelper.getCompound(feet, PHANTOM_ITEM_TAG) ?: NBTTagCompound()))
         } else this.feet = ItemStack.EMPTY
 
         captureSounds = false
@@ -141,9 +141,9 @@ object ItemPhantomThread : ItemMod("phantom_thread") {
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     fun postRender(e: RenderLivingEvent.Post<EntityLivingBase>) {
         captureSounds = true
-        if (head.isNotEmpty) e.entity.setItemStackToSlot(EntityEquipmentSlot.HEAD, head) 
-        if (chest.isNotEmpty) e.entity.setItemStackToSlot(EntityEquipmentSlot.CHEST, chest) 
-        if (legs.isNotEmpty) e.entity.setItemStackToSlot(EntityEquipmentSlot.LEGS, legs) 
+        if (head.isNotEmpty) e.entity.setItemStackToSlot(EntityEquipmentSlot.HEAD, head)
+        if (chest.isNotEmpty) e.entity.setItemStackToSlot(EntityEquipmentSlot.CHEST, chest)
+        if (legs.isNotEmpty) e.entity.setItemStackToSlot(EntityEquipmentSlot.LEGS, legs)
         if (feet.isNotEmpty) e.entity.setItemStackToSlot(EntityEquipmentSlot.FEET, feet)
         captureSounds = false
     }

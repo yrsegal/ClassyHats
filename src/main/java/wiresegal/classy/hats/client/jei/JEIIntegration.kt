@@ -4,7 +4,6 @@ import mezz.jei.api.IModPlugin
 import mezz.jei.api.IModRegistry
 import mezz.jei.api.JEIPlugin
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid
-import wiresegal.classy.hats.common.gui.ContainerHat
 
 /**
  * @author WireSegal
@@ -14,6 +13,6 @@ import wiresegal.classy.hats.common.gui.ContainerHat
 class JEIIntegration : IModPlugin {
     override fun register(registry: IModRegistry)
             = registry.recipeTransferRegistry.addRecipeTransferHandler(HatRecipeTransferHandler(
-                    registry.jeiHelpers.recipeTransferHandlerHelper()),
-                    VanillaRecipeCategoryUid.CRAFTING)
+            registry.jeiHelpers.recipeTransferHandlerHelper()),
+            VanillaRecipeCategoryUid.CRAFTING)
 }

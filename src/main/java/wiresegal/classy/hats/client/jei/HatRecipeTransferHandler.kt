@@ -3,14 +3,11 @@ package wiresegal.classy.hats.client.jei
 import com.google.common.collect.ImmutableSet
 import mezz.jei.Internal
 import mezz.jei.JustEnoughItems
-import mezz.jei.api.gui.IGuiIngredient
-import mezz.jei.api.gui.IGuiItemStackGroup
 import mezz.jei.api.gui.IRecipeLayout
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid
 import mezz.jei.api.recipe.transfer.IRecipeTransferError
 import mezz.jei.api.recipe.transfer.IRecipeTransferHandler
 import mezz.jei.api.recipe.transfer.IRecipeTransferHandlerHelper
-import mezz.jei.api.recipe.transfer.IRecipeTransferInfo
 import mezz.jei.config.SessionData
 import mezz.jei.gui.ingredients.GuiItemStackGroup
 import mezz.jei.network.packets.PacketRecipeTransfer
@@ -19,10 +16,8 @@ import mezz.jei.transfer.BasicRecipeTransferInfo
 import mezz.jei.util.Log
 import mezz.jei.util.Translator
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.inventory.ContainerPlayer
 import net.minecraft.inventory.Slot
 import net.minecraft.item.ItemStack
-import sun.audio.AudioPlayer.player
 import wiresegal.classy.hats.common.gui.ContainerHat
 import java.util.*
 

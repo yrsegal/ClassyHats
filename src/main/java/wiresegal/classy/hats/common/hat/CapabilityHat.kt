@@ -34,10 +34,13 @@ class CapabilityHatsStorage : IStorage<IHatStorage> {
 class HatStorageProvider(private val storage: IHatStorage = BaseHatStorage()) : ICapabilitySerializable<NBTTagCompound> {
     override fun <T : Any> getCapability(capability: Capability<T>, facing: EnumFacing?)
             = if (capability == CAPABILITY_HAT) CAPABILITY_HAT.cast<T>(storage) else null
+
     override fun serializeNBT(): NBTTagCompound
             = storage.serializeNBT()
+
     override fun hasCapability(capability: Capability<*>, facing: EnumFacing?)
             = capability == CAPABILITY_HAT
+
     override fun deserializeNBT(nbt: NBTTagCompound)
             = storage.deserializeNBT(nbt)
 }

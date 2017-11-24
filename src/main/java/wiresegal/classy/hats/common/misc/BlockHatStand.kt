@@ -20,11 +20,13 @@ import net.minecraft.inventory.InventoryHelper
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
-import net.minecraft.util.math.*
+import net.minecraft.util.math.AxisAlignedBB
+import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.MathHelper
+import net.minecraft.util.math.Vec3d
 import net.minecraft.world.Explosion
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
-import net.minecraftforge.items.IItemHandler
 import net.minecraftforge.items.ItemStackHandler
 import wiresegal.classy.hats.common.hat.ItemHat
 import wiresegal.classy.hats.common.misc.BlockHatStand.StandMaterial.*
@@ -141,8 +143,8 @@ object BlockHatStand : BlockModContainer("hat_stand", Material.ROCK, *StandMater
 
         addBox(0, 12, 0, 16, 16, 16)
         addBox(4, 10, 4, 12, 12, 12)
-        addBox(5,  4, 5, 11, 10, 11)
-        addBox(3,  0, 3, 13,  4, 13)
+        addBox(5, 4, 5, 11, 10, 11)
+        addBox(3, 0, 3, 13, 4, 13)
         return list
     }
 
@@ -180,25 +182,25 @@ object BlockHatStand : BlockModContainer("hat_stand", Material.ROCK, *StandMater
 
     override fun getMaterial(state: IBlockState): Material
             = when (state.getValue(PROPERTY)) {
-                OAK, SPRUCE, BIRCH, JUNGLE, ACACIA, DARK_OAK -> Material.WOOD
-                else -> Material.ROCK
-            }
+        OAK, SPRUCE, BIRCH, JUNGLE, ACACIA, DARK_OAK -> Material.WOOD
+        else -> Material.ROCK
+    }
 
     override fun getBlockHardness(state: IBlockState, worldIn: World, pos: BlockPos)
             = when (worldIn.getBlockState(pos).getValue(PROPERTY)) {
-                OBSIDIAN -> 22.5F
-                STONE -> 1.5F
-                QUARTZ -> 0.8F
-                else -> super.getBlockHardness(state, worldIn, pos)
-            }
+        OBSIDIAN -> 22.5F
+        STONE -> 1.5F
+        QUARTZ -> 0.8F
+        else -> super.getBlockHardness(state, worldIn, pos)
+    }
 
     override fun getExplosionResistance(world: World, pos: BlockPos, exploder: Entity?, explosion: Explosion)
             = when (world.getBlockState(pos).getValue(PROPERTY)) {
-                OBSIDIAN -> 2000F * 3 / 5
-                STONE -> 10F * 3 / 5
-                QUARTZ -> 4F * 3 / 5
-                else -> super.getExplosionResistance(world, pos, exploder, explosion)
-            }
+        OBSIDIAN -> 2000F * 3 / 5
+        STONE -> 10F * 3 / 5
+        QUARTZ -> 4F * 3 / 5
+        else -> super.getExplosionResistance(world, pos, exploder, explosion)
+    }
 
     override fun getHarvestLevel(state: IBlockState): Int {
         if (state.getValue(PROPERTY) == OBSIDIAN) return 3
@@ -210,9 +212,9 @@ object BlockHatStand : BlockModContainer("hat_stand", Material.ROCK, *StandMater
 
     override fun getSoundType(state: IBlockState, world: World, pos: BlockPos, entity: Entity?): SoundType
             = when (state.getValue(PROPERTY)) {
-                OAK, SPRUCE, BIRCH, JUNGLE, ACACIA, DARK_OAK -> SoundType.WOOD
-                else -> SoundType.STONE
-            }
+        OAK, SPRUCE, BIRCH, JUNGLE, ACACIA, DARK_OAK -> SoundType.WOOD
+        else -> SoundType.STONE
+    }
 
     override fun createTileEntity(world: World, state: IBlockState) = TileHatStand()
 

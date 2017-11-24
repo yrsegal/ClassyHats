@@ -29,7 +29,7 @@ class ContainerHat(playerInv: InventoryPlayer, private val thePlayer: EntityPlay
     init {
         this.addSlotToContainer(SlotCrafting(playerInv.player, this.craftMatrix, this.craftResult, 0, 154, 28))
 
-        for (i in 0..1) for (j in 0..1) 
+        for (i in 0..1) for (j in 0..1)
             this.addSlotToContainer(Slot(this.craftMatrix, j + i * 2, 98 + j * 18, 18 + i * 18))
 
         for (k in 0..3) {
@@ -130,9 +130,9 @@ class ContainerHat(playerInv: InventoryPlayer, private val thePlayer: EntityPlay
                 if (!this.mergeItemStack(inSlot, 36 + slotShift, 45 + slotShift, false))
                     return ItemStack.EMPTY
             } else if (index >= 36 + slotShift && index < 45 + slotShift) {
-                if (!this.mergeItemStack(inSlot, 9 + slotShift, 36 + slotShift, false)) 
+                if (!this.mergeItemStack(inSlot, 9 + slotShift, 36 + slotShift, false))
                     return ItemStack.EMPTY
-            } else if (!this.mergeItemStack(inSlot, 9 + slotShift, 45 + slotShift, false)) 
+            } else if (!this.mergeItemStack(inSlot, 9 + slotShift, 45 + slotShift, false))
                 return ItemStack.EMPTY
 
             if (inSlot.isEmpty) slot.putStack(ItemStack.EMPTY)

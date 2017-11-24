@@ -15,7 +15,6 @@ import net.minecraftforge.common.util.FakePlayer
 import net.minecraftforge.event.LootTableLoadEvent
 import net.minecraftforge.event.entity.living.LivingDropsEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
-import sun.audio.AudioPlayer.player
 import wiresegal.classy.hats.LibMisc
 import wiresegal.classy.hats.common.core.AttachmentHandler
 import wiresegal.classy.hats.common.core.HatConfigHandler
@@ -38,10 +37,14 @@ object LootTableFactory {
         val elusive = hats.filter { it.elusive }
         val regular = hats.filterNot { it.elusive }
 
-        val elusiveEntries = elusive.map { LootEntryItem(ItemHat, if (it.weight == -1) 40 else it.weight, 0,
-                arrayOf(SetNBT(arrayOf(), ItemHat.ofHat(it).tagCompound)), arrayOf(), it.name) }.toTypedArray()
-        val regularEntries = regular.map { LootEntryItem(ItemHat, if (it.weight == -1) 40 else it.weight, 0,
-                arrayOf(SetNBT(arrayOf(), ItemHat.ofHat(it).tagCompound)), arrayOf(), it.name) }.toTypedArray()
+        val elusiveEntries = elusive.map {
+            LootEntryItem(ItemHat, if (it.weight == -1) 40 else it.weight, 0,
+                    arrayOf(SetNBT(arrayOf(), ItemHat.ofHat(it).tagCompound)), arrayOf(), it.name)
+        }.toTypedArray()
+        val regularEntries = regular.map {
+            LootEntryItem(ItemHat, if (it.weight == -1) 40 else it.weight, 0,
+                    arrayOf(SetNBT(arrayOf(), ItemHat.ofHat(it).tagCompound)), arrayOf(), it.name)
+        }.toTypedArray()
 
         val elusivePool = LootPool(elusiveEntries, arrayOf(), RandomValueRange(1f), RandomValueRange(0f), "elusive")
         val regularPool = LootPool(regularEntries, arrayOf(), RandomValueRange(1f), RandomValueRange(0f), "regular")

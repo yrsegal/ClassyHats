@@ -5,7 +5,6 @@ import com.teamwizardry.librarianlib.features.network.PacketBase
 import com.teamwizardry.librarianlib.features.saving.Save
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext
 import net.minecraftforge.fml.relauncher.Side
-import wiresegal.classy.hats.ClassyHats
 import wiresegal.classy.hats.common.core.AttachmentHandler
 
 

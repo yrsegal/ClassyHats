@@ -1,21 +1,16 @@
 package wiresegal.classy.hats.common.core
 
-import com.teamwizardry.librarianlib.features.network.PacketHandler
-import com.teamwizardry.librarianlib.test.cap.CapabilityTest.Companion.cap
 import net.minecraft.command.CommandBase
 import net.minecraft.command.CommandException
 import net.minecraft.command.ICommandSender
 import net.minecraft.command.WrongUsageException
 import net.minecraft.entity.EntityList
 import net.minecraft.entity.EntityLiving
-import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayerMP
-import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.server.MinecraftServer
 import net.minecraft.util.math.BlockPos
-import sun.audio.AudioPlayer.player
 import wiresegal.classy.hats.common.hat.ItemHat
 
 /**
@@ -63,7 +58,7 @@ object CommandChangeHat : CommandBase() {
                     notifyCommandListener(sender, this, "commands.replaceitem.success", "equipped", 1, if (stack.isEmpty) "Air" else stack.textComponent)
                 }
             } else
-                    throw CommandException("commands.replaceitem.failed", "equipped", 1, if (stack.isEmpty) "Air" else stack.textComponent)
+                throw CommandException("commands.replaceitem.failed", "equipped", 1, if (stack.isEmpty) "Air" else stack.textComponent)
         } else if (type == "page") {
             if (args.size < 4)
                 throw WrongUsageException(getUsage("page"))

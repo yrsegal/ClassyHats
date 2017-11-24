@@ -1,19 +1,14 @@
 package wiresegal.classy.hats.common.core
 
-import com.teamwizardry.librarianlib.features.helpers.nonnullListOf
-import com.teamwizardry.librarianlib.features.kotlin.get
 import com.teamwizardry.librarianlib.features.network.PacketHandler
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityList
 import net.minecraft.entity.EntityLiving
-import net.minecraft.entity.EntityLivingBase
-import net.minecraft.entity.passive.EntityWolf
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.util.ResourceLocation
 import net.minecraft.world.WorldServer
 import net.minecraft.world.storage.loot.LootContext
-import net.minecraft.world.storage.loot.LootTableManager
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.event.AttachCapabilitiesEvent
 import net.minecraftforge.event.entity.EntityJoinWorldEvent

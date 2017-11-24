@@ -55,6 +55,7 @@ class HatInventoryWrapper(val hats: IHatStorage) : IInventory {
 
     override fun openInventory(player: EntityPlayer)
             = Unit
+
     override fun setField(id: Int, value: Int)
             = Unit
 

@@ -5,7 +5,6 @@ import net.minecraft.client.audio.PositionedSoundRecord
 import net.minecraft.client.gui.GuiButton
 import net.minecraft.client.gui.GuiButtonImage
 import net.minecraft.client.gui.inventory.GuiContainer
-import net.minecraft.client.gui.inventory.GuiContainerCreative
 import net.minecraft.client.gui.inventory.GuiInventory
 import net.minecraft.client.gui.recipebook.GuiRecipeBook
 import net.minecraft.client.gui.recipebook.IRecipeShownListener
