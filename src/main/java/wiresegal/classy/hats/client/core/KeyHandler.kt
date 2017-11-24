@@ -22,7 +22,7 @@ import wiresegal.classy.hats.common.gui.PacketHatGuiOpen
 @SideOnly(Side.CLIENT)
 object KeyHandler {
 
-    var key = KeyBinding(LibrarianLib.PROXY.translate("keybind.hatsinventory"),
+    var key = KeyBinding(LibrarianLib.PROXY.translate("keybind.hats_inventory"),
             KEY_H, "key.categories.inventory")
 
     init {

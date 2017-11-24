@@ -174,4 +174,4 @@ tile.classyhats:hat_stand_stone.name=Stone Hat Stand
 tile.classyhats:hat_stand_quartz.name=Quartz Hat Stand
 tile.classyhats:hat_stand_obsidian.name=Obsidian Hat Stand
 
-keybind.hats_inv=Hat Inventory
+keybind.hats_inventory=Hat Inventory
