@@ -11,9 +11,9 @@ class ClassyRecipeTransferInfo : IRecipeTransferInfo<ContainerHat> {
 
     override fun canHandle(container: ContainerHat): Boolean = true
 
-    override fun getInventorySlots(container: ContainerHat): MutableList<Slot> = container.inventorySlots.subList(9, 46)
+    override fun getInventorySlots(container: ContainerHat): MutableList<Slot> = container.inventorySlots.subList(10, 46)
 
-    override fun getRecipeSlots(container: ContainerHat): MutableList<Slot> = container.inventorySlots.subList(0, 5)
+    override fun getRecipeSlots(container: ContainerHat): MutableList<Slot> = container.inventorySlots.subList(1, 5)
 
     override fun getRecipeCategoryUid(): String {
         return VanillaRecipeCategoryUid.CRAFTING
