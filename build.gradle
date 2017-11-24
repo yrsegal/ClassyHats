@@ -45,8 +45,7 @@ repositories {
 
 dependencies {
     deobfCompile "com.teamwizardry.librarianlib:librarianlib-$liblibVersion"
-    deobfProvided "mezz.jei:jei_$jeiVersion:api"
-    runtime "mezz.jei:jei_$jeiVersion"
+    deobfCompile "mezz.jei:jei_$jeiVersion"
 }
 
 sourceSets { main.java.srcDirs += 'src/main/kotlin' }
