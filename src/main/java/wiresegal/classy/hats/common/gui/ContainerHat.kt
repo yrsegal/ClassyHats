@@ -82,7 +82,11 @@ class ContainerHat(playerInv: InventoryPlayer, private val thePlayer: EntityPlay
         (0..3)
                 .map { this.craftMatrix.removeStackFromSlot(it) }
                 .filterNot { it.isEmpty }
-                .forEach { player.dropItem(it, false) }
+                .forEach {
+                    if (!player.inventory.addItemStackToInventory(it)) {
+                        player.dropItem(it, false)
+                    }
+                }
 
         this.craftResult.setInventorySlotContents(0, ItemStack.EMPTY)
     }
