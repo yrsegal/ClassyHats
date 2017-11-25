@@ -105,7 +105,7 @@ object BlockHatStand : BlockModContainer("hat_stand", Material.ROCK, *StandMater
                 te.inv.handler.setStackInSlot(0, ItemStack.EMPTY)
             }
         }
-        return !stack.isEmpty || !invStack.isEmpty
+        return (!stack.isEmpty && stack.item is ItemHat) || !invStack.isEmpty
     }
 
     override fun getBlockFaceShape(world: IBlockAccess, state: IBlockState, pos: BlockPos, facing: EnumFacing?): BlockFaceShape {
