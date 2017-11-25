@@ -87,7 +87,7 @@ object BlockHatStand : BlockModContainer("hat_stand", Material.ROCK, *StandMater
                 te.markDirty()
             }
         } else {
-            if (stack.item is ItemHat) {
+            if (stack.item is ItemHat && invStack.isEmpty) {
                 val xS = playerIn.posX - (te.pos.x + 0.5)
                 val zS = playerIn.posZ - (te.pos.z + 0.5)
                 val angle = MathHelper.atan2(zS, xS) * 180 / Math.PI + 90
