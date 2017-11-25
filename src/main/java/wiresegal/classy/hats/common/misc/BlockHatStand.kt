@@ -7,6 +7,7 @@ import com.teamwizardry.librarianlib.features.base.block.tile.TileMod
 import com.teamwizardry.librarianlib.features.base.block.tile.module.ModuleInventory
 import com.teamwizardry.librarianlib.features.saving.Module
 import com.teamwizardry.librarianlib.features.saving.Save
+import net.minecraft.block.Block
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
 import net.minecraft.block.properties.PropertyEnum
@@ -16,7 +17,7 @@ import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.inventory.InventoryHelper
+import net.minecraft.init.SoundEvents
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
@@ -74,6 +75,8 @@ object BlockHatStand : BlockModContainer("hat_stand", Material.ROCK, *StandMater
 
     override fun onBlockActivated(worldIn: World, pos: BlockPos, state: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
         val te = worldIn.getTileEntity(pos) as TileHatStand
+        val stack = playerIn.getHeldItem(hand)
+        val invStack = te.inv.handler.getStackInSlot(0)
 
         if (playerIn.isSneaking) {
             if (!worldIn.isRemote) {
@@ -83,39 +86,26 @@ object BlockHatStand : BlockModContainer("hat_stand", Material.ROCK, *StandMater
                 te.angle = Math.round(angle / 22.5) * 22.5f
                 te.markDirty()
             }
-            return true
-        }
-
-        val stack = playerIn.getHeldItem(hand)
-
-        var ret = false
-        val invStack = te.inv.handler.getStackInSlot(0)
-
-        if (stack.item == ItemHat) {
-            val xS = playerIn.posX - (te.pos.x + 0.5)
-            val zS = playerIn.posZ - (te.pos.z + 0.5)
-            val angle = MathHelper.atan2(zS, xS) * 180 / Math.PI + 90
-            te.angle = Math.round(angle / 22.5) * 22.5f
-
-            te.inv.handler.setStackInSlot(0, stack.copy().apply { count = 1 })
-            playerIn.inventory.setInventorySlotContents(playerIn.inventory.currentItem, ItemStack.EMPTY)
-
-            ret = true
-        }
-
-        if (!invStack.isEmpty) {
-            val copy = invStack.copy()
-            if (playerIn.heldItemMainhand.isEmpty)
-                playerIn.setHeldItem(EnumHand.MAIN_HAND, copy)
-            else if (!playerIn.inventory.addItemStackToInventory(copy))
-                InventoryHelper.spawnItemStack(worldIn, pos.x.toDouble(), pos.y + 0.75, pos.z.toDouble(), copy)
-
-            if (!ret)
+        } else {
+            if (stack.item is ItemHat) {
+                val xS = playerIn.posX - (te.pos.x + 0.5)
+                val zS = playerIn.posZ - (te.pos.z + 0.5)
+                val angle = MathHelper.atan2(zS, xS) * 180 / Math.PI + 90
+                te.angle = Math.round(angle / 22.5) * 22.5f
+                te.inv.handler.setStackInSlot(0, stack.copy().apply { count = 1 })
+                playerIn.playSound(SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 1.0F, 1.0F)
+                playerIn.setHeldItem(hand, stack.copy().apply { shrink(1) })
+            }
+            if (!invStack.isEmpty) {
+                val copy = invStack.copy()
+                if (playerIn.heldItemMainhand.isEmpty)
+                    playerIn.setHeldItem(EnumHand.MAIN_HAND, copy)
+                else if (!playerIn.addItemStackToInventory(copy))
+                    Block.spawnAsEntity(worldIn, pos, copy)
                 te.inv.handler.setStackInSlot(0, ItemStack.EMPTY)
-            ret = true
+            }
         }
-
-        return ret
+        return !stack.isEmpty || !invStack.isEmpty
     }
 
     override fun getBlockFaceShape(world: IBlockAccess, state: IBlockState, pos: BlockPos, facing: EnumFacing?): BlockFaceShape {
