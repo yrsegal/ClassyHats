@@ -79,14 +79,7 @@ class ContainerHat(playerInv: InventoryPlayer, private val thePlayer: EntityPlay
      */
     override fun onContainerClosed(player: EntityPlayer) {
         super.onContainerClosed(player)
-        (0..3)
-                .map { this.craftMatrix.removeStackFromSlot(it) }
-                .filterNot { it.isEmpty }
-                .forEach {
-                    if (!player.inventory.addItemStackToInventory(it)) {
-                        player.dropItem(it, false)
-                    }
-                }
+        clearContainer(player, player.world, craftMatrix)
 
         this.craftResult.setInventorySlotContents(0, ItemStack.EMPTY)
     }
