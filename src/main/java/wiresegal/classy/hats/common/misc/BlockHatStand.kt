@@ -73,6 +73,11 @@ object BlockHatStand : BlockModContainer("hat_stand", Material.ROCK, *StandMater
         return side == EnumFacing.UP
     }
 
+    override fun getPickBlock(state: IBlockState, target: RayTraceResult?, world: World, pos: BlockPos, player: EntityPlayer): ItemStack {
+        val hatStack = (world.getTileEntity(pos) as TileHatStand).inv.handler.getStackInSlot(0)
+        return if (target?.sideHit == EnumFacing.UP && !hatStack.isEmpty) hatStack else ItemStack(this, 1, state.getValue(PROPERTY).ordinal)
+    }
+
     override fun onBlockActivated(worldIn: World, pos: BlockPos, state: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
         val te = worldIn.getTileEntity(pos) as TileHatStand
         val stack = playerIn.getHeldItem(hand)
