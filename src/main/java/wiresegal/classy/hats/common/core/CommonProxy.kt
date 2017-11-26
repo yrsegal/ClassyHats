@@ -54,6 +54,11 @@ open class CommonProxy {
     }
 
     open fun post(e: FMLPostInitializationEvent) {
-        // NO-OP
+        val size = HatConfigHandler.hats.size
+        ClassyHats.LOGGER.info("Loaded $size hats.")
+        if (size < defaultHats.size)
+            ClassyHats.LOGGER.info("Your lack of hats disturbs me.")
+        else if (size - defaultHats.size > 20)
+            ClassyHats.LOGGER.info("Wow, that's a lot of hats!")
     }
 }
