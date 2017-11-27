@@ -1,6 +1,5 @@
 package wiresegal.classy.hats.block
 
-import com.google.common.collect.ImmutableList
 import com.teamwizardry.librarianlib.features.autoregister.TileRegister
 import com.teamwizardry.librarianlib.features.base.block.EnumStringSerializable
 import com.teamwizardry.librarianlib.features.base.block.ItemModBlock
@@ -33,7 +32,7 @@ import wiresegal.classy.hats.item.ItemHat
 abstract class BlockHatContainer(name: String) : BlockModContainer(name, Material.AIR, *ContainerMaterial.getVariantStrings(name)) {
     abstract fun getPickBlock(side: EnumFacing?, hat: ItemStack, container: ItemStack): ItemStack
 
-    abstract fun getCollisionBoxes(state: IBlockState): ImmutableList<AxisAlignedBB>
+    abstract fun getCollisionBoxes(state: IBlockState): List<AxisAlignedBB>
 
     override fun createTileEntity(world: World, state: IBlockState) = getTileEntity(state)
 
