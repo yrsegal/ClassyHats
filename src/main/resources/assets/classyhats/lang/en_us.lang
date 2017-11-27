@@ -1,177 +1,196 @@
-item_group.classyhats=Classy Hats
-classyhats.container.hats=Hats
-classyhats.misc.back_to_hat=Back to Inventory
-classyhats.misc.back_to_bag=Hat Storage
-classyhats.misc.go_to=To Page %d
-classyhats.misc.page=Page %d
+tab.classyhats.name=Classy Hats
 
-item.classyhats:missingno.name=Broken Hat
-item.classyhats:missingno.desc0=Oh no! Something went wrong!
-item.classyhats:missingno.desc1=The server might have different configs...
-item.classyhats:missingno.desc2=This might be from an old version...
-item.classyhats:missingno.desc3=Or this was just created manually.
+hat.classyhats.missingno.name=Broken Hat
+hat.classyhats.missingno.desc0=Oh no! Something went wrong!
+hat.classyhats.missingno.desc1=The server might have different configs...
+hat.classyhats.missingno.desc2=This might be from an old version...
+hat.classyhats.missingno.desc3=Or this was just created manually.
 
-item.classyhats:top_hat.name=Top Hat
-item.classyhats:top_hat.desc=For black tie parties.
+hat.classyhats.top_hat.name=Top Hat
+hat.classyhats.top_hat.desc=For black tie parties.
 
-item.classyhats:shleep_0.name=Red Shleep
-item.classyhats:shleep_0.desc=A little friend for your head.
-item.classyhats:shleep_1.name=Orange Shleep
-item.classyhats:shleep_1.desc=A little friend for your head.
-item.classyhats:shleep_2.name=Yellow Shleep
-item.classyhats:shleep_2.desc=A little friend for your head.
-item.classyhats:shleep_3.name=Green Shleep
-item.classyhats:shleep_3.desc=A little friend for your head.
-item.classyhats:shleep_4.name=Cyan Shleep
-item.classyhats:shleep_4.desc=A little friend for your head.
-item.classyhats:shleep_5.name=Blue Shleep
-item.classyhats:shleep_5.desc=A little friend for your head.
-item.classyhats:shleep_6.name=Violet Shleep
-item.classyhats:shleep_6.desc=A little friend for your head.
-item.classyhats:shleep_7.name=Pink Shleep
-item.classyhats:shleep_7.desc=A little friend for your head.
+hat.classyhats.shleep_0.name=Red Shleep
+hat.classyhats.shleep_0.desc=A little friend for your head.
+hat.classyhats.shleep_1.name=Orange Shleep
+hat.classyhats.shleep_1.desc=A little friend for your head.
+hat.classyhats.shleep_2.name=Yellow Shleep
+hat.classyhats.shleep_2.desc=A little friend for your head.
+hat.classyhats.shleep_3.name=Green Shleep
+hat.classyhats.shleep_3.desc=A little friend for your head.
+hat.classyhats.shleep_4.name=Cyan Shleep
+hat.classyhats.shleep_4.desc=A little friend for your head.
+hat.classyhats.shleep_5.name=Blue Shleep
+hat.classyhats.shleep_5.desc=A little friend for your head.
+hat.classyhats.shleep_6.name=Violet Shleep
+hat.classyhats.shleep_6.desc=A little friend for your head.
+hat.classyhats.shleep_7.name=Pink Shleep
+hat.classyhats.shleep_7.desc=A little friend for your head.
 
-item.classyhats:top_slime_0.name=Red Top Slime
-item.classyhats:top_slime_0.desc=Even companions need to look classy!
-item.classyhats:top_slime_1.name=Orange Top Slime
-item.classyhats:top_slime_1.desc=Even companions need to look classy!
-item.classyhats:top_slime_2.name=Yellow Top Slime
-item.classyhats:top_slime_2.desc=Even companions need to look classy!
-item.classyhats:top_slime_3.name=Green Top Slime
-item.classyhats:top_slime_3.desc=Even companions need to look classy!
-item.classyhats:top_slime_4.name=Cyan Top Slime
-item.classyhats:top_slime_4.desc=Even companions need to look classy!
-item.classyhats:top_slime_5.name=Blue Top Slime
-item.classyhats:top_slime_5.desc=Even companions need to look classy!
-item.classyhats:top_slime_6.name=Violet Top Slime
-item.classyhats:top_slime_6.desc=Even companions need to look classy!
-item.classyhats:top_slime_7.name=Pink Top Slime
-item.classyhats:top_slime_7.desc=Even companions need to look classy!
+hat.classyhats.top_slime_0.name=Red Top Slime
+hat.classyhats.top_slime_0.desc=Even companions need to look classy!
+hat.classyhats.top_slime_1.name=Orange Top Slime
+hat.classyhats.top_slime_1.desc=Even companions need to look classy!
+hat.classyhats.top_slime_2.name=Yellow Top Slime
+hat.classyhats.top_slime_2.desc=Even companions need to look classy!
+hat.classyhats.top_slime_3.name=Green Top Slime
+hat.classyhats.top_slime_3.desc=Even companions need to look classy!
+hat.classyhats.top_slime_4.name=Cyan Top Slime
+hat.classyhats.top_slime_4.desc=Even companions need to look classy!
+hat.classyhats.top_slime_5.name=Blue Top Slime
+hat.classyhats.top_slime_5.desc=Even companions need to look classy!
+hat.classyhats.top_slime_6.name=Violet Top Slime
+hat.classyhats.top_slime_6.desc=Even companions need to look classy!
+hat.classyhats.top_slime_7.name=Pink Top Slime
+hat.classyhats.top_slime_7.desc=Even companions need to look classy!
 
-item.classyhats:headtato.name=Tiny Headtato
-item.classyhats:headtato.desc=It believes in you!
+hat.classyhats.headtato.name=Tiny Headtato
+hat.classyhats.headtato.desc=It believes in you!
 
-item.classyhats:japanese_headband.name=Japanese Headband
-item.classyhats:japanese_headband.desc=あなたはウィーバーです
+hat.classyhats.japanese_headband.name=Japanese Headband
+hat.classyhats.japanese_headband.desc=あなたはウィーバーです
 
-item.classyhats:menacing.name=Menacing
-item.classyhats:menacing.desc=ＴＨＩＳ ＭＵＳＴ ＢＥ ＴＨＥ ＷＯＲＫ ＯＦ ＡＮ ＥＮＥＭＹ 「ＳＴＡＮＤ」！！
+hat.classyhats.menacing.name=Menacing
+hat.classyhats.menacing.desc=ＴＨＩＳ ＭＵＳＴ ＢＥ ＴＨＥ ＷＯＲＫ ＯＦ ＡＮ ＥＮＥＭＹ 「ＳＴＡＮＤ」！！
 
-item.classyhats:thinking.name=:thonk:
-item.classyhats:thinking.desc=Sponsored by /r/hmmm
+hat.classyhats.thinking.name=:thonk:
+hat.classyhats.thinking.desc=Sponsored by /r/hmmm
 
-item.classyhats:cat_ears_black.name=Black Cat Ears
-item.classyhats:cat_ears_black.desc=+5 to Persuasion, +5 to Nya
-item.classyhats:cat_ears_brown.name=Brown Cat Ears
-item.classyhats:cat_ears_brown.desc=+5 to Persuasion, +5 to Nya
-item.classyhats:cat_ears_dark_brown.name=Dark Brown Cat Ears
-item.classyhats:cat_ears_dark_brown.desc=+5 to Persuasion, +5 to Nya
-item.classyhats:cat_ears_grey.name=Gray Cat Ears
-item.classyhats:cat_ears_grey.desc=+5 to Persuasion, +5 to Nya
-item.classyhats:cat_ears_white.name=White Cat Ears
-item.classyhats:cat_ears_white.desc=+5 to Persuasion, +5 to Nya
+hat.classyhats.cat_ears_black.name=Black Cat Ears
+hat.classyhats.cat_ears_black.desc=+5 to Persuasion, +5 to Nya
+hat.classyhats.cat_ears_brown.name=Brown Cat Ears
+hat.classyhats.cat_ears_brown.desc=+5 to Persuasion, +5 to Nya
+hat.classyhats.cat_ears_dark_brown.name=Dark Brown Cat Ears
+hat.classyhats.cat_ears_dark_brown.desc=+5 to Persuasion, +5 to Nya
+hat.classyhats.cat_ears_grey.name=Gray Cat Ears
+hat.classyhats.cat_ears_grey.desc=+5 to Persuasion, +5 to Nya
+hat.classyhats.cat_ears_white.name=White Cat Ears
+hat.classyhats.cat_ears_white.desc=+5 to Persuasion, +5 to Nya
 
-item.classyhats:classy_gear.name=Classy Gear
-item.classyhats:classy_gear.desc=I do say, my good sir!
+hat.classyhats.classy_gear.name=Classy Gear
+hat.classyhats.classy_gear.desc=I do say, my good sir!
 
-item.classyhats:mask_happy.name=Smiling Drama Mask
-item.classyhats:mask_happy.desc=The show must go on!
-item.classyhats:mask_neutral.name=Neutral Drama Mask
-item.classyhats:mask_neutral.desc=The show must go on!
-item.classyhats:mask_sad.name=Downcast Drama Mask
-item.classyhats:mask_sad.desc=The show must go on!
-item.classyhats:mask_uwot.name=Angry Drama Mask
-item.classyhats:mask_uwot.desc=The show must go on!
+hat.classyhats.mask_happy.name=Smiling Drama Mask
+hat.classyhats.mask_happy.desc=The show must go on!
+hat.classyhats.mask_neutral.name=Neutral Drama Mask
+hat.classyhats.mask_neutral.desc=The show must go on!
+hat.classyhats.mask_sad.name=Downcast Drama Mask
+hat.classyhats.mask_sad.desc=The show must go on!
+hat.classyhats.mask_uwot.name=Angry Drama Mask
+hat.classyhats.mask_uwot.desc=The show must go on!
 
-item.classyhats:monocle.name=Monocle
-item.classyhats:monocle.desc=For external use only.
+hat.classyhats.monocle.name=Monocle
+hat.classyhats.monocle.desc=For external use only.
 
-item.classyhats:skull.name=Skull Mask
-item.classyhats:skull.desc=Alas, poor Yorick!
+hat.classyhats.skull.name=Skull Mask
+hat.classyhats.skull.desc=Alas, poor Yorick!
 
-item.classyhats:skull_shattered.name=Shattered Skull Mask
-item.classyhats:skull_shattered.desc=Alas, poor Yorick!
+hat.classyhats.skull_shattered.name=Shattered Skull Mask
+hat.classyhats.skull_shattered.desc=Alas, poor Yorick!
 
-item.classyhats:halo.name=Halo
-item.classyhats:halo.desc0=An angel is anything but innocent.
-item.classyhats:halo.desc1=Do not mistake optimism for oblivion.
+hat.classyhats.halo.name=Halo
+hat.classyhats.halo.desc0=An angel is anything but innocent.
+hat.classyhats.halo.desc1=Do not mistake optimism for oblivion.
 
-item.classyhats:snowball.name=Snowball
-item.classyhats:snowball.desc=Freeze! Don't move!
+hat.classyhats.snowball.name=Snowball
+hat.classyhats.snowball.desc=Freeze! Don't move!
 
-item.classyhats:snowball_golden.name=Golden Snowball
-item.classyhats:snowball_golden.desc0=SR can buy you happiness.
-item.classyhats:snowball_golden.desc1=Just buy one of these.
+hat.classyhats.snowball_golden.name=Golden Snowball
+hat.classyhats.snowball_golden.desc0=SR can buy you happiness.
+hat.classyhats.snowball_golden.desc1=Just buy one of these.
 
-item.classyhats:pachimari.name=Pachimari
-item.classyhats:pachimari.desc=Half onion, half octopus, all cute.
+hat.classyhats.pachimari.name=Pachimari
+hat.classyhats.pachimari.desc=Half onion, half octopus, all cute.
 
-item.classyhats:pachimari_sombra.name=Hacked Pachimari
-item.classyhats:pachimari_sombra.desc=Boop!
+hat.classyhats.pachimari_sombra.name=Hacked Pachimari
+hat.classyhats.pachimari_sombra.desc=Boop!
 
-item.classyhats:moon_man.name=Moon Man
-item.classyhats:moon_man.desc=Goodbye, moon men...
+hat.classyhats.moon_man.name=Moon Man
+hat.classyhats.moon_man.desc=Goodbye, moonmen...
 
-item.classyhats:top_kek.name=Top Kek
-item.classyhats:top_kek.desc=forty keks
+hat.classyhats.top_kek.name=Top Kek
+hat.classyhats.top_kek.desc=forty keks
 
-item.classyhats:eye.name=The Horned Eye
-item.classyhats:eye.desc0=The Eye of Ea stands at the gate
-item.classyhats:eye.desc1=It shatters the limits your mind can create
-item.classyhats:eye.desc2=It sees the blight and it knows your soul
-item.classyhats:eye.desc3=And toward the center it bids you go
+hat.classyhats.eye.name=The Horned Eye
+hat.classyhats.eye.desc0=The Eye of Ea stands at the gate
+hat.classyhats.eye.desc1=It shatters the limits your mind can create
+hat.classyhats.eye.desc2=It sees the blight and it knows your soul
+hat.classyhats.eye.desc3=And toward the center it bids you go
 
-item.classyhats:artificial_intelligence.name=Artificial Intelligence
-item.classyhats:artificial_intelligence.desc=01101110 01100101 01100001 01110100
+hat.classyhats.artificial_intelligence.name=Artificial Intelligence
+hat.classyhats.artificial_intelligence.desc=01101110 01100101 01100001 01110100
 
-item.classyhats:companion_cube.name=Companion Cube
-item.classyhats:companion_cube.desc=Science!
+hat.classyhats.companion_cube.name=Companion Cube
+hat.classyhats.companion_cube.desc=Science!
 
-item.classyhats:cube_companion.name=Cube Companion
-item.classyhats:cube_companion.desc=We &omight've&7 gone a bit far.
+hat.classyhats.cube_companion.name=Cube Companion
+hat.classyhats.cube_companion.desc=We &omight've&7 gone a bit far.
 
-item.classyhats:head_hiss.name=Head Hiss
-item.classyhats:head_hiss.desc=With 80%% less gunpowder.
+hat.classyhats.head_hiss.name=Head Hiss
+hat.classyhats.head_hiss.desc=With 80%% less gunpowder.
 
-item.classyhats:jar_head.name=Jarhead
-item.classyhats:jar_head.desc=Now they can all see how small your brain is.
+hat.classyhats.jar_head.name=Jarhead
+hat.classyhats.jar_head.desc=Now they can all see how small your brain is.
 
-item.classyhats:miracle_seer.name=Miracle Seer
-item.classyhats:miracle_seer.desc0=Memorate miraculos absentes.
-item.classyhats:miracle_seer.desc1=Semper vivunt ea in nostri animis.
+hat.classyhats.miracle_seer.name=Miracle Seer
+hat.classyhats.miracle_seer.desc0=Memorate miraculos absentes.
+hat.classyhats.miracle_seer.desc1=Semper vivunt ea in nostri animis.
 
-item.classyhats:warped.name=Warped
-item.classyhats:warped.desc=Oh god, they're real, they're comi
+hat.classyhats.warped.name=Warped
+hat.classyhats.warped.desc=Oh god, they're real, they're comi
 
-item.classyhats:dungeon_companion.name=Dungeon Companion
-item.classyhats:dungeon_companion.desc0=Why was a swet stuck in a chest
-item.classyhats:dungeon_companion.desc1=in the middle of a Slider dungeon...?
+hat.classyhats.dungeon_companion.name=Dungeon Companion
+hat.classyhats.dungeon_companion.desc0=Why was a swet stuck in a chest
+hat.classyhats.dungeon_companion.desc1=in the middle of a Slider dungeon...?
 
-classyhats.misc.phantom=&bLined with Phantom Thread
-classyhats.misc.phantom.desc=Craft with other armor to camouflage!
-classyhats.misc.phantom.camo=Camouflaged as: %s
+hat.classyhats.retro_computer.name=Retro Computer
+hat.classyhats.retro_computer.desc=Dapper in the 90s
 
-classyhats.replacehat.usage=/replacehat <player> <equipped|page> ...
-classyhats.replacehat.usage.equipped=/replacehat <player> equipped <hat|none>
-classyhats.replacehat.usage.page=/replacehat <player> page <page.n.n> <hat|none>
-classyhats.replacehat.usage.invalid.page=Invalid page ID (%s)
+hat.classyhats.bone_hurting_juice.name=Bone Hurting Juice
+hat.classyhats.bone_hurting_juice.desc=Oof, owie
 
-classyhats.hat_inv_tooltip=Press &6%s&7 to open the Hat Inventory
-classyhats.hat_inv_tooltip_sneak=Sneak-using this item will do the same
+item.classyhats.phantom_thread.name=Phantom Thread
+item.classyhats.phantom_thread.desc0=Craft with armor to make it invisible!
+item.classyhats.phantom_thread.desc1=Craft invisible armor with other armor to camouflage.
+item.classyhats.phantom_thread.desc2=Craft with thread again to make the armor visible.
 
-item.classyhats:phantom_thread.name=Phantom Thread
-item.classyhats:phantom_thread.desc0=Craft with armor to make it invisible!
-item.classyhats:phantom_thread.desc1=Craft invisible armor with other armor to camouflage.
-item.classyhats:phantom_thread.desc2=Craft with thread again to make the armor visible.
+tile.classyhats.hat_stand_oak.name=Oak Wood Hat Stand
+tile.classyhats.hat_stand_spruce.name=Spruce Wood Hat Stand
+tile.classyhats.hat_stand_birch.name=Birch Wood Hat Stand
+tile.classyhats.hat_stand_jungle.name=Jungle Wood Hat Stand
+tile.classyhats.hat_stand_acacia.name=Acacia Wood Hat Stand
+tile.classyhats.hat_stand_dark_oak.name=Dark Oak Wood Hat Stand
+tile.classyhats.hat_stand_stone.name=Stone Hat Stand
+tile.classyhats.hat_stand_quartz.name=Quartz Hat Stand
+tile.classyhats.hat_stand_obsidian.name=Obsidian Hat Stand
 
-tile.classyhats:hat_stand_oak.name=Oak Wood Hat Stand
-tile.classyhats:hat_stand_spruce.name=Spruce Wood Hat Stand
-tile.classyhats:hat_stand_birch.name=Birch Wood Hat Stand
-tile.classyhats:hat_stand_jungle.name=Jungle Wood Hat Stand
-tile.classyhats:hat_stand_acacia.name=Acacia Wood Hat Stand
-tile.classyhats:hat_stand_dark_oak.name=Dark Oak Wood Hat Stand
-tile.classyhats:hat_stand_stone.name=Stone Hat Stand
-tile.classyhats:hat_stand_quartz.name=Quartz Hat Stand
-tile.classyhats:hat_stand_obsidian.name=Obsidian Hat Stand
+tile.classyhats.hat_display_case_oak.name=Oak Wood Hat Display Case
+tile.classyhats.hat_display_case_spruce.name=Spruce Wood Hat Display Case
+tile.classyhats.hat_display_case_birch.name=Birch Wood Hat Display Case
+tile.classyhats.hat_display_case_jungle.name=Jungle Wood Hat Display Case
+tile.classyhats.hat_display_case_acacia.name=Acacia Wood Hat Display Case
+tile.classyhats.hat_display_case_dark_oak.name=Dark Oak Wood Hat Display Case
+tile.classyhats.hat_display_case_stone.name=Stone Hat Display Case
+tile.classyhats.hat_display_case_quartz.name=Quartz Hat Display Case
+tile.classyhats.hat_display_case_obsidian.name=Obsidian Hat Display Case
 
-keybind.hats_inventory=Hat Inventory
+tooltip.classyhats.phantom=&bLined with Phantom Thread
+tooltip.classyhats.phantom.desc=Craft with other armor to camouflage!
+tooltip.classyhats.phantom.camo=Camouflaged as: %s
+
+tooltip.classyhats.hat_inventory=Press &6%s&7 to open the Hat Inventory
+tooltip.classyhats.hat_inventory_sneak=Sneak-using this item will do the same
+
+container.classyhats.hat_bag=Hats
+
+button.classyhats.hat_inventory.open_bag=Hat Storage
+button.classyhats.hat_bag.close=Back to Inventory
+button.classyhats.hat_bag.next_page=Next Page
+button.classyhats.hat_bag.prev_page=Prev. Page
+button.classyhats.hat_bag.page=%d/%d
+
+command.classyhats.replacehat.usage=/replacehat <player> <equipped|page> ...
+command.classyhats.replacehat.usage.equipped=/replacehat <player> equipped <hat|none>
+command.classyhats.replacehat.usage.page=/replacehat <player> page <page.n.n> <hat|none>
+command.classyhats.replacehat.usage.invalid.page=Invalid page ID (%s)
+
+keybind.classyhats.hats_inventory=Hat Inventory

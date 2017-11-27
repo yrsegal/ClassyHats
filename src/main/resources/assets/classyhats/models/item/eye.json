@@ -1,15 +1,15 @@
 {
-    "__comment": "Designed by Wire Segal with Cubik Studio - https://cubik.studio",
+    "credit": "Made by wiresegal, utilizing something probably.",
+    "parent": "classyhats:item/hat",
     "textures": {
         "texture": "classyhats:items/eye"
     },
     "elements": [
         {
-            "__comment": "Box2",
             "from": [ 13, 12, 7.5 ],
             "to": [ 14, 14, 8.5 ],
             "faces": {
-                "down": { "uv": [ 13, 3, 14, 4 ], "texture": "#texture", "tintindex": 99, "shade": false },
+                "down": { "uv": [ 13, 3, 14, 4 ], "texture": "#texture", "tintindex": 99 },
                 "up": { "uv": [ 14, 3, 13, 2 ], "texture": "#texture", "tintindex": 99 },
                 "north": { "uv": [ 13, 4, 14, 2 ], "texture": "#texture", "rotation": 180, "tintindex": 99 },
                 "south": { "uv": [ 14, 4, 13, 2 ], "texture": "#texture", "rotation": 180, "tintindex": 99 },
@@ -18,7 +18,6 @@
             }
         },
         {
-            "__comment": "Box3",
             "from": [ 12, 12, 7.5 ],
             "to": [ 13, 13, 8.5 ],
             "faces": {
@@ -30,7 +29,6 @@
             }
         },
         {
-            "__comment": "Box4",
             "from": [ 7, 8, 7.5 ],
             "to": [ 9, 15, 8.5 ],
             "faces": {
@@ -43,7 +41,6 @@
             }
         },
         {
-            "__comment": "Box5",
             "from": [ 6, 10, 7.5 ],
             "to": [ 7, 11, 8.5 ],
             "faces": {
@@ -55,7 +52,6 @@
             }
         },
         {
-            "__comment": "Box6",
             "from": [ 9, 10, 7.5 ],
             "to": [ 10, 11, 8.5 ],
             "faces": {
@@ -67,7 +63,6 @@
             }
         },
         {
-            "__comment": "Box3",
             "from": [ 3, 12, 7.5 ],
             "to": [ 4, 13, 8.5 ],
             "faces": {
@@ -79,7 +74,6 @@
             }
         },
         {
-            "__comment": "Box2",
             "from": [ 2, 12, 7.5 ],
             "to": [ 3, 14, 8.5 ],
             "faces": {
@@ -92,7 +86,6 @@
             }
         },
         {
-            "__comment": "Box9",
             "from": [ 10, 8, 7.5 ],
             "to": [ 13, 10, 8.5 ],
             "faces": {
@@ -105,7 +98,6 @@
             }
         },
         {
-            "__comment": "Box10",
             "from": [ 10, 7, 7.5 ],
             "to": [ 12, 8, 8.5 ],
             "faces": {
@@ -117,7 +109,6 @@
             }
         },
         {
-            "__comment": "Box11",
             "from": [ 9, 6, 7.5 ],
             "to": [ 11, 7, 8.5 ],
             "faces": {
@@ -130,7 +121,6 @@
             }
         },
         {
-            "__comment": "Box12",
             "from": [ 13, 8, 7.5 ],
             "to": [ 14, 9, 8.5 ],
             "faces": {
@@ -142,7 +132,6 @@
             }
         },
         {
-            "__comment": "Box9",
             "from": [ 3, 8, 7.5 ],
             "to": [ 6, 10, 8.5 ],
             "faces": {
@@ -155,7 +144,6 @@
             }
         },
         {
-            "__comment": "Box12",
             "from": [ 2, 8, 7.5 ],
             "to": [ 3, 9, 8.5 ],
             "faces": {
@@ -167,7 +155,6 @@
             }
         },
         {
-            "__comment": "Box10",
             "from": [ 4, 7, 7.5 ],
             "to": [ 6, 8, 8.5 ],
             "faces": {
@@ -179,7 +166,6 @@
             }
         },
         {
-            "__comment": "Box11",
             "from": [ 5, 6, 7.5 ],
             "to": [ 7, 7, 8.5 ],
             "faces": {
@@ -192,7 +178,6 @@
             }
         },
         {
-            "__comment": "Box17",
             "from": [ 6, 5, 7.5 ],
             "to": [ 10, 6, 8.5 ],
             "faces": {
@@ -205,7 +190,6 @@
             }
         },
         {
-            "__comment": "Box18",
             "from": [ 1, 5, 7.5 ],
             "to": [ 3, 6, 8.5 ],
             "faces": {
@@ -218,7 +202,6 @@
             }
         },
         {
-            "__comment": "Box19",
             "from": [ 0, 3, 7.5 ],
             "to": [ 1, 5, 8.5 ],
             "faces": {
@@ -231,7 +214,6 @@
             }
         },
         {
-            "__comment": "Box20",
             "from": [ 1, 4, 7.5 ],
             "to": [ 2, 5, 8.5 ],
             "faces": {
@@ -242,7 +224,6 @@
             }
         },
         {
-            "__comment": "Box21",
             "from": [ 13, 5, 7.5 ],
             "to": [ 15, 6, 8.5 ],
             "faces": {
@@ -255,7 +236,6 @@
             }
         },
         {
-            "__comment": "Box22",
             "from": [ 15, 3, 7.5 ],
             "to": [ 16, 5, 8.5 ],
             "faces": {
@@ -268,7 +248,6 @@
             }
         },
         {
-            "__comment": "Box23",
             "from": [ 14, 4, 7.5 ],
             "to": [ 15, 5, 8.5 ],
             "faces": {
@@ -279,7 +258,6 @@
             }
         },
         {
-            "__comment": "Box24",
             "from": [ 4, 3, 7.5 ],
             "to": [ 5, 4, 8.5 ],
             "faces": {
@@ -292,7 +270,6 @@
             }
         },
         {
-            "__comment": "Box25",
             "from": [ 11, 3, 7.5 ],
             "to": [ 12, 4, 8.5 ],
             "faces": {
@@ -305,7 +282,6 @@
             }
         },
         {
-            "__comment": "Box26",
             "from": [ 7, 1, 7.5 ],
             "to": [ 9, 4, 8.5 ],
             "faces": {

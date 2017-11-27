@@ -13,7 +13,8 @@
                     "functions": [ ],
                     "weight": 19,
                     "quality": 0
-                }, {
+                },
+                {
                     "conditions": [ ],
                     "type": "loot_table",
                     "name": "classyhats:elusive",

@@ -5,7 +5,7 @@ buildscript {
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
-        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.1.4-3'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.1.61'
     }
 }
 
@@ -30,8 +30,8 @@ minecraft {
     mappings = mcpMappings
     runDir = 'run'
 
-    replaceIn 'LibMisc.java'
-    replaceIn 'LibMisc.kt'
+    replaceIn 'ClassyHats.java'
+    replaceIn 'ClassyHats.kt'
     replace '%VERSION%', modVersion
 
     clientJvmArgs = ["-Dfml.coreMods.load=$corePlugin"]

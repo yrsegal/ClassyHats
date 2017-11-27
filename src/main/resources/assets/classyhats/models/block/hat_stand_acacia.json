@@ -1,8 +1,9 @@
 {
     "parent": "classyhats:block/hat_stand",
     "textures": {
+        "bottom": "classyhats:blocks/stand_bottom_acacia",
         "top": "classyhats:blocks/stand_top_acacia",
-        "side": "classyhats:blocks/stand_side_acacia",
-        "bottom": "classyhats:blocks/stand_bottom_acacia"
+        "side": "classyhats:blocks/stand_side_acacia"
+
     }
 }

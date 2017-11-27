@@ -1,5 +1,8 @@
 package wiresegal.classy.hats
 
+import com.teamwizardry.librarianlib.features.base.ModCreativeTab
+import com.teamwizardry.librarianlib.features.helpers.nonnullListOf
+import net.minecraft.item.ItemStack
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.common.SidedProxy
 import net.minecraftforge.fml.common.event.FMLInitializationEvent
@@ -8,46 +11,60 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
-import wiresegal.classy.hats.common.core.CommandChangeHat
-import wiresegal.classy.hats.common.core.CommonProxy
+import wiresegal.classy.hats.command.CommandChangeHat
+import wiresegal.classy.hats.proxy.CommonProxy
 
-/**
- * @author WireSegal
- * Created at 8:28 PM on 8/31/17.
- */
-@Mod(modid = LibMisc.MOD_ID, name = LibMisc.NAME, version = LibMisc.VERSION, dependencies = LibMisc.DEPENDENCIES)
+@Mod(modid = ClassyHats.ID, name = ClassyHats.NAME, version = ClassyHats.VERSION)
 class ClassyHats {
-
     @Mod.EventHandler
-    fun pre(e: FMLPreInitializationEvent) {
-        INSTANCE = this
-
-        PROXY.pre(e)
+    fun onPreInit(event: FMLPreInitializationEvent) {
+        PROXY.onPreInit(event)
     }
 
     @Mod.EventHandler
-    fun init(e: FMLInitializationEvent) {
-        PROXY.init(e)
+    fun onInit(event: FMLInitializationEvent) {
+        PROXY.onInit(event)
     }
 
     @Mod.EventHandler
-    fun post(e: FMLPostInitializationEvent) {
-        PROXY.post(e)
+    fun onPostInit(event: FMLPostInitializationEvent) {
+        PROXY.onPostInit(event)
     }
 
     @Mod.EventHandler
-    fun serverStart(e: FMLServerStartingEvent) {
-        e.registerServerCommand(CommandChangeHat)
+    fun onServerStart(event: FMLServerStartingEvent) {
+        event.registerServerCommand(CommandChangeHat)
     }
 
     companion object {
+        const val ID = "classyhats"
+        const val NAME = "Classy Hats"
+        const val VERSION = "%VERSION%"
 
-        val LOGGER: Logger = LogManager.getLogger("ClassyHats")
+        val TAB = object : ModCreativeTab() {
+            override fun getTranslatedTabLabel() = "tab.$tabLabel.name"
 
-        @SidedProxy(clientSide = LibMisc.CLIENT_PROXY, serverSide = LibMisc.COMMON_PROXY)
+            override fun hasSearchBar() = true
+
+            override fun getBackgroundImageName() = "item_search.png"
+
+            override val iconStack: ItemStack
+                get() {
+                    val items = nonnullListOf<ItemStack>()
+                    ClassyHatsContent.HAT.getSubItems(this, items)
+                    return when {
+                        items.isEmpty() -> ItemStack(ClassyHatsContent.HAT)
+                        else -> items[0]
+                    }
+                }
+        }
+
+        val LOGGER: Logger = LogManager.getLogger(NAME)
+
+        @SidedProxy(clientSide = CommonProxy.CLIENT, serverSide = CommonProxy.SERVER)
         lateinit var PROXY: CommonProxy
 
+        @Mod.Instance(ID)
         lateinit var INSTANCE: ClassyHats
-            private set
     }
 }

@@ -5,6 +5,9 @@
         "description": "A mod of classy hats. Enough said.",
         "version": "${version}",
         "mcversion": "[1.12,1.13)",
-        "authorList": [ "yrsegal", "Tristaric", "InsomniaKitten" ]
+        "authorList": [ "yrsegal", "Tristaric", "InsomniaKitten" ],
+        "dependencies": [ "librarianlib" ],
+        "requiredMods": [ "librarianlib" ],
+        "useDependencyInformation": true
     }
 ]
