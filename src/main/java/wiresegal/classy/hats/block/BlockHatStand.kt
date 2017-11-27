@@ -1,6 +1,7 @@
 package wiresegal.classy.hats.block
 
 import com.google.common.collect.ImmutableList
+import com.teamwizardry.librarianlib.features.kotlin.isNotEmpty
 import net.minecraft.block.state.BlockFaceShape
 import net.minecraft.block.state.IBlockState
 import net.minecraft.item.ItemStack
@@ -11,7 +12,7 @@ import net.minecraft.world.IBlockAccess
 
 class BlockHatStand : BlockHatContainer("hat_stand") {
     override fun getPickBlock(side: EnumFacing?, hat: ItemStack, container: ItemStack)
-            = if (side == EnumFacing.UP) hat else container
+            = if (side == EnumFacing.UP && hat.isNotEmpty) hat else container
 
     override fun getCollisionBoxes(state: IBlockState) = ImmutableList.of(
             AxisAlignedBB(0.0, 0.75, 0.0, 1.0, 1.0, 1.0),
