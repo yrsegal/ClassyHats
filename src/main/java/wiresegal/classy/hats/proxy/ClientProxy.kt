@@ -18,7 +18,6 @@ import wiresegal.classy.hats.block.BlockHatContainer.TileHatContainer
 import wiresegal.classy.hats.client.keybind.KeyBindHandler
 import wiresegal.classy.hats.client.render.EntityLayerRendererHat
 import wiresegal.classy.hats.client.render.PlayerLayerRendererHat
-import wiresegal.classy.hats.client.render.TileRendererHatDisplayCase
 import wiresegal.classy.hats.client.render.TileRendererHatStand
 import wiresegal.classy.hats.event.GuiTextureEvents
 import wiresegal.classy.hats.event.HatStandRenderEvents
@@ -45,7 +44,6 @@ class ClientProxy : CommonProxy() {
         super.onInit(event)
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileHatContainer::class.java, TileRendererHatStand)
-        ClientRegistry.bindTileEntitySpecialRenderer(TileHatContainer::class.java, TileRendererHatDisplayCase)
 
         val skinMap = Minecraft.getMinecraft().renderManager.skinMap
         var render = skinMap["default"]
