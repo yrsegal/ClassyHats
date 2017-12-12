@@ -79,7 +79,7 @@ class ItemHat : ItemMod("hat"), IExtraVariantHolder, IGlowingItem {
     override val extraVariants: Array<out String>
         get() = ClassyHatsConfig.hats.values.map { it.name }.toTypedArray()
     override val meshDefinition: ((stack: ItemStack) -> ModelResourceLocation)?
-        get() = { ModelHandler.resourceLocations[ClassyHats.ID]!![getHat(it).name] as ModelResourceLocation }
+        get() = { ModelHandler.getResource(ClassyHats.ID, getHat(it).name)!! }
 
     override fun getSubItems(tab: CreativeTabs?, subItems: NonNullList<ItemStack>) {
         if (isInCreativeTab(tab)) {
@@ -124,6 +124,7 @@ class ItemHat : ItemMod("hat"), IExtraVariantHolder, IGlowingItem {
         return IGlowingItem.Helper.wrapperBake(model, false, 99)
     }
 
+    @SideOnly(Side.CLIENT)
     override fun shouldDisableLightingForGlow(itemStack: ItemStack, model: IBakedModel): Boolean {
         return true
     }
