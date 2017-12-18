@@ -1,8 +1,0 @@
-{
-    "parent": "classyhats:block/hat_display_case",
-    "textures": {
-        "bottom": "classyhats:blocks/display_case_top_oak",
-        "top": "classyhats:blocks/display_case_top_oak",
-        "side": "classyhats:blocks/display_case_side_oak"
-    }
-}

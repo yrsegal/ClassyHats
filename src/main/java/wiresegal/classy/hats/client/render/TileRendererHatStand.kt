@@ -5,8 +5,6 @@ import net.minecraft.client.renderer.GlStateManager
 import net.minecraft.client.renderer.OpenGlHelper
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer
-import net.minecraft.util.math.MathHelper
-import wiresegal.classy.hats.ClassyHatsContent
 import wiresegal.classy.hats.block.BlockHatContainer.TileHatContainer
 
 object TileRendererHatStand : TileEntitySpecialRenderer<TileHatContainer>() {
@@ -21,18 +19,9 @@ object TileRendererHatStand : TileEntitySpecialRenderer<TileHatContainer>() {
             val prevX = OpenGlHelper.lastBrightnessX
             val prevY = OpenGlHelper.lastBrightnessY
 
-            if (te.blockType == ClassyHatsContent.HAT_STAND) {
-                GlStateManager.translate(x + 0.5, y + 1.4625, z + 0.5)
-                GlStateManager.scale(0.9375, 0.9375, 0.9375)
-                GlStateManager.rotate(te.angle, 0.0f, -1.0f, 0.0f)
-            } else if (te.blockType == ClassyHatsContent.HAT_DISPLAY_CASE) {
-                val intpol = world.totalWorldTime + partialTicks
-                val offset = 0.1F + MathHelper.sin(intpol * 0.1F) * 0.01F
-
-                GlStateManager.translate(x + 0.5, y + offset + 1.4625, z + 0.5)
-                GlStateManager.scale(0.9375, 0.9375, 0.9375)
-                GlStateManager.rotate(intpol % 360.0F, 0.0f, -1.0f, 0.0f)
-            }
+            GlStateManager.translate(x + 0.5, y + 1.4625, z + 0.5)
+            GlStateManager.scale(0.9375, 0.9375, 0.9375)
+            GlStateManager.rotate(te.angle, 0.0f, -1.0f, 0.0f)
 
             OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lX, lY)
             Minecraft.getMinecraft().renderItem.renderItem(stack, ItemCameraTransforms.TransformType.NONE)

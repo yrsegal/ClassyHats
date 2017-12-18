@@ -163,16 +163,6 @@ tile.classyhats.hat_stand_stone.name=Stone Hat Stand
 tile.classyhats.hat_stand_quartz.name=Quartz Hat Stand
 tile.classyhats.hat_stand_obsidian.name=Obsidian Hat Stand
 
-tile.classyhats.hat_display_case_oak.name=Oak Wood Hat Display Case
-tile.classyhats.hat_display_case_spruce.name=Spruce Wood Hat Display Case
-tile.classyhats.hat_display_case_birch.name=Birch Wood Hat Display Case
-tile.classyhats.hat_display_case_jungle.name=Jungle Wood Hat Display Case
-tile.classyhats.hat_display_case_acacia.name=Acacia Wood Hat Display Case
-tile.classyhats.hat_display_case_dark_oak.name=Dark Oak Wood Hat Display Case
-tile.classyhats.hat_display_case_stone.name=Stone Hat Display Case
-tile.classyhats.hat_display_case_quartz.name=Quartz Hat Display Case
-tile.classyhats.hat_display_case_obsidian.name=Obsidian Hat Display Case
-
 tooltip.classyhats.phantom=&bLined with Phantom Thread
 tooltip.classyhats.phantom.desc=Craft with other armor to camouflage!
 tooltip.classyhats.phantom.camo=Camouflaged as: %s
