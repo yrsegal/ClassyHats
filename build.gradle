@@ -5,7 +5,7 @@ buildscript {
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
-        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.2.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
     }
 }
 
@@ -21,7 +21,7 @@ archivesBaseName = 'ClassyHats'
 compileKotlin {
     kotlinOptions {
         javaParameters = true
-        jvmTarget = 1.8
+        jvmTarget = "1.8"
     }
 }
 
@@ -39,11 +39,13 @@ minecraft {
 }
 
 repositories {
+    mavenCentral()
     maven { url 'http://maven.bluexin.be/repository/snapshots' }
     maven { url 'http://dvs1.progwml6.com/files/maven' }
 }
 
 dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
     deobfCompile "com.teamwizardry.librarianlib:librarianlib-$liblibVersion"
     deobfProvided "mezz.jei:jei_$jeiVersion:api"
     runtime "mezz.jei:jei_$jeiVersion"
