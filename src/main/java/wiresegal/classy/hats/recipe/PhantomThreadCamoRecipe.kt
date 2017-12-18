@@ -127,5 +127,5 @@ object PhantomThreadCamoRecipe : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
         return armor.isNotEmpty && threaded.isNotEmpty
     }
 
-    override fun isHidden() = true
+    override fun isDynamic() = true
 }
