@@ -23,7 +23,6 @@ import wiresegal.classy.hats.util.SidedGuiHandler
 
 open class CommonProxy {
     open fun onPreInit(event: FMLPreInitializationEvent) {
-        ClassyHatsRegistry.collectExternalHats(event)
         CapabilityManager.INSTANCE.register(IHatContainer::class.java, ClassyHatStorage(), ::CapabilityHatContainer)
         ClassyHatsContent
         CapabilityEvents

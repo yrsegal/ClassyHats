@@ -1,28 +1,9 @@
 package wiresegal.classy.hats
 
-import com.teamwizardry.librarianlib.features.utilities.AnnotationHelper
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
-import wiresegal.classy.hats.api.ClassyHatHolder
-import wiresegal.classy.hats.api.IClassyHat
 import wiresegal.classy.hats.util.HatData
 
 class ClassyHatsRegistry {
     companion object {
-        private var hasParsedAnnotations = false
-
-        fun collectExternalHats(event: FMLPreInitializationEvent) {
-            if (!hasParsedAnnotations) {
-                val detectedHats = HashSet<Class<out IClassyHat>>()
-                AnnotationHelper.findAnnotatedClasses(event.asmData, IClassyHat::class.java, ClassyHatHolder::class.java, { clazz, _ ->
-                    detectedHats.add(clazz)
-                })
-                detectedHats.forEach({
-                    // TODO: Register new HatContainers for ifaces and register MRLs
-                })
-            }
-            hasParsedAnnotations = true
-        }
-
         val HATS = listOf(
                 HatData("top_hat"),
                 HatData("shleep_0", 0.125),
