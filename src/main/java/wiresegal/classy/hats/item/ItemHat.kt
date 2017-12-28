@@ -81,7 +81,7 @@ class ItemHat : ItemMod("hat"), IExtraVariantHolder, IGlowingItem {
     override val meshDefinition: ((stack: ItemStack) -> ModelResourceLocation)?
         get() = { ModelHandler.getResource(ClassyHats.ID, getHat(it).name)!! }
 
-    override fun getSubItems(tab: CreativeTabs?, subItems: NonNullList<ItemStack>) {
+    override fun getSubItems(tab: CreativeTabs, subItems: NonNullList<ItemStack>) {
         if (isInCreativeTab(tab)) {
             ClassyHatsConfig.hats.values
                     .filter { it != ClassyHatsConfig.missingno && !it.elusive }

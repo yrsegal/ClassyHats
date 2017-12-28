@@ -33,8 +33,8 @@ object PhantomThreadEvents {
     fun onRenderTooltip(event: RenderTooltipEvent) {
         if (event.stack.hasTagCompound() && ItemNBTHelper.getBoolean(event.stack, PHANTOM_TAG, false)) {
             val locale = "tooltip.${ClassyHats.ID}.phantom"
-            val nbt = ItemNBTHelper.getCompound(event.stack, PHANTOM_ITEM_TAG)
-            val container = ItemStack(nbt ?: NBTTagCompound())
+            val nbt = ItemNBTHelper.getCompound(event.stack, PHANTOM_ITEM_TAG) ?: NBTTagCompound()
+            val container = ItemStack(nbt)
             if (!container.isEmpty) {
                 var formatting = container.rarity.rarityColor.toString()
                 if (container.hasDisplayName()) formatting += TextFormatting.ITALIC.toString()
@@ -80,7 +80,8 @@ object PhantomThreadEvents {
     private fun setPhantomStack(entity: EntityLivingBase, slot: EntityEquipmentSlot) : ItemStack {
         val stack = entity.getItemStackFromSlot(slot)
         return if (stack.hasTagCompound() && ItemNBTHelper.getBoolean(stack, PHANTOM_TAG, false)) {
-            entity.setItemStackToSlot(slot, ItemStack(getPhantomTag(stack) ?: NBTTagCompound()))
+            val comp = getPhantomTag(stack) ?: NBTTagCompound()
+            entity.setItemStackToSlot(slot, ItemStack(comp))
             stack
         } else ItemStack.EMPTY
     }

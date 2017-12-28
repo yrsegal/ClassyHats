@@ -146,7 +146,7 @@ class GuiHatInventory(player: EntityPlayer) : InventoryEffectRenderer(ContainerH
         }
     }
 
-    override fun handleMouseClick(slotIn: Slot?, slotId: Int, mouseButton: Int, type: ClickType) {
+    override fun handleMouseClick(slotIn: Slot, slotId: Int, mouseButton: Int, type: ClickType) {
         super.handleMouseClick(slotIn, slotId, mouseButton, type)
         this.recipeBookGui.slotClicked(slotIn)
     }

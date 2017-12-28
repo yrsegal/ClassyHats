@@ -131,7 +131,7 @@ abstract class BlockHatContainer(name: String) : BlockModContainer(name, Materia
         return ModuleInventory.getPowerLevel(power)
     }
 
-    override fun hasComparatorInputOverride(state: IBlockState?) = true
+    override fun hasComparatorInputOverride(state: IBlockState) = true
 
     override fun collisionRayTrace(blockState: IBlockState, world: World, pos: BlockPos, start: Vec3d, end: Vec3d): RayTraceResult? {
         return getCollisionBoxes(blockState).map { rayTrace(pos, start, end, it) }.firstOrNull { it != null }

@@ -82,7 +82,7 @@ object LootTableFactory {
             e.table.addPool(pool)
     }
 
-    private val FAKE_PLAYER_PATTERN = "^(?:\\[.*\\])|(?:ComputerCraft)$".toRegex()
+    private val FAKE_PLAYER_PATTERN = "^(?:\\[.*])|(?:ComputerCraft)$".toRegex()
     fun isTruePlayer(e: Entity)
             = e !is EntityPlayer || e !is FakePlayer && !FAKE_PLAYER_PATTERN.matches(e.name)
 
