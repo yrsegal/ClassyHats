@@ -25,6 +25,7 @@ import net.minecraft.util.EnumHand
 import net.minecraft.util.math.*
 import net.minecraft.world.Explosion
 import net.minecraft.world.World
+import net.minecraftforge.items.ItemHandlerHelper
 import net.minecraftforge.items.ItemStackHandler
 import wiresegal.classy.hats.ClassyHats
 import wiresegal.classy.hats.item.ItemHat
@@ -39,7 +40,7 @@ abstract class BlockHatContainer(name: String) : BlockModContainer(name, Materia
     open fun getTileEntity(state: IBlockState) : TileHatContainer = TileHatContainer()
 
     override fun createItemForm(): ItemBlock? = object : ItemModBlock(this) {
-        override fun getUnlocalizedName(stack: ItemStack): String {
+        override fun getTranslationKey(stack: ItemStack): String {
             val name = when {
                 stack.itemDamage >= variants.size -> bareName
                 else -> variants[stack.itemDamage]
@@ -127,9 +128,11 @@ abstract class BlockHatContainer(name: String) : BlockModContainer(name, Materia
 
     override fun getComparatorInputOverride(blockState: IBlockState, worldIn: World, pos: BlockPos): Int {
         val tile = (worldIn.getTileEntity(pos) as TileHatContainer)
-        val power = ModuleInventory.getPowerLevel(tile.inventory.handler)
-        return ModuleInventory.getPowerLevel(power)
+        val power = ItemHandlerHelper.calcRedstoneFromInventory(tile.inventory.handler) / 15f
+        return tile.getPowerLevel(power)
     }
+
+
 
     override fun hasComparatorInputOverride(state: IBlockState) = true
 

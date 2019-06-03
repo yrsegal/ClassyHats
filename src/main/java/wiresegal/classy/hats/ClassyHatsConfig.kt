@@ -4,7 +4,8 @@ import com.google.gson.JsonArray
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
-import com.teamwizardry.librarianlib.features.kotlin.json
+import com.teamwizardry.librarianlib.features.kotlin.array
+import com.teamwizardry.librarianlib.features.kotlin.jsonObject
 import com.teamwizardry.librarianlib.features.kotlin.serialize
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
@@ -74,20 +75,18 @@ object ClassyHatsConfig {
             }
         }
 
-        val baseJson = json {
-            obj(
-                    "__comment0" to "The folder ${ClassyHats.ID}_resources will act as a resource pack for any custom hats you want to add.",
-                    "__comment1" to "Put any hat names from the default HATS you don't want in the blacklist.",
-                    "__default_weight" to 40,
-                    "__example_custom_hat" to array(HatData("example", 2, true).toJson()),
-                    "blacklist_hats" to array(),
-                    "loot_hat_from_chests" to true,
-                    "loot_hat_from_boss" to true,
-                    "custom_hats" to array(),
-                    "hat_wearing_entities" to array(*names.toTypedArray()),
-                    "chance_of_entities_wearing_hats" to hatSpawnPercentage
-            )
-        } as JsonObject
+        val baseJson = jsonObject {
+                    "__comment0" to "The folder ${ClassyHats.ID}_resources will act as a resource pack for any custom hats you want to add."
+                    "__comment1" to "Put any hat names from the default HATS you don't want in the blacklist."
+                    "__default_weight" to 40
+                    "__example_custom_hat" to array(HatData("example", 2, true).toJson())
+                    "blacklist_hats" to array()
+                    "loot_hat_from_chests" to true
+                    "loot_hat_from_boss" to true
+                    "custom_hats" to array()
+                    "hat_wearing_entities" to array(*names.toTypedArray())
+            "chance_of_entities_wearing_hats" to hatSpawnPercentage
+        }
 
         if (succeeded) {
             val toRemove = mutableListOf<String>()

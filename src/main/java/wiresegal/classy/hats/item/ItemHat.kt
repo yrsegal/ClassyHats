@@ -5,7 +5,8 @@ import com.teamwizardry.librarianlib.core.client.ModelHandler
 import com.teamwizardry.librarianlib.features.base.IExtraVariantHolder
 import com.teamwizardry.librarianlib.features.base.item.IGlowingItem
 import com.teamwizardry.librarianlib.features.base.item.ItemMod
-import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper
+import com.teamwizardry.librarianlib.features.helpers.getNBTString
+import com.teamwizardry.librarianlib.features.helpers.setNBTString
 import com.teamwizardry.librarianlib.features.kotlin.isNotEmpty
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper
 import net.minecraft.client.renderer.block.model.IBakedModel
@@ -34,7 +35,7 @@ class ItemHat : ItemMod("hat"), IExtraVariantHolder, IGlowingItem {
 
     fun getHat(stack: ItemStack): HatData {
         if (!stack.hasTagCompound()) return ClassyHatsConfig.missingno
-        val hatId = ItemNBTHelper.getString(stack, "hat", null) ?: return ClassyHatsConfig.missingno
+        val hatId = stack.getNBTString("hat") ?: return ClassyHatsConfig.missingno
         return ClassyHatsConfig.hats[hatId] ?: ClassyHatsConfig.missingno
     }
 
@@ -42,7 +43,7 @@ class ItemHat : ItemMod("hat"), IExtraVariantHolder, IGlowingItem {
 
     fun ofHat(name: String, amount: Int = 1): ItemStack {
         val stack = ItemStack(this, amount)
-        ItemNBTHelper.setString(stack, "hat", name)
+        stack.setNBTString("hat", name)
         return stack
     }
 
@@ -92,11 +93,11 @@ class ItemHat : ItemMod("hat"), IExtraVariantHolder, IGlowingItem {
         }
     }
 
-    override fun getUnlocalizedName(stack: ItemStack) = "hat.${ClassyHats.ID}.${getHat(stack).name}"
+    override fun getTranslationKey(stack: ItemStack) = "hat.${ClassyHats.ID}.${getHat(stack).name}"
 
     @SideOnly(Side.CLIENT)
     override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
-        val desc = stack.unlocalizedName + ".desc"
+        val desc = stack.translationKey + ".desc"
         val used = if (LibrarianLib.PROXY.canTranslate(desc)) desc else "${desc}0"
         if (LibrarianLib.PROXY.canTranslate(used)) {
             TooltipHelper.addToTooltip(tooltip, used)

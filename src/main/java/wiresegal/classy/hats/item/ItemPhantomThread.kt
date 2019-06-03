@@ -12,7 +12,8 @@ import net.minecraftforge.fml.relauncher.SideOnly
 import wiresegal.classy.hats.ClassyHats
 
 class ItemPhantomThread : ItemMod("phantom_thread") {
-    override fun getUnlocalizedName(stack: ItemStack): String {
+
+    override fun getTranslationKey(stack: ItemStack): String {
         return "item.${ClassyHats.ID}.phantom_thread"
     }
 
@@ -29,7 +30,7 @@ class ItemPhantomThread : ItemMod("phantom_thread") {
 
     @SideOnly(Side.CLIENT)
     override fun addInformation(stack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
-        val desc = stack.unlocalizedName + ".desc"
+        val desc = stack.translationKey + ".desc"
         val used = if (LibrarianLib.PROXY.canTranslate(desc)) desc else "${desc}0"
         if (LibrarianLib.PROXY.canTranslate(used)) {
             TooltipHelper.addToTooltip(tooltip, used)

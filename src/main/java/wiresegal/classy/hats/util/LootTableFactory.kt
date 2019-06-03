@@ -66,10 +66,10 @@ object LootTableFactory {
 
     @SubscribeEvent
     fun onLootTable(e: LootTableLoadEvent) {
-        if (e.name.resourceDomain == ClassyHats.ID) {
-            if (e.name.resourcePath == "elusive")
+        if (e.name.namespace == ClassyHats.ID) {
+            if (e.name.path == "elusive")
                 e.table = elusiveTable
-            else if (e.name.resourcePath == "regular")
+            else if (e.name.path == "regular")
                 e.table = regularTable
         } else if (ClassyHatsConfig.shouldInjectLootChests && (e.name == CHESTS_SIMPLE_DUNGEON ||
                 e.name == CHESTS_STRONGHOLD_LIBRARY ||

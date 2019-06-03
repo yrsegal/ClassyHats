@@ -1,6 +1,6 @@
 package wiresegal.classy.hats.client.render
 
-import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper
+import com.teamwizardry.librarianlib.features.helpers.setNBTString
 import net.minecraft.client.Minecraft
 import net.minecraft.client.model.ModelRenderer
 import net.minecraft.client.renderer.GlStateManager
@@ -20,7 +20,7 @@ class EntityLayerRendererHat(private val modelRenderer: ModelRenderer?) : LayerR
         if (data.hasKey(CapabilityEvents.customKey)) {
             val str = data.getString(CapabilityEvents.customKey)
             if (str.isNotEmpty()) {
-                ItemNBTHelper.setString(stack, "hat", str)
+                stack.setNBTString("hat", str)
                 GlStateManager.pushMatrix()
 
                 if (player.isSneaking) GlStateManager.translate(0.0f, 0.2f, 0.0f)

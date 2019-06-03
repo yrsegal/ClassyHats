@@ -42,7 +42,8 @@ class ClassyHats {
         const val VERSION = "%VERSION%"
 
         val TAB = object : ModCreativeTab() {
-            override fun getTranslatedTabLabel() = "tab.$tabLabel.name"
+
+            override fun getTranslationKey() = "tab.$tabLabel.name"
 
             override fun hasSearchBar() = true
 

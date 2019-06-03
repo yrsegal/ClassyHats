@@ -68,6 +68,13 @@ tasks.withType(JavaCompile).all {
     targetCompatibility = '1.8'
 }
 
+compileKotlin {
+    kotlinOptions {
+        javaParameters = true
+        jvmTarget = "1.8"
+    }
+}
+
 
 repositories {
     mavenCentral()

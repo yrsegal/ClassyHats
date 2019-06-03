@@ -1,6 +1,9 @@
 package wiresegal.classy.hats.recipe
 
-import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper
+import com.teamwizardry.librarianlib.features.helpers.getNBTBoolean
+import com.teamwizardry.librarianlib.features.helpers.getNBTCompound
+import com.teamwizardry.librarianlib.features.helpers.removeNBTEntry
+import com.teamwizardry.librarianlib.features.helpers.setNBTBoolean
 import com.teamwizardry.librarianlib.features.kotlin.isNotEmpty
 import net.minecraft.inventory.EntityEquipmentSlot
 import net.minecraft.inventory.InventoryCrafting
@@ -24,8 +27,8 @@ object PhantomThreadRecipe : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
         val ret = NonNullList.withSize(inv.sizeInventory, ItemStack.EMPTY)
         for (i in ret.indices) {
             val stack = inv.getStackInSlot(i)
-            if (stack.hasTagCompound() && ItemNBTHelper.getBoolean(stack, PhantomThreadEvents.PHANTOM_TAG, false)) {
-                val container = ItemStack(ItemNBTHelper.getCompound(stack, PhantomThreadEvents.PHANTOM_ITEM_TAG) ?: NBTTagCompound())
+            if (stack.hasTagCompound()&& stack.getNBTBoolean(PhantomThreadEvents.PHANTOM_TAG, false)) {
+                val container = ItemStack(stack.getNBTCompound(PhantomThreadEvents.PHANTOM_ITEM_TAG) ?: NBTTagCompound())
                 ret[i] = container
             } else
                 ret[i] = ForgeHooks.getContainerItem(inv.getStackInSlot(i))
@@ -64,18 +67,18 @@ object PhantomThreadRecipe : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
         }
 
         val armorCopy = armor.copy()
-        val phantom = ItemNBTHelper.getBoolean(armorCopy, PhantomThreadEvents.PHANTOM_TAG, false)
-        val camo = ItemStack(ItemNBTHelper.getCompound(armorCopy, PhantomThreadEvents.PHANTOM_ITEM_TAG) ?: NBTTagCompound()).isNotEmpty
+        val phantom = armorCopy.getNBTBoolean(PhantomThreadEvents.PHANTOM_TAG, false)
+        val camo = ItemStack(armorCopy.getNBTCompound(PhantomThreadEvents.PHANTOM_ITEM_TAG) ?: NBTTagCompound()).isNotEmpty
 
         if (!camo || thread.isNotEmpty) {
             if (phantom)
-                ItemNBTHelper.removeEntry(armorCopy, PhantomThreadEvents.PHANTOM_TAG)
+                armorCopy.removeNBTEntry(PhantomThreadEvents.PHANTOM_TAG)
             else
-                ItemNBTHelper.setBoolean(armorCopy, PhantomThreadEvents.PHANTOM_TAG, true)
+                armorCopy.setNBTBoolean(PhantomThreadEvents.PHANTOM_TAG, true)
         }
 
         if (camo)
-            ItemNBTHelper.removeEntry(armorCopy, PhantomThreadEvents.PHANTOM_ITEM_TAG)
+            armorCopy.removeNBTEntry(PhantomThreadEvents.PHANTOM_ITEM_TAG)
 
         val tag = armorCopy.tagCompound
         if (tag != null && tag.size == 0)
@@ -111,7 +114,7 @@ object PhantomThreadRecipe : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
                 return false
         }
 
-        val camo = ItemStack(ItemNBTHelper.getCompound(armor, PhantomThreadEvents.PHANTOM_ITEM_TAG) ?: NBTTagCompound()).isNotEmpty
+        val camo = ItemStack(armor.getNBTCompound(PhantomThreadEvents.PHANTOM_ITEM_TAG) ?: NBTTagCompound()).isNotEmpty
 
         return (camo || thread.isNotEmpty) && armor.isNotEmpty
     }

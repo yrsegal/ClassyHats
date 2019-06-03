@@ -1,6 +1,9 @@
 package wiresegal.classy.hats.event
 
-import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper
+import com.teamwizardry.librarianlib.features.helpers.getNBTBoolean
+import com.teamwizardry.librarianlib.features.helpers.getNBTCompound
+import com.teamwizardry.librarianlib.features.helpers.getOrCreateNBT
+import com.teamwizardry.librarianlib.features.helpers.hasNBTEntry
 import com.teamwizardry.librarianlib.features.kotlin.isNotEmpty
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper
 import net.minecraft.entity.EntityLivingBase
@@ -31,12 +34,12 @@ object PhantomThreadEvents {
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     fun onRenderTooltip(event: RenderTooltipEvent) {
-        if (event.stack.hasTagCompound() && ItemNBTHelper.getBoolean(event.stack, PHANTOM_TAG, false)) {
+        if (event.stack.hasTagCompound() && event.stack.getNBTBoolean(PHANTOM_TAG, false)) {
             val locale = "tooltip.${ClassyHats.ID}.phantom"
-            val nbt = ItemNBTHelper.getCompound(event.stack, PHANTOM_ITEM_TAG) ?: NBTTagCompound()
+            val nbt = event.stack.getNBTCompound(PHANTOM_ITEM_TAG) ?: NBTTagCompound()
             val container = ItemStack(nbt)
             if (!container.isEmpty) {
-                var formatting = container.rarity.rarityColor.toString()
+                var formatting = container.rarity.color.name
                 if (container.hasDisplayName()) formatting += TextFormatting.ITALIC.toString()
                 formatting += container.displayName
                 TooltipHelper.addToTooltip(event.lines, formatting + (locale + ".camo"))
@@ -79,7 +82,7 @@ object PhantomThreadEvents {
 
     private fun setPhantomStack(entity: EntityLivingBase, slot: EntityEquipmentSlot) : ItemStack {
         val stack = entity.getItemStackFromSlot(slot)
-        return if (stack.hasTagCompound() && ItemNBTHelper.getBoolean(stack, PHANTOM_TAG, false)) {
+        return if (stack.hasTagCompound() && stack.getNBTBoolean(PHANTOM_TAG, false)) {
             val comp = getPhantomTag(stack) ?: NBTTagCompound()
             entity.setItemStackToSlot(slot, ItemStack(comp))
             stack
@@ -87,8 +90,9 @@ object PhantomThreadEvents {
     }
 
     private fun getPhantomTag(stack: ItemStack): NBTTagCompound? {
-        return if (ItemNBTHelper.verifyExistence(stack, PHANTOM_TAG)) {
-            ItemNBTHelper.getNBT(stack, false).getCompoundTag(PHANTOM_TAG)
+        return if (stack.hasNBTEntry(PHANTOM_TAG)) {
+            val nbt = stack.tagCompound ?: NBTTagCompound()
+            nbt.getCompoundTag(PHANTOM_TAG)
         } else null
     }
 }
