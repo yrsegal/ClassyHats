@@ -15,8 +15,8 @@ apply plugin: 'idea'
 apply plugin: 'java'
 
 version = mod_version
-group = 'wiresegal.classy.hats'
-archivesBaseName = 'ClassyHats'
+group = mod_author + "." + mod_name
+archivesBaseName = mod_name
 
 ext.mod_name = mod_name.toLowerCase()
 ext.capitalized_name = mod_name.capitalize()
@@ -53,7 +53,7 @@ sourceSets {
 idea {
     module {
         excludeDirs += [file("run"), file("out"), file("gradle"), file(".idea")]
-        generatedSourceDirs += file("EvalEx/src/main/java")
+        inheritOutputDirs = true
     }
 
     if (it.project != null)
