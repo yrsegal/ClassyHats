@@ -1,8 +1,13 @@
 package wiresegal.classyhats.block
 
+import com.teamwizardry.librarianlib.features.autoregister.TileRegister
 import com.teamwizardry.librarianlib.features.base.block.EnumStringSerializable
 import com.teamwizardry.librarianlib.features.base.block.ItemModBlock
 import com.teamwizardry.librarianlib.features.base.block.tile.BlockModContainer
+import com.teamwizardry.librarianlib.features.base.block.tile.TileMod
+import com.teamwizardry.librarianlib.features.base.block.tile.module.ModuleInventory
+import com.teamwizardry.librarianlib.features.saving.Module
+import com.teamwizardry.librarianlib.features.saving.Save
 import net.minecraft.block.Block
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
@@ -21,6 +26,7 @@ import net.minecraft.util.math.*
 import net.minecraft.world.Explosion
 import net.minecraft.world.World
 import net.minecraftforge.items.ItemHandlerHelper
+import net.minecraftforge.items.ItemStackHandler
 import wiresegal.classyhats.ClassyHats
 import wiresegal.classyhats.item.ItemHat
 
@@ -89,7 +95,7 @@ abstract class BlockHatContainer(name: String) : BlockModContainer(name, Materia
         val xS = placer.posX - (tile.pos.x + 0.5)
         val zS = placer.posZ - (tile.pos.z + 0.5)
         val angle = MathHelper.atan2(zS, xS) * 180 / Math.PI + 90
-        //tile.angle = Math.round(angle / 22.5) * 22.5f
+        tile.angle = Math.round(angle / 22.5) * 22.5f
     }
 
     override fun createBlockState(): BlockStateContainer {
@@ -126,8 +132,6 @@ abstract class BlockHatContainer(name: String) : BlockModContainer(name, Materia
         return tile.getPowerLevel(power)
     }
 
-
-
     override fun hasComparatorInputOverride(state: IBlockState) = true
 
     override fun collisionRayTrace(blockState: IBlockState, world: World, pos: BlockPos, start: Vec3d, end: Vec3d): RayTraceResult? {
@@ -136,6 +140,21 @@ abstract class BlockHatContainer(name: String) : BlockModContainer(name, Materia
 
     override fun addCollisionBoxToList(state: IBlockState, worldIn: World, pos: BlockPos, entityBox: AxisAlignedBB, collidingBoxes: MutableList<AxisAlignedBB>, entityIn: Entity?, actual: Boolean) {
         getCollisionBoxes(state).forEach { addCollisionBoxToList(pos, entityBox, collidingBoxes, it) }
+    }
+
+    @TileRegister
+    open class TileHatContainer : TileMod() {
+        @Save
+        var angle = 0.0F
+
+        @Module
+        val inventory = ModuleInventory(object : ItemStackHandler() {
+            override fun getStackLimit(slot: Int, stack: ItemStack) = if (stack.item is ItemHat) 1 else 0
+
+            override fun onContentsChanged(slot: Int) = markDirty()
+        })
+
+        override fun getRenderBoundingBox() = AxisAlignedBB(pos, pos.add(1, 2, 1))
     }
 
     companion object {

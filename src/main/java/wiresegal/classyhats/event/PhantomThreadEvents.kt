@@ -5,6 +5,7 @@ import com.teamwizardry.librarianlib.features.helpers.getNBTCompound
 import com.teamwizardry.librarianlib.features.helpers.hasNBTEntry
 import com.teamwizardry.librarianlib.features.kotlin.isNotEmpty
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper
+import net.minecraft.client.resources.I18n
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.inventory.EntityEquipmentSlot
 import net.minecraft.inventory.EntityEquipmentSlot.*
@@ -12,8 +13,8 @@ import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.text.TextFormatting
 import net.minecraftforge.client.event.RenderLivingEvent
-import net.minecraftforge.client.event.RenderTooltipEvent
 import net.minecraftforge.event.entity.PlaySoundAtEntityEvent
+import net.minecraftforge.event.entity.player.ItemTooltipEvent
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.relauncher.Side
@@ -35,18 +36,16 @@ object PhantomThreadEvents {
 
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
-    fun onRenderTooltip(event: RenderTooltipEvent) {
-        if (event.stack.hasTagCompound() && event.stack.getNBTBoolean(PHANTOM_TAG, false)) {
+    @JvmStatic
+    fun onRenderTooltip(event: ItemTooltipEvent) {
+        if (event.itemStack.hasTagCompound() && event.itemStack.getNBTBoolean(PHANTOM_TAG, false)) {
             val locale = "tooltip.${ClassyHats.ID}.phantom"
-            val nbt = event.stack.getNBTCompound(PHANTOM_ITEM_TAG) ?: NBTTagCompound()
+            val nbt = event.itemStack.getNBTCompound(PHANTOM_ITEM_TAG) ?: NBTTagCompound()
             val container = ItemStack(nbt)
             if (!container.isEmpty) {
-                var formatting = container.rarity.color.name
-                if (container.hasDisplayName()) formatting += TextFormatting.ITALIC.toString()
-                formatting += container.displayName
-                TooltipHelper.addToTooltip(event.lines, "$formatting$locale.camo")
-            } else TooltipHelper.addToTooltip(event.lines, "$locale.desc")
-            TooltipHelper.addToTooltip(event.lines, locale)
+                event.toolTip.add(I18n.format("$locale.camo") + " " + container.rarity.color + if (container.hasDisplayName()) TextFormatting.ITALIC else "" + container.displayName)
+            } else TooltipHelper.addToTooltip(event.toolTip, "$locale.desc")
+            TooltipHelper.addToTooltip(event.toolTip, locale)
         }
     }
 
@@ -95,9 +94,8 @@ object PhantomThreadEvents {
     }
 
     private fun getPhantomTag(stack: ItemStack): NBTTagCompound? {
-        return if (stack.hasNBTEntry(PHANTOM_TAG)) {
-            val nbt = stack.tagCompound ?: NBTTagCompound()
-            nbt.getCompoundTag(PHANTOM_TAG)
+        return if (stack.hasNBTEntry(PHANTOM_ITEM_TAG)) {
+            stack.tagCompound?.getCompoundTag(PHANTOM_ITEM_TAG)
         } else null
     }
 }

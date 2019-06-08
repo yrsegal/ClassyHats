@@ -165,7 +165,7 @@ tile.classyhats.hat_stand_obsidian.name=Obsidian Hat Stand
 
 tooltip.classyhats.phantom=&bLined with Phantom Thread
 tooltip.classyhats.phantom.desc=Craft with other armor to camouflage!
-tooltip.classyhats.phantom.camo=Camouflaged as: %s
+tooltip.classyhats.phantom.camo=Camouflaged as:
 
 tooltip.classyhats.hat_inventory=Press &6%s&7 to open the Hat Inventory
 tooltip.classyhats.hat_inventory_sneak=Sneak-using this item will do the same

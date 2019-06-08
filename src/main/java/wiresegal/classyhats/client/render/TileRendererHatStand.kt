@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.block.model.ItemCameraTransforms
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
-import wiresegal.classyhats.block.TileHatContainer
+import wiresegal.classyhats.block.BlockHatContainer.TileHatContainer
 
 @SideOnly(Side.CLIENT)
 object TileRendererHatStand : TileEntitySpecialRenderer<TileHatContainer>() {
@@ -24,7 +24,7 @@ object TileRendererHatStand : TileEntitySpecialRenderer<TileHatContainer>() {
 
             GlStateManager.translate(x + 0.5, y + 1.4625, z + 0.5)
             GlStateManager.scale(0.9375, 0.9375, 0.9375)
-            //GlStateManager.rotate(te.angle, 0.0f, -1.0f, 0.0f)
+            GlStateManager.rotate(te.angle, 0.0f, -1.0f, 0.0f)
 
             OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lX, lY)
             Minecraft.getMinecraft().renderItem.renderItem(stack, ItemCameraTransforms.TransformType.NONE)

@@ -15,6 +15,7 @@ import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import wiresegal.classyhats.ClassyHats
 import wiresegal.classyhats.ClassyHatsConfig
+import wiresegal.classyhats.block.BlockHatContainer.TileHatContainer
 import wiresegal.classyhats.client.keybind.KeyBindHandler
 import wiresegal.classyhats.client.render.EntityLayerRendererHat
 import wiresegal.classyhats.client.render.PlayerLayerRendererHat
